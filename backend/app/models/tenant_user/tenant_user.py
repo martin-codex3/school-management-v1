@@ -6,8 +6,11 @@ from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from utils.base import Base
 
+from app.models.user_roles.user_role import user_roles
+
 if TYPE_CHECKING:
     from app.models.application_user.application_user import ApplicationUser
+    from app.models.roles.role import Role
     from app.models.tenant.tenant import Tenant
 
 
@@ -23,8 +26,11 @@ class TenantUser(Base):
         ForeignKey("tenants.id"), primary_key=True
     )
 
-    application_user: Mapped[ApplicationUser] = relationship(back_populates="tenants")
-    tenant: Mapped[Tenant] = relationship(back_populates="application_users")
-
     created_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
     updated_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
+    application_user: Mapped[ApplicationUser] = relationship(back_populates="tenants")
+    tenant: Mapped[Tenant] = relationship(back_populates="application_users")
+    # for the roles here
+    roles: Mapped[list[Role]] = relationship(
+        back_populates="tenant_users", secondary=user_roles
+    )
