@@ -1,10 +1,13 @@
 import uuid
-from datetime import UTC, datetime
+from typing import TYPE_CHECKING
 
 from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.utils.base import Base
+
+if TYPE_CHECKING:
+    from app.models.tenant_user.tenant_user import TenantUser
 
 
 class Tenant(Base):
@@ -25,5 +28,5 @@ class Tenant(Base):
     description: Mapped[str | None] = mapped_column(String(255), nullable=True)
     settings: Mapped[dict | None] = mapped_column(default={}, nullable=True)
     is_deleted: Mapped[bool | None] = mapped_column(default=False)
-    created_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
-    updated_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
+
+    application_users: Mapped[list[TenantUser]] = relationship(back_populates="tenants")
