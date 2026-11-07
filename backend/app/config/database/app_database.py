@@ -1,7 +1,8 @@
-from app.config.settings.app_settings import AppSettings
-from sqlalchemy.ext.asyncio.session import AsyncSession, async_sessionmaker
-from sqlalchemy.ext.asyncio.engine import create_async_engine
 from sqlalchemy import MetaData
+from sqlalchemy.ext.asyncio.engine import create_async_engine
+from sqlalchemy.ext.asyncio.session import AsyncSession, async_sessionmaker
+
+from app.config.settings.app_settings import AppSettings
 
 
 # this will establish the connection
