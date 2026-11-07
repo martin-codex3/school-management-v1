@@ -2,13 +2,15 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from app.config.database.app_database import app_database_engine, database_init
+
 
 # the context manager
 @asynccontextmanager
 async def app_lifespan(app: FastAPI):
-    print("hey mate we start here")
+    await database_init()
     yield
-    print("This is the other context")
+    app_database_engine.dispose()
 
 
 app = FastAPI(
