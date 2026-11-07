@@ -3,6 +3,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 
 from app.config.database.app_database import app_database_engine, database_init
+from app.routes.auth.auth_router import auth_router
 
 
 # the context manager
@@ -21,6 +22,6 @@ app = FastAPI(
 )
 
 
-@app.get("")
-def greeting():
-    return {"message": "hey mate"}
+app.include_router(
+    router=auth_router, prefix="/api/authentication", tags=["Authentication"]
+)
