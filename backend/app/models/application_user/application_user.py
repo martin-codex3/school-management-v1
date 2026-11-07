@@ -23,5 +23,5 @@ class ApplicationUser(Base):
     bio: Mapped[str | None] = mapped_column(String(255), nullable=True)
     password_hash: Mapped[str] = mapped_column(String(30))
     tenants: Mapped[list[TenantUser]] = relationship(
-        back_populates="users", lazy="selectin"
+        back_populates="application_user", lazy="selectin"
     )

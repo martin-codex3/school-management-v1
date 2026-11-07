@@ -2,6 +2,7 @@ import asyncio
 from datetime import UTC, datetime
 
 from sqlalchemy import func, select
+from sqlalchemy.orm import lazyload
 from typer import Typer
 
 from app.config.database.app_database import Session
@@ -22,7 +23,9 @@ available_roles: list[Role] = [
 
 async def seed_roles():
     async with Session() as session:
-        statement = await session.execute(select(Role))
+        statement = await session.execute(
+            select(Role).options(lazyload(Role.tenant_users))
+        )
         roles = statement.scalars().all()
         print(roles)
 

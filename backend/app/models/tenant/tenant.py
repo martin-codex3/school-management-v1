@@ -30,5 +30,5 @@ class Tenant(Base):
     is_deleted: Mapped[bool | None] = mapped_column(default=False)
 
     application_users: Mapped[list[TenantUser]] = relationship(
-        back_populates="tenants", lazy="selectin"
+        back_populates="tenant", lazy="selectin"
     )
