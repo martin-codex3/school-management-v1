@@ -11,23 +11,37 @@ from app.models.roles.role import Role
 app = Typer()
 
 # the list of roles here
-available_roles: list[Role] = [
+available_roles: list[dict[str, any]] = [
     {
         "name": "Administrator",
         "description": "This is the main description for the role",
-        "created_date": datetime.now(UTC),
-        "updated_date": datetime.now(UTC),
-    }
+    },
+    {
+        "name": "Teacher",
+        "description": "Responsible for managing classes and students",
+    },
+    {
+        "name": "Student",
+        "description": "Responsible for accessing learning resources",
+    },
 ]
 
 
 async def seed_roles():
     async with Session() as session:
-        statement = await session.execute(
-            select(Role).options(lazyload(Role.tenant_users))
+        statement = await session.execute(select(Role))
+        existing_roles = statement.scalars().all()
+
+        for role in available_roles:
+            if role not in existing_roles:
+                return
+
+        new_role = Role(
+            **role, created_date=datetime.now(UTC), updated_date=datetime.now(UTC)
         )
-        roles = statement.scalars().all()
-        print(roles)
+
+        session.add(new_role)
+        await session.commit()
 
 
 @app.command()
