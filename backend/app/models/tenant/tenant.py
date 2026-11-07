@@ -1,7 +1,7 @@
 import uuid
 from typing import TYPE_CHECKING
 
-from sqlalchemy import String
+from sqlalchemy import JSON, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.utils.base import Base
@@ -26,7 +26,7 @@ class Tenant(Base):
     registration_number: Mapped[str | None] = mapped_column(String(30), nullable=True)
     school_code: Mapped[str | None] = mapped_column(String(50), nullable=True)
     description: Mapped[str | None] = mapped_column(String(255), nullable=True)
-    settings: Mapped[dict | None] = mapped_column(default={}, nullable=True)
+    settings: Mapped[dict[str, any]] = mapped_column(JSON, default={}, nullable=True)
     is_deleted: Mapped[bool | None] = mapped_column(default=False)
 
     application_users: Mapped[list[TenantUser]] = relationship(back_populates="tenants")

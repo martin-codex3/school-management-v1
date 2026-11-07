@@ -1,6 +1,5 @@
 from sqlalchemy.ext.asyncio.engine import create_async_engine
 from sqlalchemy.ext.asyncio.session import AsyncSession, async_sessionmaker
-from sqlalchemy.orm import DeclarativeBase
 
 from app.config.settings.app_settings import AppSettings
 from app.models.application_user.application_user import ApplicationUser  # noqa F401
@@ -8,12 +7,7 @@ from app.models.roles.role import Role  # noqa F401
 from app.models.tenant.tenant import Tenant  # noqa F401
 from app.models.tenant_user.tenant_user import TenantUser  # noqa F401
 from app.models.user_roles.user_role import user_roles  # noqa F401
-
-
-# this will establish the connection
-class Base(DeclarativeBase):
-    pass
-
+from app.utils.base import Base
 
 # we will create the database engine here
 app_database_engine = create_async_engine(

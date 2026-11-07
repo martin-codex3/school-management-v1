@@ -4,9 +4,9 @@ from typing import TYPE_CHECKING
 
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from utils.base import Base
 
 from app.models.user_roles.user_role import user_roles
+from app.utils.base import Base
 
 if TYPE_CHECKING:
     from app.models.application_user.application_user import ApplicationUser
