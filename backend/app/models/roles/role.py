@@ -22,5 +22,5 @@ class Role(Base):
     created_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
     updated_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
     tenant_users: Mapped[list[TenantUser]] = relationship(
-        back_populates="roles", secondary=user_roles
+        back_populates="roles", secondary=user_roles, lazy="selectin"
     )

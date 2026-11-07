@@ -29,4 +29,6 @@ class Tenant(Base):
     settings: Mapped[dict[str, any]] = mapped_column(JSON, default={}, nullable=True)
     is_deleted: Mapped[bool | None] = mapped_column(default=False)
 
-    application_users: Mapped[list[TenantUser]] = relationship(back_populates="tenants")
+    application_users: Mapped[list[TenantUser]] = relationship(
+        back_populates="tenants", lazy="selectin"
+    )

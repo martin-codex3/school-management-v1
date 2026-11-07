@@ -32,5 +32,5 @@ class TenantUser(Base):
     tenant: Mapped[Tenant] = relationship(back_populates="application_users")
     # for the roles here
     roles: Mapped[list[Role]] = relationship(
-        back_populates="tenant_users", secondary=user_roles
+        back_populates="tenant_users", secondary=user_roles, lazy="selectin"
     )

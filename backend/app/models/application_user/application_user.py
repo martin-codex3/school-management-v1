@@ -22,4 +22,6 @@ class ApplicationUser(Base):
     profile_image_url: Mapped[str | None] = mapped_column(String(100), nullable=True)
     bio: Mapped[str | None] = mapped_column(String(255), nullable=True)
     password_hash: Mapped[str] = mapped_column(String(30))
-    tenants: Mapped[list[TenantUser]] = relationship(back_populates="users")
+    tenants: Mapped[list[TenantUser]] = relationship(
+        back_populates="users", lazy="selectin"
+    )
