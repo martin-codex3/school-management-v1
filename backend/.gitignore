@@ -3,3 +3,4 @@ school.db
 .vscode/
 .idea/
 *.pyc
+.Migrations
