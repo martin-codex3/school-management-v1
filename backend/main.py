@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 from app.config.database.app_database import app_database_engine, database_init
 from app.routes.auth.auth_router import auth_router
@@ -21,6 +22,10 @@ app = FastAPI(
     description="The full api documentation for the school management system.",
 )
 
+# we will mount the static files here
+app.mount(
+    "/static", app=StaticFiles(directory="static/uploads/profiles"), name="static"
+)
 
 app.include_router(
     router=auth_router, prefix="/api/authentication", tags=["Authentication"]
