@@ -5,7 +5,7 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import lazyload
 from typer import Typer
 
-from app.config.database.app_database import Session
+from app.config.database.app_database import Session, app_database_engine, database_init
 from app.models.roles.role import Role
 
 app = Typer()
@@ -14,9 +14,6 @@ app = Typer()
 from typing import Any
 
 available_roles: list[dict[str, Any]] = [
-    # ==========================================
-    # SCHOOL ADMINISTRATION
-    # ==========================================
     {
         "name": "School Owner",
         "description": "Owns the school account and oversees school ownership, administration, and strategic settings.",
@@ -70,19 +67,17 @@ available_roles: list[dict[str, Any]] = [
 
 async def seed_roles():
     async with Session() as session:
-        statement = await session.execute(select(Role))
+        await database_init()
+
+        statement = await session.execute(select(Role.name))
         existing_roles = statement.scalars().all()
 
         for role in available_roles:
-            if role not in existing_roles:
-                return
-
-        new_role = Role(
-            **role, created_date=datetime.now(UTC), updated_date=datetime.now(UTC)
-        )
-
-        session.add(new_role)
-        await session.commit()
+            if role["name"] not in existing_roles:
+                new_role = Role(**role)
+                session.add(new_role)
+                await session.commit()
+        await app_database_engine.dispose()
 
 
 @app.command()
