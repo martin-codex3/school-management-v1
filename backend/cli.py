@@ -1,8 +1,7 @@
 import asyncio
 from datetime import UTC, datetime
 
-from sqlalchemy import func, select
-from sqlalchemy.orm import lazyload
+from sqlalchemy import select
 from typer import Typer
 
 from app.config.database.app_database import Session, app_database_engine, database_init
@@ -74,7 +73,11 @@ async def seed_roles():
 
         for role in available_roles:
             if role["name"] not in existing_roles:
-                new_role = Role(**role)
+                new_role = Role(
+                    **role,
+                    created_date=datetime.now(UTC),
+                    updated_date=datetime.now(UTC),
+                )
                 session.add(new_role)
                 await session.commit()
         await app_database_engine.dispose()
