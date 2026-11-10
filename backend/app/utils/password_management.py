@@ -3,7 +3,7 @@ from pwdlib import PasswordHash, exceptions
 password_hash = PasswordHash.recommended()
 
 
-def hash_password(password: str) -> str:
+def create_password_hash(password: str) -> str:
     hashed_password = password_hash.hash(password)
     return hashed_password
 

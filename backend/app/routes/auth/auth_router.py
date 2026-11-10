@@ -3,6 +3,7 @@ from datetime import timedelta
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm, oauth2
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
@@ -16,9 +17,13 @@ from app.models.user_roles.user_role import UserRole
 from app.schemas.authentication.create_account_schema import (
     CreateAccountSchema,
 )
+from app.utils.password_management import create_password_hash
 from app.utils.token_management import Token, create_jwt_token
 
 auth_router = APIRouter()
+
+# for the oauth 2 security
+oauth_scheme = OAuth2PasswordBearer(tokenUrl="/api/authentication/token")
 
 
 @auth_router.post(
@@ -59,7 +64,7 @@ async def create_tenant_account(
         last_name=data.last_name,
         email=data.email,
         phone_number=data.phone_number,
-        password_hash=data.password_hash,
+        password_hash=create_password_hash(data.password_hash),
     )
 
     session.add(new_user)
@@ -123,8 +128,8 @@ async def create_tenant_account(
 
     user_data = {
         "sub": str(new_user.id),
-        "tenant_id": new_tenant.id,
-        "jti": str(uuid.UUID),
+        "tenant_id": str(new_tenant.id),
+        "jti": str(uuid.uuid4()),
         "audience": "StrideTechnologiesClient",
         "issuer": "StrideTechnologies",
         "exp": AppSettings.access_token_expiry_days,
@@ -134,3 +139,12 @@ async def create_tenant_account(
 
     access_token = create_jwt_token(data=user_data, expires_delta=expires_delta)
     return Token(token=access_token, token_type="bearer")
+
+
+@auth_router.post("/sign-in")
+async def sign_user_in(
+    user_data: Annotated[OAuth2PasswordRequestForm, Depends()],
+    session: Annotated[AsyncSession, Depends(app_session)],
+):
+    # we will first get the user
+    pass
