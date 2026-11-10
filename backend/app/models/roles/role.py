@@ -17,4 +17,4 @@ class Role(Base):
     description: Mapped[str] = mapped_column(String(255), index=True)
     created_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
     updated_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
-    tenant_users: Mapped[list[UserRole]] = relationship(back_populates="roles")
+    tenant_users: Mapped[list[UserRole]] = relationship(back_populates="role")

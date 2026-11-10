@@ -20,4 +20,4 @@ class UserRole(Base):
     role_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("roles.id"), primary_key=True)
 
     tenant_user: Mapped[TenantUser] = relationship(back_populates="roles")
-    roled: Mapped[Role] = relationship(back_populates="tenant_users")
+    role: Mapped[Role] = relationship(back_populates="tenant_users")

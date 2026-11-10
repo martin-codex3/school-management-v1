@@ -3,8 +3,14 @@ from datetime import UTC, datetime, timedelta
 import jwt
 from fastapi import HTTPException, status
 from jwt.exceptions import InvalidTokenError
+from pydantic import BaseModel
 
 from app.config.settings.app_settings import AppSettings
+
+
+class Token(BaseModel):
+    token: str
+    token_type: str
 
 
 def create_jwt_token(data: dict, expires_delta: timedelta | None = None) -> str:

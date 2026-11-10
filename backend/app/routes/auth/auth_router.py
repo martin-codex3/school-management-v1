@@ -1,3 +1,5 @@
+import uuid
+from datetime import timedelta
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -5,20 +7,27 @@ from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from app.config.database.app_database import app_session
+from app.config.settings.app_settings import AppSettings
 from app.models.application_user.application_user import ApplicationUser
 from app.models.roles.role import Role
 from app.models.tenant.tenant import Tenant
 from app.models.tenant_user.tenant_user import TenantUser
 from app.models.user_roles.user_role import UserRole
-from app.schemas.authentication.create_account_schema import CreateAccountSchema
+from app.schemas.authentication.create_account_schema import (
+    CreateAccountSchema,
+)
+from app.utils.token_management import Token, create_jwt_token
 
 auth_router = APIRouter()
 
 
-@auth_router.post("/create-account")
+@auth_router.post(
+    "/create-account", status_code=status.HTTP_200_OK, response_model=Token
+)
 async def create_tenant_account(
     data: CreateAccountSchema, session: Annotated[AsyncSession, Depends(app_session)]
 ):
+
     # we will check if the roles exists
     statement = await session.execute(
         select(Role).where(Role.name == "School Administrator")
@@ -54,6 +63,7 @@ async def create_tenant_account(
     )
 
     session.add(new_user)
+    await session.flush()
 
     # we then have to create the tenant here
     statement = await session.execute(
@@ -95,18 +105,32 @@ async def create_tenant_account(
 
     # we will add the tenant to the session here
     session.add(new_tenant)
+    await session.flush()
 
-    # we have to create the user roles using the generated
     new_tenant_user = TenantUser(
         application_user_id=new_user.id, tenant_id=new_tenant.id
     )
-
     session.add(new_tenant_user)
+    session.flush()
 
-    # we will the assign the role to the user here
-    new_user_role = UserRole(tenant_user_id=new_tenant_user.id, role_id=role.id)
+    # we assign the user role
+    new_user_role = UserRole(tenant_user=new_tenant_user, role=role)
 
     session.add(new_user_role)
+    await session.flush()
 
     await session.commit()
-    return "Created successfully"
+
+    user_data = {
+        "sub": str(new_user.id),
+        "tenant_id": new_tenant.id,
+        "jti": str(uuid.UUID),
+        "audience": "StrideTechnologiesClient",
+        "issuer": "StrideTechnologies",
+        "exp": AppSettings.access_token_expiry_days,
+    }
+
+    expires_delta = timedelta(days=AppSettings.access_token_expiry_days)
+
+    access_token = create_jwt_token(data=user_data, expires_delta=expires_delta)
+    return Token(token=access_token, token_type="bearer")

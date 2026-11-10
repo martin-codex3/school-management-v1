@@ -38,3 +38,17 @@ class CreateAccountSchema(BaseModel):
         if not last_name.isalpha():
             raise ValueError("Name cannot include numbers")
         return last_name
+
+
+class CreateAccountResponseSchema(BaseModel):
+    first_name: str
+    last_name: str
+    email: EmailStr
+    phone_number: MalawiPhone
+    school_name: str
+    school_type: str
+    school_email: EmailStr
+    school_phone: MalawiPhone
+    address: str
+    city: str
+    country: str
