@@ -18,7 +18,7 @@ from app.schemas.authentication.create_account_schema import (
     CreateAccountSchema,
 )
 from app.services.user_service import CurrentUser
-from app.utils.password_management import create_password_hash
+from app.utils.password_management import create_password_hash, verify_hashed_password
 from app.utils.token_management import Token, create_jwt_token
 
 auth_router = APIRouter()
@@ -139,7 +139,7 @@ async def create_tenant_account(
     return Token(token=access_token, token_type="bearer")
 
 
-@auth_router.post("/sign-in")
+@auth_router.post("/token")
 async def sign_user_in(
     user_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     session: Annotated[AsyncSession, Depends(app_session)],
@@ -157,3 +157,12 @@ async def sign_user_in(
             detail="Invalid username or password",
             headers={"WWW-Authenticate": "Bearer"},
         )
+    # we will check if the passwor id valid
+    if not verify_hashed_password(user_data.password, user.password_hash):
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Provided password is incorrect",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    print(user)
