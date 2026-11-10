@@ -201,3 +201,19 @@ async def get_user_tenant(
     current_user: CurrentUser, session: Annotated[AsyncSession, Depends(app_session)]
 ):
     """We will get the tenant for the authenticated user"""
+    statement = await session.execute(
+        select(Tenant)
+        .join(TenantUser, TenantUser.tenant_id == Tenant.id)
+        .where(ApplicationUser.id == current_user.id)
+    )
+
+    tenant = statement.scalars().first()
+
+    if not tenant:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Tenant not found",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    return tenant
