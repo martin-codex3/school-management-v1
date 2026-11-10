@@ -14,6 +14,9 @@ from app.models.roles.role import Role
 from app.models.tenant.tenant import Tenant
 from app.models.tenant_user.tenant_user import TenantUser
 from app.models.user_roles.user_role import UserRole
+from app.schemas.application_users.application_user_schemas import (
+    ApplicationUserResponse,
+)
 from app.schemas.authentication.create_account_schema import (
     CreateAccountSchema,
 )
@@ -189,7 +192,9 @@ async def sign_user_in(
     return Token(access_token=access_token, token_type="bearer")
 
 
-@auth_router.get("/me", status_code=status.HTTP_200_OK)
+@auth_router.get(
+    "/me", status_code=status.HTTP_200_OK, response_model=ApplicationUserResponse
+)
 async def get_current_user(current_user: CurrentUser):
     return current_user
 

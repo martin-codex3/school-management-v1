@@ -1,9 +1,10 @@
+import uuid
 from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field, field_validator
 from pydantic_extra_types.phone_numbers import PhoneNumberValidator
 
-MalawiPhone = Annotated[str, PhoneNumberValidator("MW", number_format=["MW"])]
+MalawiPhone = Annotated[str, PhoneNumberValidator("MW", supported_regions=["MW"])]
 
 
 class ApplicationUserSchemaBase(BaseModel):
@@ -29,3 +30,13 @@ class ApplicationUserSchemaBase(BaseModel):
         if last_name.isalnum():
             raise ValueError("Name cannot include numbers")
         return last_name
+
+
+class ApplicationUserResponse(BaseModel):
+    id: uuid.UUID
+    first_name: str
+    last_name: str
+    email: str
+    phone_number: str
+    bio: str | None
+    profile_image_url: str | None

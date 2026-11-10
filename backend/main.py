@@ -1,6 +1,7 @@
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi_faults import FaultRegistry
 
@@ -30,6 +31,17 @@ app.mount(
 
 app.include_router(
     router=auth_router, prefix="/api/authentication", tags=["Authentication"]
+)
+
+# for the cords here
+allowed_origins = ["http://localhost:5173"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_credentials=True,
+    allow_headers=["*"],
+    allow_methods=["*"],
+    allow_origins=[allowed_origins],
 )
 
 # for the fault registry here

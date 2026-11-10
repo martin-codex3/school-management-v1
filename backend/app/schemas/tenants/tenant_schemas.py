@@ -33,4 +33,4 @@ class TenantResponseSchema(BaseModel):
     registration_number: str | None
     school_code: str | None
     description: str | None
-    settings: str | None
+    settings: dict | None
