@@ -9,7 +9,6 @@ from app.models.application_user.application_user import ApplicationUser
 from app.models.roles.role import Role
 from app.models.tenant.tenant import Tenant
 from app.models.tenant_user.tenant_user import TenantUser
-from app.models.user_roles.user_role import user_roles
 from app.schemas.authentication.create_account_schema import CreateAccountSchema
 
 auth_router = APIRouter()
@@ -104,9 +103,6 @@ async def create_tenant_account(
     session.add(new_tenant_user)
 
     # we will the assign the role to the user here
-    new_user_role = user_roles(tenant_user_id=new_tenant_user.id, role_id=role.id)
-
-    session.add(new_user_role)
 
     await session.commit()
     return "Created successfully"

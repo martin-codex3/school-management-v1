@@ -7,6 +7,11 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from app.config.settings.app_settings import AppSettings
+from app.models.application_user.application_user import ApplicationUser  # noqa: F401
+from app.models.roles.role import Role  # noqa: F401
+from app.models.tenant.tenant import Tenant  # noqa: F401
+from app.models.tenant_user.tenant_user import TenantUser  # noqa: F401
+from app.models.user_roles.user_role import UserRole  # noqa: F401
 from app.utils.base import Base
 
 # this is the Alembic Config object, which provides
@@ -22,7 +27,7 @@ if config.config_file_name is not None:
 # for 'autogenerate' support
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
-target_metadata = Base.metadata.create_all
+target_metadata = Base.metadata
 # other values from the config, defined by the needs of env.py,
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")

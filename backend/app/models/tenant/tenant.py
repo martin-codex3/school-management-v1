@@ -1,11 +1,10 @@
 import uuid
+from typing import TYPE_CHECKING
 
 from sqlalchemy import JSON, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-
 from app.utils.base import Base
-from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
     from app.models.tenant_user.tenant_user import TenantUser
@@ -30,6 +29,6 @@ class Tenant(Base):
     settings: Mapped[dict[str, any]] = mapped_column(JSON, default={}, nullable=True)
     is_deleted: Mapped[bool | None] = mapped_column(default=False)
 
-    application_users: Mapped[list["TenantUser"]] = relationship(
+    application_users: Mapped[list[TenantUser]] = relationship(
         back_populates="tenant", lazy="selectin"
     )

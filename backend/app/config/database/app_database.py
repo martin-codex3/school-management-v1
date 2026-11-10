@@ -6,7 +6,7 @@ from app.models.application_user.application_user import ApplicationUser  # noqa
 from app.models.roles.role import Role  # noqa: F401
 from app.models.tenant.tenant import Tenant  # noqa: F401
 from app.models.tenant_user.tenant_user import TenantUser  # noqa: F401
-from app.models.user_roles.user_role import user_roles  # noqa: F401
+from app.models.user_roles.user_role import UserRole  # noqa: F401
 from app.utils.base import Base
 
 # we will create the database engine here

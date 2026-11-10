@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
-from fastapi_faults import Fault, FaultRegistry
+from fastapi_faults import FaultRegistry
 
 from app.config.database.app_database import app_database_engine, database_init
 from app.routes.auth.auth_router import auth_router

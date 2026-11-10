@@ -5,13 +5,12 @@ from typing import TYPE_CHECKING
 from sqlalchemy import ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
-from app.models.user_roles.user_role import user_roles
 from app.utils.base import Base
 
 if TYPE_CHECKING:
     from app.models.application_user.application_user import ApplicationUser
-    from app.models.roles.role import Role
     from app.models.tenant.tenant import Tenant
+    from app.models.user_roles.user_role import UserRole
 
 
 class TenantUser(Base):
@@ -31,6 +30,4 @@ class TenantUser(Base):
     application_user: Mapped[ApplicationUser] = relationship(back_populates="tenants")
     tenant: Mapped[Tenant] = relationship(back_populates="application_users")
     # for the roles here
-    roles: Mapped[list[Role]] = relationship(
-        back_populates="tenant_users", secondary=user_roles, lazy="selectin"
-    )
+    roles: Mapped[list[UserRole]] = relationship(back_populates="tenant_users")
