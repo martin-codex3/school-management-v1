@@ -6,6 +6,7 @@ from fastapi.staticfiles import StaticFiles
 from fastapi_faults import FaultRegistry
 
 from app.config.database.app_database import app_database_engine, database_init
+from app.routes.application_user.application_user_routes import appliication_user_router
 from app.routes.auth.auth_router import auth_router
 
 
@@ -32,6 +33,8 @@ app.mount(
 app.include_router(
     router=auth_router, prefix="/api/authentication", tags=["Authentication"]
 )
+
+app.include_router(router=appliication_user_router, prefix="/api/users", tags=["User"])
 
 # for the cords here
 allowed_origins = ["http://localhost:5173"]
