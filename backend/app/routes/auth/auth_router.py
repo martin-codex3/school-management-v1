@@ -76,3 +76,7 @@ async def create_tenant_account(
         city=data.city,
         country=data.country,
     )
+
+    # we will add the tenant to the session here
+    session.add(new_tenant)
+    session.flush()
