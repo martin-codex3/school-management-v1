@@ -28,13 +28,13 @@ class CreateAccountSchema(BaseModel):
     @field_validator("first_name")
     @classmethod
     def validate_first_name(cls, first_name: str):
-        if first_name.isalnum():
+        if not first_name.isalpha():
             raise ValueError("Name cannot include numbers")
         return first_name
 
     @field_validator("last_name")
     @classmethod
     def validate_last_name(cls, last_name: str):
-        if last_name.isalnum():
+        if not last_name.isalpha():
             raise ValueError("Name cannot include numbers")
         return last_name
