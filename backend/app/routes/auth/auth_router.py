@@ -17,6 +17,7 @@ from app.models.user_roles.user_role import UserRole
 from app.schemas.authentication.create_account_schema import (
     CreateAccountSchema,
 )
+from app.schemas.tenants.tenant_schemas import TenantResponseSchema
 from app.services.user_service import CurrentUser
 from app.utils.password_management import create_password_hash, verify_hashed_password
 from app.utils.token_management import Token, create_jwt_token
@@ -128,15 +129,15 @@ async def create_tenant_account(
         "sub": str(new_user.id),
         "tenant_id": str(new_tenant.id),
         "jti": str(uuid.uuid4()),
-        "aud": "StrideTechnologiesClient",
-        "iss": "StrideTechnologies",
+        "aud": AppSettings.audience,
+        "iss": AppSettings.issuer,
         "iat": datetime.now(UTC),
     }
 
     expires_delta = timedelta(days=AppSettings.access_token_expiry_days)
 
     access_token = create_jwt_token(data=user_data, expires_delta=expires_delta)
-    return Token(token=access_token, token_type="bearer")
+    return Token(access_token=access_token, token_type="bearer")
 
 
 @auth_router.post("/token", status_code=status.HTTP_200_OK, response_model=Token)
@@ -178,16 +179,25 @@ async def sign_user_in(
         "sub": str(user.id),
         "tenant_id": str(tenant.id),
         "jti": str(uuid.uuid4()),
-        "aud": "StrideTechnologiesClient",
-        "iss": "StrideTechnologies",
+        "aud": AppSettings.audience,
+        "iss": AppSettings.issuer,
         "iat": datetime.now(UTC),
     }
 
     expires_delta = timedelta(days=AppSettings.access_token_expiry_days)
     access_token = create_jwt_token(data=user_data, expires_delta=expires_delta)
-    return Token(token=access_token, token_type="bearer")
+    return Token(access_token=access_token, token_type="bearer")
 
 
 @auth_router.get("/me", status_code=status.HTTP_200_OK)
 async def get_current_user(current_user: CurrentUser):
-    pass
+    return current_user
+
+
+@auth_router.get(
+    "/tenant", status_code=status.HTTP_200_OK, response_model=TenantResponseSchema
+)
+async def get_user_tenant(
+    current_user: CurrentUser, session: Annotated[AsyncSession, Depends(app_session)]
+):
+    """We will get the tenant for the authenticated user"""

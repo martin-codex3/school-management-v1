@@ -20,45 +20,40 @@ async def get_current_user(
     session: Annotated[AsyncSession, Depends(app_session)],
 ) -> ApplicationUser:
 
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Cannot verify the credentials",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
     try:
         payload = jwt.decode(
             token,
             key=AppSettings.access_token_key.get_secret_value(),
             algorithms=[AppSettings.algorithm],
-            issuer="",
-            audience="",
+            issuer=AppSettings.issuer,
+            audience=AppSettings.audience,
         )
 
-        print("payload", payload)
+        user_uuid = uuid.UUID(payload.get("sub"))
 
-        user_id = payload.get("sub")
+        if user_uuid is None:
+            raise credentials_exception
 
-        if not user_id:
-            raise InvalidTokenError("Missing user subject")
+    except InvalidTokenError, ValueError:
+        raise credentials_exception
 
-        user_uuid = uuid.UUID(str(user_id))
-
-    except InvalidTokenError, TypeError, ValueError:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Could not validate credentials",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-
+    # we will get the user here
     statement = await session.execute(
         select(ApplicationUser).where(ApplicationUser.id == user_uuid)
     )
 
-    application_user = statement.scalars().first()
+    user = statement.scalars().first()
 
-    if not application_user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="User could not be found",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
+    if not user:
+        raise credentials_exception
 
-    return application_user
+    return user
 
 
 CurrentUser = Annotated[

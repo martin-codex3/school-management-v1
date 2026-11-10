@@ -1,3 +1,4 @@
+import uuid
 from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field
@@ -17,3 +18,19 @@ class TenantSchemaBase(BaseModel):
     address: str = Field(min_length=5, max_length=100)
     city: str = Field(min_length=5, max_length=50)
     country: str = Field(min_length=5, max_length=100)
+
+
+class TenantResponseSchema(BaseModel):
+    id: uuid.UUID
+    school_name: str
+    school_type: str
+    school_email: str
+    school_phone: str
+    address: str
+    city: str
+    country: str
+    website_url: str | None
+    registration_number: str | None
+    school_code: str | None
+    description: str | None
+    settings: str | None

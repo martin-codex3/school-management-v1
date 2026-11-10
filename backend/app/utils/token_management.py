@@ -9,7 +9,7 @@ from app.config.settings.app_settings import AppSettings
 
 
 class Token(BaseModel):
-    token: str
+    access_token: str
     token_type: str
 
 
