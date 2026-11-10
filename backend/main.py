@@ -13,7 +13,7 @@ from app.routes.auth.auth_router import auth_router
 async def app_lifespan(app: FastAPI):
     await database_init()
     yield
-    app_database_engine.dispose()
+    await app_database_engine.dispose()
 
 
 app = FastAPI(

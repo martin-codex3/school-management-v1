@@ -17,6 +17,7 @@ from app.models.user_roles.user_role import UserRole
 from app.schemas.authentication.create_account_schema import (
     CreateAccountSchema,
 )
+from app.services.user_service import CurrentUser
 from app.utils.password_management import create_password_hash, verify_hashed_password
 from app.utils.token_management import Token, create_jwt_token
 
@@ -187,5 +188,6 @@ async def sign_user_in(
     return Token(token=access_token, token_type="bearer")
 
 
-
 @auth_router.get("/me", status_code=status.HTTP_200_OK)
+async def get_current_user(current_user: CurrentUser):
+    pass

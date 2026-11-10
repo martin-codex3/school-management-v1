@@ -40,7 +40,9 @@ def verify_access_token(token: str) -> bool:
 
     try:
         return jwt.decode(
-            token, AppSettings.access_token_key, algorithms=[AppSettings.algorithm]
+            token,
+            AppSettings.access_token_key.get_secret_value(),
+            algorithms=[AppSettings.algorithm],
         )
     except InvalidTokenError:
         raise credentials_error

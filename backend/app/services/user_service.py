@@ -1,3 +1,4 @@
+import uuid
 from typing import Annotated
 
 import jwt
@@ -5,50 +6,60 @@ from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
 from sqlalchemy import select
-from sqlalchemy.ext.asyncio.session import AsyncSession
+from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.config.database.app_database import app_session
 from app.config.settings.app_settings import AppSettings
 from app.models.application_user.application_user import ApplicationUser
 
-# for the oauth 2 security
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/authentication/token")
 
 
 async def get_current_user(
     token: Annotated[str, Depends(oauth2_scheme)],
     session: Annotated[AsyncSession, Depends(app_session)],
-):
+) -> ApplicationUser:
 
-    # we will get the user id from the payload
     try:
         payload = jwt.decode(
-            token, key=AppSettings.access_token_key, algorithms=[AppSettings.algorithm]
+            token,
+            key=AppSettings.access_token_key.get_secret_value(),
+            algorithms=[AppSettings.algorithm],
         )
+
+        print("payload", payload)
 
         user_id = payload.get("sub")
 
-        if user_id is None:
-            raise HTTPException(
-                status_code=status.HTTP_401_UNAUTHORIZED,
-                detail="Could not validate credentials",
-                headers={"WWW-Authenticate": "Bearer"},
-            )
-    except InvalidTokenError, TypeError:
+        if not user_id:
+            raise InvalidTokenError("Missing user subject")
+
+        user_uuid = uuid.UUID(str(user_id))
+
+    except InvalidTokenError, TypeError, ValueError:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Could not validate credentials",
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    # we will fetch the user based on the id here
     statement = await session.execute(
-        select(ApplicationUser).where(ApplicationUser.id == user_id)
+        select(ApplicationUser).where(ApplicationUser.id == user_uuid)
     )
 
     application_user = statement.scalars().first()
 
-    print(application_user)
+    if not application_user:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="User could not be found",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    return application_user
 
 
-CurrentUser = Annotated[ApplicationUser, Depends(get_current_user)]
+CurrentUser = Annotated[
+    ApplicationUser,
+    Depends(get_current_user),
+]
