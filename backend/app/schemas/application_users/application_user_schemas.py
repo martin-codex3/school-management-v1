@@ -32,6 +32,32 @@ class ApplicationUserSchemaBase(BaseModel):
         return last_name
 
 
+# for updating the application user
+class ApplicationUserSchema(BaseModel):
+    model_config = ConfigDict(arbitrary_types_allowed=True)
+
+    first_name: str = Field(min_length=3, max_length=20)
+    last_name: str = Field(min_length=3, max_length=20)
+    email: EmailStr
+    phone_number: MalawiPhone
+    password_hash: str = Field(min_length=10, max_length=20)
+
+    # sample validations
+    @field_validator("first_name")
+    @classmethod
+    def validate_first_name(cls, first_name: str):
+        if first_name.isalnum():
+            raise ValueError("Name cannot include numbers")
+        return first_name
+
+    @field_validator("last_name")
+    @classmethod
+    def validate_last_name(cls, last_name: str):
+        if last_name.isalnum():
+            raise ValueError("Name cannot include numbers")
+        return last_name
+
+
 class ApplicationUserResponse(BaseModel):
     id: uuid.UUID
     first_name: str
