@@ -3,7 +3,7 @@ from datetime import timedelta
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm, oauth2
+from fastapi.security import OAuth2PasswordRequestForm
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
@@ -17,7 +17,6 @@ from app.models.user_roles.user_role import UserRole
 from app.schemas.authentication.create_account_schema import (
     CreateAccountSchema,
 )
-from app.services.user_service import CurrentUser
 from app.utils.password_management import create_password_hash, verify_hashed_password
 from app.utils.token_management import Token, create_jwt_token
 
@@ -139,7 +138,7 @@ async def create_tenant_account(
     return Token(token=access_token, token_type="bearer")
 
 
-@auth_router.post("/token")
+@auth_router.post("/token", status_code=status.HTTP_200_OK, response_model=Token)
 async def sign_user_in(
     user_data: Annotated[OAuth2PasswordRequestForm, Depends()],
     session: Annotated[AsyncSession, Depends(app_session)],
@@ -175,10 +174,18 @@ async def sign_user_in(
     tenant = statement.scalars().first()
 
     user_data = {
-        "sub": str(new_user.id),
-        "tenant_id": str(new_tenant.id),
+        "sub": str(user.id),
+        "tenant_id": str(tenant.id),
         "jti": str(uuid.uuid4()),
         "audience": "StrideTechnologiesClient",
         "issuer": "StrideTechnologies",
         "exp": AppSettings.access_token_expiry_days,
     }
+
+    expires_delta = timedelta(days=AppSettings.access_token_expiry_days)
+    access_token = create_jwt_token(data=user_data, expires_delta=expires_delta)
+    return Token(token=access_token, token_type="bearer")
+
+
+
+@auth_router.get("/me", status_code=status.HTTP_200_OK)
