@@ -33,14 +33,16 @@ class ApplicationUserSchemaBase(BaseModel):
 
 
 # for updating the application user
-class ApplicationUserSchema(BaseModel):
+class UpdateApplicationUserSchema(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
 
-    first_name: str = Field(min_length=3, max_length=20)
-    last_name: str = Field(min_length=3, max_length=20)
-    email: EmailStr
-    phone_number: MalawiPhone
-    password_hash: str = Field(min_length=10, max_length=20)
+    first_name: str | None = Field(default=None, min_length=3, max_length=20)
+    last_name: str | None = Field(default=None, min_length=3, max_length=20)
+    email: EmailStr | None = Field(default=None)
+    phone_number: MalawiPhone | None = Field(default=None)
+    bio: str | None = Field(default=None, min_length=5, max_length=100)
+    profile_image_url: str | None = Field(default=None)
+    password_hash: str | None = Field(default=None, min_length=10, max_length=20)
 
     # sample validations
     @field_validator("first_name")
