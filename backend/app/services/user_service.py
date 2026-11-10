@@ -25,6 +25,8 @@ async def get_current_user(
             token,
             key=AppSettings.access_token_key.get_secret_value(),
             algorithms=[AppSettings.algorithm],
+            issuer="",
+            audience="",
         )
 
         print("payload", payload)

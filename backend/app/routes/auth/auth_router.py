@@ -1,5 +1,5 @@
 import uuid
-from datetime import timedelta
+from datetime import UTC, datetime, timedelta
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
@@ -128,9 +128,9 @@ async def create_tenant_account(
         "sub": str(new_user.id),
         "tenant_id": str(new_tenant.id),
         "jti": str(uuid.uuid4()),
-        "audience": "StrideTechnologiesClient",
-        "issuer": "StrideTechnologies",
-        "exp": AppSettings.access_token_expiry_days,
+        "aud": "StrideTechnologiesClient",
+        "iss": "StrideTechnologies",
+        "iat": datetime.now(UTC),
     }
 
     expires_delta = timedelta(days=AppSettings.access_token_expiry_days)
@@ -178,9 +178,9 @@ async def sign_user_in(
         "sub": str(user.id),
         "tenant_id": str(tenant.id),
         "jti": str(uuid.uuid4()),
-        "audience": "StrideTechnologiesClient",
-        "issuer": "StrideTechnologies",
-        "exp": AppSettings.access_token_expiry_days,
+        "aud": "StrideTechnologiesClient",
+        "iss": "StrideTechnologies",
+        "iat": datetime.now(UTC),
     }
 
     expires_delta = timedelta(days=AppSettings.access_token_expiry_days)
