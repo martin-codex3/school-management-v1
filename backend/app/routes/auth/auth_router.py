@@ -165,4 +165,20 @@ async def sign_user_in(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
-    print(user)
+    # we will get the tenant here
+    statement = await session.execute(
+        select(Tenant)
+        .join(TenantUser, TenantUser.tenant_id == Tenant.id)
+        .where(TenantUser.application_user_id == user.id)
+    )
+
+    tenant = statement.scalars().first()
+
+    user_data = {
+        "sub": str(new_user.id),
+        "tenant_id": str(new_tenant.id),
+        "jti": str(uuid.uuid4()),
+        "audience": "StrideTechnologiesClient",
+        "issuer": "StrideTechnologies",
+        "exp": AppSettings.access_token_expiry_days,
+    }
