@@ -17,13 +17,11 @@ from app.models.user_roles.user_role import UserRole
 from app.schemas.authentication.create_account_schema import (
     CreateAccountSchema,
 )
+from app.services.user_service import CurrentUser
 from app.utils.password_management import create_password_hash
 from app.utils.token_management import Token, create_jwt_token
 
 auth_router = APIRouter()
-
-# for the oauth 2 security
-oauth_scheme = OAuth2PasswordBearer(tokenUrl="/api/authentication/token")
 
 
 @auth_router.post(
@@ -147,4 +145,15 @@ async def sign_user_in(
     session: Annotated[AsyncSession, Depends(app_session)],
 ):
     # we will first get the user
-    pass
+    statement = await session.execute(
+        select(ApplicationUser).where(ApplicationUser.email == user_data.username)
+    )
+
+    user = statement.scalars().first()
+
+    if not user:
+        raise HTTPException(
+            status_code=status.HTTP_403_FORBIDDEN,
+            detail="Invalid username or password",
+            headers={"WWW-Authenticate": "Bearer"},
+        )

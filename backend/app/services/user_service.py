@@ -4,10 +4,12 @@ import jwt
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from jwt.exceptions import InvalidTokenError
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from app.config.database.app_database import app_session
 from app.config.settings.app_settings import AppSettings
+from app.models.application_user.application_user import ApplicationUser
 
 # for the oauth 2 security
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/authentication/token")
@@ -40,4 +42,13 @@ async def get_current_user(
         )
 
     # we will fetch the user based on the id here
-    statement = await session
+    statement = await session.execute(
+        select(ApplicationUser).where(ApplicationUser.id == user_id)
+    )
+
+    application_user = statement.scalars().first()
+
+    print(application_user)
+
+
+CurrentUser = Annotated[ApplicationUser, Depends(get_current_user)]
