@@ -4,8 +4,8 @@
 
 @theme {
     --font-primary-main: SF-Pro, ui-sans-serif, system-ui, sans-serif;
-    --color-primary-color-green: #1DB954;
-    --color-primary-color-black: #191414;
+    --color-primary-main-green: #1DB954;
+    --color-primary-main-black: #191414;
     --color-primary-border: #a3a3a3;
 }
 
