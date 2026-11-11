@@ -4,9 +4,15 @@
         id: string;
         placeholder: string;
         name: string;
+        label: string;
     }
 
-    const { type, id, placeholder, name }: Props = $props();
+    const { type, id, placeholder, name, label }: Props = $props();
 </script>
 
-<div></div>
+<div>
+    {#if label}
+        <label for={id}>{label}</label>
+    {/if}
+    <input {type} {id} {placeholder} {name} />
+</div>
