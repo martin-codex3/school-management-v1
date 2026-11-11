@@ -1,3 +1,14 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+
+@theme {
+    --font-primary-main: SF-Pro, ui-sans-serif, system-ui, sans-serif;
+}
+
+@font-face {
+    font-family: "SF-Pro";
+    src: url("/fonts/SF-Pro.ttf") format("truetype");
+    font-size: 500 900;
+    font-weight: normal;
+}
