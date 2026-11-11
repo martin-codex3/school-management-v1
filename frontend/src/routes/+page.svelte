@@ -17,16 +17,86 @@
 
             <div>
                 <form action="">
-                    <div
-                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
-                    >
-                        <TextInput
-                            type="text"
-                            name="first_name"
-                            placeholder="John"
-                            id="FirstName"
-                            label="First name"
-                        />
+                    <div class="wrapper">
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
+                        >
+                            <TextInput
+                                type="text"
+                                name="first_name"
+                                placeholder="John"
+                                id="FirstName"
+                                label="First name"
+                            />
+
+                            <TextInput
+                                type="text"
+                                name="last_name"
+                                placeholder="Doe"
+                                id="LastName"
+                                label="Last name"
+                            />
+                        </div>
+
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
+                        >
+                            <TextInput
+                                type="email"
+                                name="email"
+                                placeholder="user@example.com"
+                                id="Email"
+                                label="Email"
+                            />
+
+                            <TextInput
+                                type="text"
+                                name="phone_number"
+                                placeholder=""
+                                id="PhoneNumber"
+                                label="Phone number"
+                            />
+                        </div>
+
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
+                        >
+                            <TextInput
+                                type="text"
+                                name="first_name"
+                                placeholder="John"
+                                id="FirstName"
+                                label="First name"
+                            />
+
+                            <TextInput
+                                type="text"
+                                name="last_name"
+                                placeholder="Doe"
+                                id="LastName"
+                                label="Last name"
+                            />
+                        </div>
+
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
+                        >
+                            <TextInput
+                                type="text"
+                                name="school_name"
+                                placeholder=""
+                                id="SchoolName"
+                                label="School name"
+                            />
+
+                            <TextInput
+                                type="text"
+                                name="last_name"
+                                placeholder="Doe"
+                                id="LastName"
+                                label="Last name"
+                            />
+                        </div>
                     </div>
                 </form>
             </div>

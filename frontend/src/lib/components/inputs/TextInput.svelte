@@ -19,6 +19,6 @@
         {id}
         {placeholder}
         {name}
-        class="w-full mt-1 py-3 px-3 rounded-lg outline-none border border-gray-300 focus:border-primary-main-green focus:ring-primary-main-green"
+        class="w-full mt-1 py-3 px-3 rounded-lg outline-none border border-gray-300 focus:border-primary-main-purple focus:ring-primary-main-purple"
     />
 </div>
