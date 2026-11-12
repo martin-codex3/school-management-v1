@@ -97,7 +97,7 @@
                                 placeholder=""
                                 label="School type"
                             >
-                                <option value=""></option>
+                                <option value="">Select option</option>
                                 <option value="Primary School"
                                     >Primary School</option
                                 >
@@ -112,6 +112,80 @@
                                 >
                                 <option value="Other">Other</option>
                             </SelectInput>
+                        </div>
+
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
+                        >
+                            <TextInput
+                                type="email"
+                                name="school_email"
+                                placeholder="school@example.com"
+                                id="SchoolEmail"
+                                label="School email"
+                            />
+
+                            <TextInput
+                                type="text"
+                                name="school_phone"
+                                placeholder=""
+                                id="SchoolPhone"
+                                label="School phone"
+                            />
+                        </div>
+
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
+                        >
+                            <TextInput
+                                type="text"
+                                name="address"
+                                placeholder=""
+                                id="Address"
+                                label="Address"
+                            />
+
+                            <TextInput
+                                type="text"
+                                name="city"
+                                placeholder="Blantyre"
+                                id="City"
+                                label="City"
+                            />
+                        </div>
+
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-5"
+                        >
+                            <SelectInput
+                                name="country"
+                                placeholder="Malawi"
+                                id="Country"
+                                label="Country"
+                            >
+                                <option value="">Selection option</option>
+                                <option value="Malawi">Malawi</option>
+                            </SelectInput>
+                        </div>
+
+                        <div
+                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
+                        >
+                            <TextInput
+                                type="password"
+                                name="password_hash"
+                                placeholder=""
+                                id="Password"
+                                label="Password"
+                            />
+
+                            <TextInput
+                                type="text"
+                                name="confirm_password"
+                                placeholder=""
+                                id="ConfirmPassword"
+                                label="Confirm password"
+                            />
                         </div>
                     </div>
                 </form>
