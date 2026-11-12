@@ -8,6 +8,7 @@
     import NumberIcon2 from "@iconify-svelte/tabler/number-2";
     import type { PageProps } from "./$types";
     import { toast } from "svelte-sonner";
+    import { getCountryDataList } from "countries-list";
 
     let isCreatingAccount: boolean = $state(false);
 
@@ -25,9 +26,9 @@
     });
 </script>
 
-<section class="h-screen flex items-center justify-center">
+<section class="h-screen flex items-center justify-center px-5 lg:px-0">
     <div
-        class="bg-white rounded-4xl w-full border border-primary-border py-5 px-5 max-w-2xl h-[calc(100vh-3rem)] mx-auto"
+        class="bg-white rounded-4xl w-full border border-primary-border py-5 px-5 max-w-3xl h-[calc(100vh-3rem)] mx-auto"
     >
         <div class="h-full overflow-auto scrollbar-thin px-5 space-y-10 py-5">
             <div class="flex items-center justify-center gap-5">
@@ -132,6 +133,8 @@
                                 id="SchoolType"
                                 placeholder=""
                                 label="School type"
+                                fieldError={fieldErrors("#/school_type")
+                                    ?.detail}
                             >
                                 <option value="">Select option</option>
                                 <option value="Primary School"
@@ -204,9 +207,14 @@
                                 placeholder="Malawi"
                                 id="Country"
                                 label="Country"
+                                fieldError={fieldErrors("#/country")?.detail}
                             >
                                 <option value="">Selection option</option>
-                                <option value="Malawi">Malawi</option>
+                                {#each getCountryDataList() as country}
+                                    <option value={country.name}
+                                        >{country.name}</option
+                                    >
+                                {/each}
                             </SelectInput>
                         </div>
 

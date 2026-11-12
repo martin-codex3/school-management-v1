@@ -5,17 +5,23 @@
         name,
         label,
         children,
+        fieldError,
     }: {
         id: string;
         placeholder: string;
         name: string;
         label: string;
+        fieldError: string | undefined;
         children: any;
     } = $props();
 </script>
 
 {#snippet Options()}
     <option></option>
+{/snippet}
+
+{#snippet fieldErrors(errorValue: string | undefined)}
+    <span class="text-sm text-red-600">{errorValue}</span>
 {/snippet}
 
 <div class="">
@@ -30,4 +36,5 @@
     >
         {@render children()}
     </select>
+    {@render fieldErrors(fieldError)}
 </div>
