@@ -11,6 +11,13 @@
     let isCreatingAccount: boolean = $state(false);
 
     const { form }: PageProps = $props();
+    let errorTitle: string = $state("");
+
+    $effect(() => {
+        if (form?.problem) {
+            errorTitle = form.problem.title;
+        }
+    });
 </script>
 
 <section class="h-screen flex items-center justify-center">
