@@ -7,6 +7,7 @@
     import NumberIcon from "@iconify-svelte/tabler/number-1";
     import NumberIcon2 from "@iconify-svelte/tabler/number-2";
     import type { PageProps } from "./$types";
+    import { toast } from "svelte-sonner";
 
     let isCreatingAccount: boolean = $state(false);
 
@@ -15,8 +16,12 @@
 
     $effect(() => {
         if (form?.problem) {
-            errorTitle = form.problem.title;
+            errorTitle = form?.problem?.title;
         }
+    });
+
+    const fieldErrors = $derived((field: any) => {
+        return form?.problem?.errors?.find((error) => error.pointer === field);
     });
 </script>
 
@@ -54,7 +59,7 @@
                             isCreatingAccount = false;
 
                             if (result.type === "failure") {
-                                console.log("we will do something here");
+                                toast.error(errorTitle);
                             }
 
                             if (result.type === "error") {
@@ -63,7 +68,7 @@
                         };
                     }}
                 >
-                    <div class="wrapper space-y-7">
+                    <div class="wrapper space-y-5">
                         <div
                             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
                         >
@@ -73,6 +78,7 @@
                                 placeholder="John"
                                 id="FirstName"
                                 label="First name"
+                                valueError={fieldErrors("#/first_name")?.detail}
                             />
 
                             <TextInput
@@ -81,6 +87,7 @@
                                 placeholder="Doe"
                                 id="LastName"
                                 label="Last name"
+                                valueError={fieldErrors("#/last_name")?.detail}
                             />
                         </div>
 
@@ -93,6 +100,7 @@
                                 placeholder="user@example.com"
                                 id="Email"
                                 label="Email"
+                                valueError={fieldErrors("#/email")?.detail}
                             />
 
                             <TextInput
@@ -101,26 +109,8 @@
                                 placeholder=""
                                 id="PhoneNumber"
                                 label="Phone number"
-                            />
-                        </div>
-
-                        <div
-                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
-                        >
-                            <TextInput
-                                type="text"
-                                name="first_name"
-                                placeholder="John"
-                                id="FirstName"
-                                label="First name"
-                            />
-
-                            <TextInput
-                                type="text"
-                                name="last_name"
-                                placeholder="Doe"
-                                id="LastName"
-                                label="Last name"
+                                valueError={fieldErrors("#/phone_number")
+                                    ?.detail}
                             />
                         </div>
 
@@ -133,6 +123,8 @@
                                 placeholder=""
                                 id="SchoolName"
                                 label="School name"
+                                valueError={fieldErrors("#/school_name")
+                                    ?.detail}
                             />
 
                             <SelectInput
@@ -167,6 +159,8 @@
                                 placeholder="school@example.com"
                                 id="SchoolEmail"
                                 label="School email"
+                                valueError={fieldErrors("#/school_email")
+                                    ?.detail}
                             />
 
                             <TextInput
@@ -175,6 +169,8 @@
                                 placeholder=""
                                 id="SchoolPhone"
                                 label="School phone"
+                                valueError={fieldErrors("#/school_phone")
+                                    ?.detail}
                             />
                         </div>
 
@@ -187,6 +183,7 @@
                                 placeholder=""
                                 id="Address"
                                 label="Address"
+                                valueError={fieldErrors("#/address")?.detail}
                             />
 
                             <TextInput
@@ -195,6 +192,7 @@
                                 placeholder="Blantyre"
                                 id="City"
                                 label="City"
+                                valueError={fieldErrors("#/city")?.detail}
                             />
                         </div>
 
@@ -221,6 +219,8 @@
                                 placeholder=""
                                 id="Password"
                                 label="Password"
+                                valueError={fieldErrors("#/password_hash")
+                                    ?.detail}
                             />
                         </div>
 

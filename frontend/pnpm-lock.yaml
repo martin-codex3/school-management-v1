@@ -14,6 +14,9 @@ importers:
       '@iconify-svelte/tabler':
         specifier: gitlab:iconify-icons/svelte#tabler
         version: https://gitlab.com/iconify-icons/svelte/-/archive/3d99fde37bdca1d991444c40aa0604be5fd48ddd/svelte-3d99fde37bdca1d991444c40aa0604be5fd48ddd.tar.gz(svelte@5.57.3)
+      country-list:
+        specifier: ^2.4.1
+        version: 2.4.1
       svelte-sonner:
         specifier: ^1.2.3
         version: 1.2.3(svelte@5.57.3)
@@ -361,6 +364,9 @@ packages:
   cookie@2.0.2:
     resolution: {integrity: sha512-SL0cVuEdETEp7pN0FuZb01toc3vnODEfVUCooxG1SJN0yIirh7JMb9X9bvfCFf0vzzbT68RdbKDHYTiWy7a7iw==}
     engines: {node: '>=22'}
+
+  country-list@2.4.1:
+    resolution: {integrity: sha512-KhVV/UfUV3dSNpsWIqHTQxLpYDKPKz1UwkRjadt+YbX2PRhyCEihEoS5XgB7J7AMXpkicvl+tRHvkNI5wbji/g==}
 
   cssesc@3.0.0:
     resolution: {integrity: sha512-/Tb/JcjK111nNScGob5MNtsntNM1aCNUDipB/TkwZFhyDrrE47SOx/18wF2bbjgc3ZzCSKW1T5nt5EbFoAz/Vg==}
@@ -872,6 +878,8 @@ snapshots:
   clsx@2.1.1: {}
 
   cookie@2.0.2: {}
+
+  country-list@2.4.1: {}
 
   cssesc@3.0.0: {}
 
