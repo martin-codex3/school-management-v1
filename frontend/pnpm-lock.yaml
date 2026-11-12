@@ -7,6 +7,10 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@iconify-svelte/tabler':
+        specifier: gitlab:iconify-icons/svelte#tabler
+        version: https://gitlab.com/iconify-icons/svelte/-/archive/3d99fde37bdca1d991444c40aa0604be5fd48ddd/svelte-3d99fde37bdca1d991444c40aa0604be5fd48ddd.tar.gz(svelte@5.57.3)
     devDependencies:
       '@sveltejs/adapter-auto':
         specifier: ^8.0.0
@@ -43,6 +47,18 @@ importers:
         version: 8.3.7(jiti@2.7.0)
 
 packages:
+
+  '@iconify-svelte/tabler@https://gitlab.com/iconify-icons/svelte/-/archive/3d99fde37bdca1d991444c40aa0604be5fd48ddd/svelte-3d99fde37bdca1d991444c40aa0604be5fd48ddd.tar.gz':
+    resolution: {gitHosted: true, integrity: sha512-WKs+vF8iaG92PmWkvVzPf2EXB7PjxHeID6Fco7Y/0PssSPXbfzhvNJ9Sib7kG4JsoTjmb8fyVZyTbI759Kzf+Q==, tarball: https://gitlab.com/iconify-icons/svelte/-/archive/3d99fde37bdca1d991444c40aa0604be5fd48ddd/svelte-3d99fde37bdca1d991444c40aa0604be5fd48ddd.tar.gz}
+    version: 1.0.6
+
+  '@iconify/css-svelte@1.0.3':
+    resolution: {integrity: sha512-RFI9mCvy0bUdEaxd/9LMfzkIDBrIhNPf2hPRdy3oXmTJ4RTlFgY/nF0Gm9rgQJUq5qHWWBEl0tdOFR8fJVBmng==}
+    peerDependencies:
+      svelte: '>4.0.0'
+
+  '@iconify/types@2.0.0':
+    resolution: {integrity: sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==}
 
   '@jridgewell/gen-mapping@0.3.13':
     resolution: {integrity: sha512-2kkt/7niJ6MgEPxF0bYdQ6etZaA+fQvDcLKckhy1yIQOzaoKjBBjSj63/aLVjYE3qhRt5dvM+uUyfCg6UKCBbA==}
@@ -621,6 +637,19 @@ packages:
     resolution: {integrity: sha512-msJxIvYDYcoNL+PJsu+7qmpDWsYmAxTY+2TNYXXF0hzBzBk0BMecOqDOG/EckUoKCuKwObfbugIl8QpqHDXeFA==}
 
 snapshots:
+
+  '@iconify-svelte/tabler@https://gitlab.com/iconify-icons/svelte/-/archive/3d99fde37bdca1d991444c40aa0604be5fd48ddd/svelte-3d99fde37bdca1d991444c40aa0604be5fd48ddd.tar.gz(svelte@5.57.3)':
+    dependencies:
+      '@iconify/css-svelte': 1.0.3(svelte@5.57.3)
+    transitivePeerDependencies:
+      - svelte
+
+  '@iconify/css-svelte@1.0.3(svelte@5.57.3)':
+    dependencies:
+      '@iconify/types': 2.0.0
+      svelte: 5.57.3
+
+  '@iconify/types@2.0.0': {}
 
   '@jridgewell/gen-mapping@0.3.13':
     dependencies:

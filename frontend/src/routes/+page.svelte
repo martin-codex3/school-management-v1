@@ -6,9 +6,9 @@
 
 <section class="h-screen flex items-center justify-center">
     <div
-        class="bg-white rounded-4xl w-full border border-primary-border max-w-2xl h-[calc(100vh-3rem)] mx-auto"
+        class="bg-white rounded-4xl w-full border border-primary-border py-5 px-5 max-w-2xl h-[calc(100vh-3rem)] mx-auto"
     >
-        <div class="h-full overflow-auto scrollbar-thin px-10 py-5">
+        <div class="h-full overflow-auto scrollbar-thin px-5 space-y-10">
             <div class="flex items-center justify-center">
                 <button
                     aria-label="options button"
@@ -19,7 +19,7 @@
 
             <div>
                 <form action="">
-                    <div class="wrapper">
+                    <div class="wrapper space-y-7">
                         <div
                             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
                         >
