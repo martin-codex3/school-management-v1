@@ -13,7 +13,7 @@
     <button
         aria-label="Custom styled button"
         {title}
-        class="flex items-center justify-center w-44 h-12 text-purple-200 font-semibold rounded-full bg-primary-main-purple capitalize"
+        class="flex items-center justify-center w-44 h-12 cursor-pointer text-purple-100 hover:drop-shadow-sm transition duration-300 font-semibold rounded-full bg-primary-main-purple capitalize"
     >
         {#if isLoading}
             <div class="flex items-center gap-2">

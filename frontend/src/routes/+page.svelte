@@ -3,10 +3,11 @@
     import SelectInput from "#lib/components/inputs/SelectInput.svelte";
     import SelectInpu from "#lib/components/inputs/SelectInput.svelte";
     import TextInput from "#lib/components/inputs/TextInput.svelte";
+    import { enhance } from "$app/forms";
     import NumberIcon from "@iconify-svelte/tabler/number-1";
     import NumberIcon2 from "@iconify-svelte/tabler/number-2";
 
-    let isCreatingAccount: boolean = $state(true);
+    let isCreatingAccount: boolean = $state(false);
 </script>
 
 <section class="h-screen flex items-center justify-center">
@@ -33,7 +34,25 @@
             </div>
 
             <div>
-                <form action="">
+                <form
+                    action="?/createAccount"
+                    method="POST"
+                    use:enhance={() => {
+                        isCreatingAccount = true;
+                        return async ({ update, result }) => {
+                            await update();
+                            isCreatingAccount = false;
+
+                            if (result.type === "failure") {
+                                console.log("we will do something here");
+                            }
+
+                            if (result.type === "error") {
+                                console.log("there will be an error here");
+                            }
+                        };
+                    }}
+                >
                     <div class="wrapper space-y-7">
                         <div
                             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
@@ -184,7 +203,7 @@
                         </div>
 
                         <div
-                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5"
+                            class="grid grid-cols-1 md:grid-cols-1 lg:grid-cols-1 gap-5"
                         >
                             <TextInput
                                 type="password"
@@ -192,14 +211,6 @@
                                 placeholder=""
                                 id="Password"
                                 label="Password"
-                            />
-
-                            <TextInput
-                                type="text"
-                                name="confirm_password"
-                                placeholder=""
-                                id="ConfirmPassword"
-                                label="Confirm password"
                             />
                         </div>
 
