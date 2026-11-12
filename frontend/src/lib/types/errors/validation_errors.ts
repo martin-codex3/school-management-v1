@@ -9,13 +9,7 @@ export interface ValidationErrors {
     title: string,
     status: number,
     code: string,
+    detail: string,
     errors: ErrorDetails[]
 }
 
-export interface OtherValidationErrors {
-    type: string,
-    title: string,
-    status: number,
-    code: string,
-    detail: string
-}

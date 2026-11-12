@@ -16,8 +16,12 @@
     let errorTitle: string = $state("");
 
     $effect(() => {
-        if (form?.problem) {
+        if (form?.problem?.title) {
             errorTitle = form?.problem?.title;
+        }
+
+        if (form?.problem?.detail) {
+            errorTitle = form?.problem?.detail;
         }
     });
 

@@ -4,7 +4,7 @@ import type { ValidationErrors } from "#lib/types/errors/validation_errors.ts";
 import { fail } from "@sveltejs/kit";
 
 export const actions: Actions = {
-    createAccount: async ({ fetch, request }) => {
+    createAccount: async ({ fetch, request, cookies }) => {
         const data = await request.formData();
 
         const first_name = data.get("first_name")?.toString().trim() ?? "";
