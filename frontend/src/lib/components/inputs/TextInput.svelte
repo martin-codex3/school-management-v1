@@ -31,7 +31,10 @@
         {id}
         {placeholder}
         {name}
-        class="w-full mt-1 py-3 px-3 rounded-lg outline-none border border-gray-300 focus:border-primary-main-purple focus:ring-primary-main-purple"
+        class={[
+            "w-full mt-1 py-3 px-3 rounded-lg outline-none border border-gray-300 focus:border-primary-main-purple focus:ring-primary-main-purple",
+            valueError ? "bg-red-50 border-red-600" : "",
+        ]}
     />
     {@render fieldError(valueError)}
 </div>
