@@ -13,10 +13,13 @@
     <button
         aria-label="Custom styled button"
         {title}
-        class="flex items-center justify-center w-44 h-10 rounded-full bg-primary-main-purple capitalize"
+        class="flex items-center justify-center w-44 h-12 text-purple-200 font-semibold rounded-full bg-primary-main-purple capitalize"
     >
         {#if isLoading}
-            <LoadingSVG height="1.3em" />
+            <div class="flex items-center gap-2">
+                <LoadingSVG height="1.3em" class="shrink-0" />
+                <p class="text-sm">Processing...</p>
+            </div>
         {:else}
             <span>{label}</span>
         {/if}
