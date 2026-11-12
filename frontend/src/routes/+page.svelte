@@ -1,4 +1,6 @@
 <script lang="ts">
+    import SelectInput from "#lib/components/inputs/SelectInput.svelte";
+    import SelectInpu from "#lib/components/inputs/SelectInput.svelte";
     import TextInput from "#lib/components/inputs/TextInput.svelte";
 </script>
 
@@ -89,13 +91,27 @@
                                 label="School name"
                             />
 
-                            <TextInput
-                                type="text"
-                                name="last_name"
-                                placeholder="Doe"
-                                id="LastName"
-                                label="Last name"
-                            />
+                            <SelectInput
+                                name="school_type"
+                                id="SchoolType"
+                                placeholder=""
+                                label="School type"
+                            >
+                                <option value=""></option>
+                                <option value="Primary School"
+                                    >Primary School</option
+                                >
+                                <option value="Secondary School"
+                                    >Secondary School</option
+                                >
+                                <option value="Combined School"
+                                    >Combined School</option
+                                >
+                                <option value="International School"
+                                    >International School</option
+                                >
+                                <option value="Other">Other</option>
+                            </SelectInput>
                         </div>
                     </div>
                 </form>
