@@ -1,9 +1,9 @@
 import type { Actions } from "./$types";
-import PUBLIC_BACKEND_API from '$app/env/public'
+import { PUBLIC_BACKEND_API } from '$app/env/public';
 
 export const actions: Actions = {
     createAccount: async ({ fetch, request }) => {
-        const data = await request.formData()
+        const data = await request.formData();
 
         const first_name = data.get("first_name")?.toString().trim() ?? "";
         const last_name = data.get("last_name")?.toString().trim() ?? "";
@@ -18,6 +18,34 @@ export const actions: Actions = {
         const city = data.get("city")?.toString().trim() ?? "";
         const country = data.get("country")?.toString().trim() ?? "";
 
+        const payload = {
+            "first_name": first_name,
+            "last_name": last_name,
+            "email": email,
+            "phone_number": phone_number,
+            "school_name": school_name,
+            "school_type": school_type,
+            "school_email": school_email,
+            "school_phone": school_phone,
+            "address": address,
+            "city": city,
+            "country": country,
+            "password_hash": password_hash
+        }
+
+        const response = await fetch(`${PUBLIC_BACKEND_API}/authentication/create-account`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            console.log(await response.json())
+        }
+
+        return { success: true }
 
     }
 }
