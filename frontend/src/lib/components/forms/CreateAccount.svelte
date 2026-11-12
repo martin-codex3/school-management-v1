@@ -5,11 +5,14 @@
     import { enhance } from "$app/forms";
     import { toast } from "svelte-sonner";
     import { getCountryDataList } from "countries-list";
-    import type { PageProps } from "../../../routes/$types";
+    import type { ActionData } from "../../../routes/$types";
 
     let isCreatingAccount: boolean = $state(false);
+    interface Props {
+        form: ActionData;
+    }
+    const { form }: Props = $props();
 
-    const { form }: PageProps = $props();
     let errorTitle: string = $state("");
 
     $effect(() => {

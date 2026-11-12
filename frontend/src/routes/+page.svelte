@@ -1,6 +1,16 @@
 <script lang="ts">
+    import CreateAccount from "#lib/components/forms/CreateAccount.svelte";
     import NumberIcon from "@iconify-svelte/tabler/number-1";
     import NumberIcon2 from "@iconify-svelte/tabler/number-2";
+    import type { PageProps } from "./$types";
+    import Login from "#lib/components/forms/Login.svelte";
+
+    let currentTabIndex: number = $state(1);
+    const { form }: PageProps = $props();
+
+    const handleChangeIndex = (index: number) => {
+        currentTabIndex = index;
+    };
 </script>
 
 <section class="h-screen flex items-center justify-center px-5 lg:px-0">
@@ -12,7 +22,13 @@
                 <button
                     aria-label="options button"
                     title="Sign In"
-                    class="flex items-center justify-center p-3 rounded-full border cursor-pointer transition duration-200 hover:outline-1 outline-primary-main-purple text-primary-main-purple"
+                    onclick={() => handleChangeIndex(1)}
+                    class={[
+                        "flex items-center justify-center p-3 rounded-full border cursor-pointer transition duration-200 hover:outline-1",
+                        currentTabIndex === 1
+                            ? "bg-primary-main-purple text-black outline-primary-main-purple"
+                            : "",
+                    ]}
                 >
                     <NumberIcon height="1.5em" class="shrink-0" />
                 </button>
@@ -20,13 +36,25 @@
                 <button
                     aria-label="options button"
                     title="Create account"
-                    class="flex items-center justify-center p-3 rounded-full border cursor-pointer transition duration-200 hover:outline-1 outline-primary-main-purple text-primary-main-purple"
+                    onclick={() => handleChangeIndex(2)}
+                    class={[
+                        "flex items-center justify-center p-3 rounded-full border cursor-pointer transition duration-200 hover:outline-1",
+                        currentTabIndex === 2
+                            ? "bg-primary-main-purple text-black outline-primary-main-purple"
+                            : "",
+                    ]}
                 >
                     <NumberIcon2 height="1.5em" class="shrink-0" />
                 </button>
             </div>
 
-            <div></div>
+            <div>
+                {#if currentTabIndex === 1}
+                    <Login {form} />
+                {:else if currentTabIndex === 2}
+                    <CreateAccount {form} />
+                {/if}
+            </div>
         </div>
     </div>
 </section>

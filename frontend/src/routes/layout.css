@@ -1,6 +1,7 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/forms';
 @plugin '@tailwindcss/typography';
+@plugin "tailwindcss-motion";
 
 @theme {
     --font-primary-main: SF-Pro, ui-sans-serif, system-ui, sans-serif;
