@@ -30,7 +30,7 @@
     });
 </script>
 
-<div>
+<div class="motion-preset-slide-down-sm motion-duration-300 px-14">
     <form
         action="?/createAccount"
         method="POST"

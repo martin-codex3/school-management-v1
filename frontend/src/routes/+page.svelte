@@ -19,33 +19,41 @@
     >
         <div class="h-full overflow-auto scrollbar-thin px-5 space-y-10 py-5">
             <div class="flex items-center justify-center gap-5">
-                <button
-                    aria-label="options button"
-                    title="Sign In"
-                    onclick={() => handleChangeIndex(1)}
-                    class={[
-                        "flex items-center justify-center p-3 rounded-full border cursor-pointer transition duration-200 hover:outline-1",
-                        currentTabIndex === 1
-                            ? "bg-primary-main-purple text-black outline-primary-main-purple"
-                            : "",
-                    ]}
-                >
-                    <NumberIcon height="1.5em" class="shrink-0" />
-                </button>
+                <div class="flex flex-col items-center gap-1">
+                    <button
+                        aria-label="options button"
+                        title="Sign In"
+                        onclick={() => handleChangeIndex(1)}
+                        class={[
+                            "flex items-center justify-center p-3 rounded-full border cursor-pointer transition duration-200 hover:outline-1",
+                            currentTabIndex === 1
+                                ? "bg-primary-main-purple text-black outline-primary-main-purple"
+                                : "",
+                        ]}
+                    >
+                        <NumberIcon height="1.5em" class="shrink-0" />
+                    </button>
+                    <span class="capitalize text-sm font-semibold">Log in</span>
+                </div>
 
-                <button
-                    aria-label="options button"
-                    title="Create account"
-                    onclick={() => handleChangeIndex(2)}
-                    class={[
-                        "flex items-center justify-center p-3 rounded-full border cursor-pointer transition duration-200 hover:outline-1",
-                        currentTabIndex === 2
-                            ? "bg-primary-main-purple text-black outline-primary-main-purple"
-                            : "",
-                    ]}
-                >
-                    <NumberIcon2 height="1.5em" class="shrink-0" />
-                </button>
+                <div class="flex flex-col items-center gap-1">
+                    <button
+                        aria-label="options button"
+                        title="Create account"
+                        onclick={() => handleChangeIndex(2)}
+                        class={[
+                            "flex items-center justify-center p-3 rounded-full border cursor-pointer transition duration-200 hover:outline-1",
+                            currentTabIndex === 2
+                                ? "bg-primary-main-purple text-black outline-primary-main-purple"
+                                : "",
+                        ]}
+                    >
+                        <NumberIcon2 height="1.5em" class="shrink-0" />
+                    </button>
+                    <span class="capitalize font-semibold text-sm"
+                        >create account</span
+                    >
+                </div>
             </div>
 
             <div>
