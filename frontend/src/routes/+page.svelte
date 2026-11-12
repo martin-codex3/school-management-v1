@@ -6,8 +6,11 @@
     import { enhance } from "$app/forms";
     import NumberIcon from "@iconify-svelte/tabler/number-1";
     import NumberIcon2 from "@iconify-svelte/tabler/number-2";
+    import type { PageProps } from "./$types";
 
     let isCreatingAccount: boolean = $state(false);
+
+    const { form }: PageProps = $props();
 </script>
 
 <section class="h-screen flex items-center justify-center">

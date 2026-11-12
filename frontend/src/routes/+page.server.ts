@@ -1,5 +1,7 @@
 import type { Actions } from "./$types";
 import { PUBLIC_BACKEND_API } from '$app/env/public';
+import type { ValidationErrors } from "#lib/types/errors/validation_errors.ts";
+import { fail } from "@sveltejs/kit";
 
 export const actions: Actions = {
     createAccount: async ({ fetch, request }) => {
@@ -42,7 +44,8 @@ export const actions: Actions = {
         });
 
         if (!response.ok) {
-            console.log(await response.json())
+            const responseData: ValidationErrors = await response.json();
+            return fail(response.status, { problem: responseData });
         }
 
         return { success: true }
