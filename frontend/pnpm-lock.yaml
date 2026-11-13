@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@iconify-svelte/devicon':
+        specifier: gitlab:iconify-icons/svelte#devicon
+        version: https://gitlab.com/iconify-icons/svelte/-/archive/eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0/svelte-eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0.tar.gz(svelte@5.57.3)
       '@iconify-svelte/svg-spinners':
         specifier: gitlab:iconify-icons/svelte#svg-spinners
         version: https://gitlab.com/iconify-icons/svelte/-/archive/66eac294894020c87774191f0b5ca7a59247c5c5/svelte-66eac294894020c87774191f0b5ca7a59247c5c5.tar.gz(svelte@5.57.3)
@@ -59,6 +62,10 @@ importers:
         version: 8.3.7(jiti@2.7.0)
 
 packages:
+
+  '@iconify-svelte/devicon@https://gitlab.com/iconify-icons/svelte/-/archive/eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0/svelte-eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0.tar.gz':
+    resolution: {gitHosted: true, integrity: sha512-7gTdX4P+xD8D3NkGOG7QwsZK8dbLstuS9uZg4R0k8Ka0YQLB6IWLP7/Sb0Fs5KKd2vWubN396mX5xAjBEyMcyg==, tarball: https://gitlab.com/iconify-icons/svelte/-/archive/eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0/svelte-eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0.tar.gz}
+    version: 1.0.14
 
   '@iconify-svelte/svg-spinners@https://gitlab.com/iconify-icons/svelte/-/archive/66eac294894020c87774191f0b5ca7a59247c5c5/svelte-66eac294894020c87774191f0b5ca7a59247c5c5.tar.gz':
     resolution: {gitHosted: true, integrity: sha512-K9ek/iQdLUq/JV+ZM5tTuQofzv2ZdZeDtTF5SMoKiSg4DsvnczFZEvTOxTXIUUStDfq8fXNl3zCi0Ow+MjFUjw==, tarball: https://gitlab.com/iconify-icons/svelte/-/archive/66eac294894020c87774191f0b5ca7a59247c5c5/svelte-66eac294894020c87774191f0b5ca7a59247c5c5.tar.gz}
@@ -666,6 +673,12 @@ packages:
     resolution: {integrity: sha512-msJxIvYDYcoNL+PJsu+7qmpDWsYmAxTY+2TNYXXF0hzBzBk0BMecOqDOG/EckUoKCuKwObfbugIl8QpqHDXeFA==}
 
 snapshots:
+
+  '@iconify-svelte/devicon@https://gitlab.com/iconify-icons/svelte/-/archive/eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0/svelte-eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0.tar.gz(svelte@5.57.3)':
+    dependencies:
+      '@iconify/css-svelte': 1.0.3(svelte@5.57.3)
+    transitivePeerDependencies:
+      - svelte
 
   '@iconify-svelte/svg-spinners@https://gitlab.com/iconify-icons/svelte/-/archive/66eac294894020c87774191f0b5ca7a59247c5c5/svelte-66eac294894020c87774191f0b5ca7a59247c5c5.tar.gz(svelte@5.57.3)':
     dependencies:

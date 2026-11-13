@@ -31,6 +31,10 @@
 </script>
 
 <div class="motion-preset-slide-down-sm motion-duration-300 px-14">
+    <div>
+        <h1 class="text-4xl capitalize font-bold">welcome</h1>
+        <p class="text-lg text-gray-500">Log in to access your account</p>
+    </div>
     <form
         action="?/createAccount"
         method="POST"
