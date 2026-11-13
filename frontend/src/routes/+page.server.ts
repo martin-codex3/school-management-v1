@@ -57,9 +57,9 @@ export const actions: Actions = {
         const data = await request.formData();
 
         const username = data.get("username")?.toString().trim() ?? "";
-        const password_hash = data.get("password_hash")?.toString().trim() ?? "";
+        const password = data.get("password")?.toString().trim() ?? "";
 
-        const payload = new URLSearchParams({ username: username, password_hash: password_hash });
+        const payload = new URLSearchParams({ username: username, password: password });
 
         const response = await fetch(`${PUBLIC_BACKEND_API}/authentication/token`, {
             method: "POST",
@@ -75,7 +75,8 @@ export const actions: Actions = {
         }
 
         if (response.ok) {
-            console.log(response.body);
+            const responseData = await response.json()
+            console.log(responseData);
         }
 
         console.log(payload)

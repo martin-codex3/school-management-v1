@@ -31,7 +31,7 @@
 </script>
 
 <div
-    class="translate-y-10 h-full motion-preset-slide-down-sm motion-duration-200 px-20 space-y-10"
+    class="translate-y-10 h-full motion-preset-slide-down-sm motion-duration-200 px-0 md:px-10 lg:px-20 space-y-10"
 >
     <div>
         <h1 class="text-4xl capitalize font-bold">welcome</h1>
@@ -85,7 +85,7 @@
 
                 <TextInput
                     type="password"
-                    name="password_hash"
+                    name="password"
                     placeholder=""
                     id="Password"
                     label="Password"
