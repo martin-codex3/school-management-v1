@@ -71,20 +71,20 @@
             </div>
             <div class="space-y-5">
                 <TextInput
-                    type="text"
-                    name="first_name"
-                    placeholder="John"
-                    id="FirstName"
-                    label="First name"
+                    type="email"
+                    name="username"
+                    placeholder="user@example.com"
+                    id="Email"
+                    label="Email"
                     valueError=""
                 />
 
                 <TextInput
-                    type="text"
-                    name="first_name"
-                    placeholder="John"
-                    id="FirstName"
-                    label="First name"
+                    type="password"
+                    name="password_hash"
+                    placeholder=""
+                    id="Password"
+                    label="Password"
                     valueError=""
                 />
 

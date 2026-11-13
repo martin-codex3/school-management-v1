@@ -50,5 +50,13 @@ export const actions: Actions = {
 
         return { success: true }
 
+    },
+
+    loginUser: async ({ request, cookies, fetch }) => {
+
+        const data = await request.formData();
+
+        const username = data.get("username")?.toString().trim() ?? "";
+        const password_hash = data.get("password_hash")?.toString().trim() ?? "";
     }
 }
