@@ -27,7 +27,7 @@
                         class={[
                             "flex items-center justify-center p-3 rounded-full border cursor-pointer transition duration-200 hover:outline-1",
                             currentTabIndex === 1
-                                ? "bg-primary-main-purple text-black outline-primary-main-purple"
+                                ? "bg-primary-main-purple text-purple-100 outline-primary-main-purple"
                                 : "",
                         ]}
                     >
@@ -44,7 +44,7 @@
                         class={[
                             "flex items-center justify-center p-3 rounded-full border cursor-pointer transition duration-200 hover:outline-1",
                             currentTabIndex === 2
-                                ? "bg-primary-main-purple text-black outline-primary-main-purple"
+                                ? "bg-primary-main-purple text-purple-100 outline-primary-main-purple"
                                 : "",
                         ]}
                     >

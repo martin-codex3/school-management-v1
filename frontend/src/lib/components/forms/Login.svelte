@@ -4,6 +4,7 @@
     import { enhance } from "$app/forms";
     import { toast } from "svelte-sonner";
     import type { ActionData } from "../../../routes/$types";
+    import GoogleIcon from "@iconify-svelte/devicon/google";
 
     let isCreatingAccount: boolean = $state(false);
 
@@ -60,8 +61,9 @@
                 <button
                     aria-label="google authenticaion"
                     title="Continue With Google"
-                    class="w-full bg-gray-100 border border-gray-300 cursor-pointer rounded-full py-2 flex items-center justify-center"
+                    class="w-full bg-gray-100 border border-gray-300 cursor-pointer rounded-full py-2 flex items-center justify-center gap-3"
                 >
+                    <GoogleIcon height="1.5em" class="shrink-0" />
                     <span class="first-letter:capitalize font-semibold"
                         >continue with google</span
                     >

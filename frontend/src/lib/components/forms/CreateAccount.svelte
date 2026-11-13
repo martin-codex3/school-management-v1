@@ -30,10 +30,12 @@
     });
 </script>
 
-<div class="motion-preset-slide-down-sm motion-duration-300 px-14">
+<div class="motion-preset-slide-down-sm motion-duration-300 px-14 space-y-10">
     <div>
-        <h1 class="text-4xl capitalize font-bold">welcome</h1>
-        <p class="text-lg text-gray-500">Log in to access your account</p>
+        <h1 class="text-4xl capitalize font-bold">Create your account.</h1>
+        <p class="text-lg text-gray-500">
+            Create your account to get access to all the features
+        </p>
     </div>
     <form
         action="?/createAccount"
@@ -49,7 +51,13 @@
                 }
 
                 if (result.type === "error") {
-                    console.log("there will be an error here");
+                    toast.error(errorTitle);
+                }
+
+                if (result.type === "success") {
+                    toast.success(
+                        "Account created successfully. You'll get redirected to the dashboard",
+                    );
                 }
             };
         }}
