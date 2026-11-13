@@ -6,7 +6,7 @@
     import type { ActionData } from "../../../routes/$types";
     import GoogleIcon from "@iconify-svelte/devicon/google";
 
-    let isCreatingAccount: boolean = $state(false);
+    let isSigningIn: boolean = $state(false);
 
     interface Props {
         form: ActionData;
@@ -38,20 +38,24 @@
         <p class="text-lg text-gray-500">Log in to access your account</p>
     </div>
     <form
-        action="?/createAccount"
+        action="?/loginUser"
         method="POST"
         use:enhance={() => {
-            isCreatingAccount = true;
+            isSigningIn = true;
             return async ({ update, result }) => {
                 await update();
-                isCreatingAccount = false;
+                isSigningIn = false;
 
                 if (result.type === "failure") {
                     toast.error(errorTitle);
                 }
 
                 if (result.type === "error") {
-                    console.log("there will be an error here");
+                    toast.error(errorTitle);
+                }
+
+                if (result.type === "success") {
+                    toast.success("Logged in successfully");
                 }
             };
         }}
@@ -89,9 +93,9 @@
                 />
 
                 <StyledButton
-                    title="Create Account"
-                    label="create account"
-                    isLoading={isCreatingAccount}
+                    title="Log In"
+                    label="Log in"
+                    isLoading={isSigningIn}
                 />
             </div>
         </div>

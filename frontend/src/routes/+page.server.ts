@@ -58,5 +58,26 @@ export const actions: Actions = {
 
         const username = data.get("username")?.toString().trim() ?? "";
         const password_hash = data.get("password_hash")?.toString().trim() ?? "";
+
+        const payload = new URLSearchParams({ username: username, password_hash: password_hash });
+
+        const response = await fetch(`${PUBLIC_BACKEND_API}/authentication/token`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded"
+            },
+            body: payload
+        });
+
+        if (!response.ok) {
+            const responseData: ValidationErrors = await response.json();
+            return fail(response.status, { problem: responseData });
+        }
+
+        if (response.ok) {
+            console.log(response.body);
+        }
+
+        console.log(payload)
     }
 }
