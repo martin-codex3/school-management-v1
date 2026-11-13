@@ -2,6 +2,7 @@ import type { Actions } from "./$types";
 import { PUBLIC_BACKEND_API } from '$app/env/public';
 import type { ValidationErrors } from "#lib/types/errors/validation_errors.ts";
 import { fail } from "@sveltejs/kit";
+import type { Token } from "#lib/types/token/toke.ts";
 
 export const actions: Actions = {
     createAccount: async ({ fetch, request, cookies }) => {
@@ -75,10 +76,12 @@ export const actions: Actions = {
         }
 
         if (response.ok) {
-            const responseData = await response.json()
-            console.log(responseData);
+            const responseData: Token = await response.json()
+
+            // we will assign the cookie here 
+            cookies.set("access_token", responseData.access_token, { httpOnly: true, sameSite: "strict", secure: true });
         }
 
-        console.log(payload)
+        return { success: true }
     }
 }
