@@ -8,6 +8,7 @@
     import MessagesIcon from "@iconify-svelte/tabler/message";
     import SchoolOperationsIcon from "@iconify-svelte/tabler/stack-3";
     import ChartIcon from "@iconify-svelte/tabler/chart-infographic";
+    import ChevronIcon from "@iconify-svelte/tabler/chevron-right";
 
     let { children, data }: LayoutProps = $props();
 
@@ -19,6 +20,12 @@
 
     // for the school management links
     const schoolManagementLinks: Props[] = [
+        {
+            label: "School Profile",
+            to: "/dashboard/school-management/school-profile",
+            icon: BuildingIcon,
+        },
+
         {
             label: "School Profile",
             to: "/dashboard/school-management/school-profile",
@@ -88,7 +95,7 @@
                     </h1>
                 </div>
                 <div>
-                    <ul class="w-full">
+                    <ul class="w-full space-y-2">
                         {#each schoolManagementLinks as link}
                             <li class="w-full">
                                 <a
@@ -112,7 +119,37 @@
 
         <!-- for the profile links here -->
         <div>
-            <h1>{data.user.email}</h1>
+            <div
+                class="rounded-tr-4xl rounded-tl-4xl rounded-bl-xl rounded-br-xl bg-purple-300 px-3 py-3"
+            >
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <div
+                            class="h-14 w-14 rounded-full bg-black/60 flex items-center justify-center"
+                        >
+                            <h1 class="font-bold uppercase text-white">MS</h1>
+                        </div>
+
+                        <div>
+                            <h1 class="text-lg font-semibold">
+                                {data.user.first_name}
+                            </h1>
+
+                            <p>Online</p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <a
+                            href="/dashboard/profile"
+                            title="Check your profile"
+                            class="flex items-center justify-center p-2 rounded-full bg-purple-400 text-purple-700"
+                        >
+                            <ChevronIcon height="1.3em" class="shrink-0" />
+                        </a>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
 
