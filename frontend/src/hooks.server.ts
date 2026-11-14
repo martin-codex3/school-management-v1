@@ -1,5 +1,5 @@
 import { resolve } from "$app/paths";
-import { fail, redirect } from "@sveltejs/kit";
+import { error, fail, redirect } from "@sveltejs/kit";
 import type { Handle } from "@sveltejs/kit/hooks";
 import { PUBLIC_BACKEND_API } from "$app/env/public"
 import type { ValidationErrors } from "#lib/types/errors/validation_errors.ts";
@@ -9,7 +9,7 @@ export const handle: Handle = async ({ event, resolve }) => {
 
     event.locals.token = event.cookies.get("access_token");
     const access_token = event.locals.token;
-    event.locals.user = {}
+    event.locals.user = null;
 
     if (!access_token) {
         if (event.url.pathname.startsWith("/dashboard")) {
@@ -26,11 +26,10 @@ export const handle: Handle = async ({ event, resolve }) => {
         if (response.status === 401 || response.status === 403) {
             event.cookies.delete("access_token", { path: "/" });
         } else if (!response.ok) {
-            const responseData: ValidationErrors = await response.json();
-            fail(response.status, { problem: responseData })
+            error(response.status, "Something went wrong!")
         } else {
             const responseData: UserResponse = await response.json();
-            console.log(responseData);
+            event.locals.user = responseData
         }
     }
 

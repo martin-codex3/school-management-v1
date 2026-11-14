@@ -1,6 +1,7 @@
 // See https://svelte.dev/docs/kit/types#app.d.ts
 
 import type { Token } from "#lib/types/token/token.ts";
+import type { UserResponse } from "#lib/types/users/user_response.ts";
 
 // for information about these interfaces
 declare global {
@@ -8,7 +9,7 @@ declare global {
 		// interface Error {}
 		interface Locals {
 			token: string | undefined,
-			user: {}
+			user: UserResponse | null
 		}
 		interface PageData { }
 		// interface PageState {}
