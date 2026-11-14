@@ -1,8 +1,14 @@
 import { requiresLogin } from "#lib/server/auth.ts";
+import { redirect } from "@sveltejs/kit";
 import type { LayoutServerLoad } from "./$types";
 
-export const load: LayoutServerLoad = async () => {
-    const user = requiresLogin;
+export const load: LayoutServerLoad = async ({ locals }) => {
 
-    return user
+    const user = locals.user
+
+    if (!user) {
+        redirect(307, "/")
+    }
+
+    return { user }
 }
