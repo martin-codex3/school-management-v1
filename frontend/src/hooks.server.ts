@@ -3,6 +3,7 @@ import { fail, redirect } from "@sveltejs/kit";
 import type { Handle } from "@sveltejs/kit/hooks";
 import { PUBLIC_BACKEND_API } from "$app/env/public"
 import type { ValidationErrors } from "#lib/types/errors/validation_errors.ts";
+import type { UserResponse } from "#lib/types/users/user_response.ts";
 
 export const handle: Handle = async ({ event, resolve }) => {
 
@@ -26,10 +27,10 @@ export const handle: Handle = async ({ event, resolve }) => {
             event.cookies.delete("access_token", { path: "/" });
         } else if (!response.ok) {
             const responseData: ValidationErrors = await response.json();
-            return fail(response.status, { problem: responseData })
+            fail(response.status, { problem: responseData })
         } else {
-            const responseData = await response.json();
-            console.log(responseData)
+            const responseData: UserResponse = await response.json();
+            console.log(responseData);
         }
     }
 
