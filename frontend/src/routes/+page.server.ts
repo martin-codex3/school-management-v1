@@ -1,8 +1,8 @@
 import type { Actions } from "./$types";
 import { PUBLIC_BACKEND_API } from '$app/env/public';
 import type { ValidationErrors } from "#lib/types/errors/validation_errors.ts";
-import { fail } from "@sveltejs/kit";
-import type { Token } from "#lib/types/token/toke.ts";
+import { fail, redirect } from "@sveltejs/kit";
+import type { Token } from "#lib/types/token/token.ts";
 
 export const actions: Actions = {
     createAccount: async ({ fetch, request, cookies }) => {
@@ -72,6 +72,7 @@ export const actions: Actions = {
 
         if (!response.ok) {
             const responseData: ValidationErrors = await response.json();
+            cookies.delete("access_token")
             return fail(response.status, { problem: responseData });
         }
 
@@ -80,6 +81,9 @@ export const actions: Actions = {
 
             // we will assign the cookie here 
             cookies.set("access_token", responseData.access_token, { httpOnly: true, sameSite: "strict", secure: true });
+
+            // we will redirect the users to the main dash
+
         }
 
         return { success: true }

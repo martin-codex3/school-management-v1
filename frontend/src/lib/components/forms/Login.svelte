@@ -5,6 +5,7 @@
     import { toast } from "svelte-sonner";
     import type { ActionData } from "../../../routes/$types";
     import GoogleIcon from "@iconify-svelte/devicon/google";
+    import { goto } from "$app/navigation";
 
     let isSigningIn: boolean = $state(false);
 
@@ -56,6 +57,7 @@
 
                 if (result.type === "success") {
                     toast.success("Logged in successfully");
+                    goto("/dashboard");
                 }
             };
         }}
@@ -80,7 +82,7 @@
                     placeholder="user@example.com"
                     id="Email"
                     label="Email"
-                    valueError=""
+                    valueError={fieldErrors("#/username")?.detail}
                 />
 
                 <TextInput
@@ -89,7 +91,7 @@
                     placeholder=""
                     id="Password"
                     label="Password"
-                    valueError=""
+                    valueError={fieldErrors("#/password")?.detail}
                 />
 
                 <StyledButton

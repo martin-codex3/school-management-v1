@@ -31,7 +31,7 @@
 </script>
 
 <div
-    class="motion-preset-slide-down-sm motion-duration-300 px-0 md:px-10 lg:px-14 space-y-10"
+    class="motion-preset-slide-down-sm motion-duration-300 px-0 md:px-10 lg:px-10 space-y-10"
 >
     <div>
         <h1 class="text-4xl capitalize font-bold">Create your account.</h1>
