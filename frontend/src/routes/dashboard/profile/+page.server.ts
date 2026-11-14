@@ -1,8 +1,7 @@
-import { requiresLogin } from "#lib/server/auth.ts";
 import { redirect } from "@sveltejs/kit";
-import type { PageLoad } from "./$types";
+import type { PageServerLoad } from "./$types";
 
-export const load: PageLoad = ({ locals }) => {
+export const load: PageServerLoad = async ({ locals }) => {
     const user = locals.user;
 
     if (!user) {
