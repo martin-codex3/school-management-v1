@@ -1,8 +1,11 @@
 <script lang="ts">
     import ProfileCard from "#lib/components/cards/ProfileCard.svelte";
-    import type { UserResponse } from "#lib/types/users/user_response.ts";
     import type { PageProps } from "../$types";
     import ProfileIcon from "@iconify-svelte/tabler/user";
+    import Emailcon from "@iconify-svelte/tabler/mail";
+    import PhoneNumberIcon from "@iconify-svelte/tabler/phone";
+    import BiographyIcon from "@iconify-svelte/tabler/file-text";
+    import ProfileeImageIcon from "@iconify-svelte/tabler/photo";
 
     interface Props {
         label: string;
@@ -13,54 +16,53 @@
     }
     let { data }: PageProps = $props();
 
-    let profileData: Props[] = $state([
+    let profileData: Props[] = $derived([
         {
             label: "First name",
             title: "Open Update Modal",
-            description: "The name associated with your accoun",
+            description: "The first name associated with your account",
             iconData: ProfileIcon,
-            value: "",
+            value: data.user.first_name,
         },
 
         {
             label: "Last name",
             title: "Open Update Modal",
-            description: "The name associated with your accoun",
-            iconData: "",
-            value: "",
+            description: "The last name associated with your account",
+            iconData: ProfileIcon,
+            value: data.user.last_name,
         },
 
         {
             label: "Email",
             title: "Open Update Modal",
-            description: "The name associated with your accoun",
-            iconData: "",
-            value: "",
+            description: "your account email",
+            iconData: Emailcon,
+            value: data.user.email,
         },
 
         {
             label: "Phone number",
             title: "Open Update Modal",
-            description: "The name associated with your accoun",
-            iconData: "",
-            onclick: () => {},
-            value: "",
+            description: "Your contact phone number",
+            iconData: PhoneNumberIcon,
+            value: data.user.phone_number,
         },
 
         {
             label: "Bio",
             title: "Open Update Modal",
-            description: "The name associated with your accoun",
-            iconData: "",
-            value: "",
+            description: "Account biography",
+            iconData: BiographyIcon,
+            value: data.user.bio ?? "Not set",
         },
 
         {
             label: "Profile Image",
             title: "Open Update Modal",
-            description: "The name associated with your accoun",
-            iconData: "",
-            value: "",
+            description: "Your profile image path",
+            iconData: ProfileeImageIcon,
+            value: data.user.profile_image_url ?? "Not set",
         },
     ]);
 </script>
@@ -89,6 +91,9 @@
                     <ProfileCard
                         value={profile.value}
                         Icon={profile.iconData}
+                        description={profile.description}
+                        title={profile.title}
+                        label={profile.label}
                     />
                 {/each}
             </div>
