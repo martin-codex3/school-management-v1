@@ -41,5 +41,10 @@ export const actions: Actions = {
         }
 
         return { success: true }
+    },
+
+    // for logging the users out 
+    logOutUsers: async ({ cookies }) => {
+        cookies.delete("access_token", { path: "/" })
     }
 }

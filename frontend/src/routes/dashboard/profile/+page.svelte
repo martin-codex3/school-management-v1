@@ -7,6 +7,10 @@
     import ProfileeImageIcon from "@iconify-svelte/tabler/photo";
     import UpdateProfileModal from "#lib/components/modals/profile/UpdateProfileModal.svelte";
     import type { PageProps } from "./$types";
+    import StyledButton from "#lib/components/buttons/StyledButton.svelte";
+    import { enhance } from "$app/forms";
+    import { toast } from "svelte-sonner";
+    import { goto } from "$app/navigation";
 
     interface Props {
         label: string;
@@ -75,6 +79,7 @@
     ]);
 
     let toggleUpdateModal: boolean = $state(false);
+    let isLoggingOut: boolean = $state(false);
 
     let fieldName: string = $state("");
     let fieldLabel: string = $state("");
@@ -108,41 +113,152 @@
 <div class="">
     <div class="h-screen flex items-center justify-center">
         <div
-            class="bg-white rounded-4xl w-full max-w-4xl h-[calc(100vh-2rem)] space-y-10 mx-auto px-10 py-5"
+            class="bg-white rounded-4xl w-full max-w-4xl h-[calc(100vh-2rem)] mx-auto px-5 py-3"
         >
-            <!-- for the main header -->
             <div
-                class="flex items-center gap-3 w-full border border-gray-300 bg-gray-50 rounded-full px-2 py-2"
+                class="h-full overflow-auto scrollbar-thin space-y-10 px-5 py-3"
             >
-                <div class="h-20 w-20 rounded-full bg-purple-400"></div>
-                <div>
-                    <h1 class="text-lg capitalize font-semibold">
-                        {data.user.first_name}
-                    </h1>
-                    <p>{data.user.email}</p>
+                <!-- for the main header -->
+                <div
+                    class="flex items-center gap-3 w-full border border-gray-300 bg-gray-50 rounded-full px-2 py-2"
+                >
+                    <div class="h-20 w-20 rounded-full bg-purple-400"></div>
+                    <div>
+                        <h1 class="text-lg capitalize font-semibold">
+                            {data.user.first_name}
+                        </h1>
+                        <p>{data.user.email}</p>
+                    </div>
                 </div>
-            </div>
 
-            <!-- for the main content here -->
-            <div class="space-y-1">
-                {#each profileData as profile, index (profile.label)}
-                    <ProfileCard
-                        value={profile.label === "Bio"
-                            ? truncatedDescription()
-                            : profile.value}
-                        Icon={profile.iconData}
-                        description={profile.description}
-                        title={profile.title}
-                        label={profile.label}
-                        {index}
-                        openModal={() =>
-                            handleOpenUpdateModal(
-                                profile.name,
-                                profile.label,
-                                profile.value,
-                            )}
-                    />
-                {/each}
+                <!-- for the main content here -->
+                <div class="space-y-1">
+                    {#each profileData as profile, index (profile.label)}
+                        <ProfileCard
+                            value={profile.label === "Bio"
+                                ? truncatedDescription()
+                                : profile.value}
+                            Icon={profile.iconData}
+                            description={profile.description}
+                            title={profile.title}
+                            label={profile.label}
+                            {index}
+                            openModal={() =>
+                                handleOpenUpdateModal(
+                                    profile.name,
+                                    profile.label,
+                                    profile.value,
+                                )}
+                        />
+                    {/each}
+                </div>
+
+                <!-- for the logout -->
+                <div
+                    class="border border-gray-300 rounded-full px-10 py-5 flex items-center justify-between"
+                >
+                    <div>
+                        <h1 class="text-2xl font-bold first-letter:capitalize">
+                            log out
+                        </h1>
+                        <p class="text-lg text-gray-500">
+                            You will be redirected to the log in page.
+                        </p>
+                    </div>
+
+                    <div>
+                        <form
+                            action="?/logOutUsers"
+                            method="POST"
+                            use:enhance={() => {
+                                isLoggingOut = true;
+                                return async ({ update, result }) => {
+                                    await update();
+                                    isLoggingOut = false;
+
+                                    if (result.type === "failure") {
+                                        toast.error(
+                                            "Something went wrong!. Try again",
+                                        );
+                                    }
+
+                                    if (result.type === "error") {
+                                        toast.error(
+                                            "Something went wrong!. Try again",
+                                        );
+                                    }
+
+                                    if (result.type === "success") {
+                                        toast.success(
+                                            "Logged out successfully",
+                                        );
+                                        goto("/");
+                                    }
+                                };
+                            }}
+                        >
+                            <StyledButton
+                                isLoading={isLoggingOut}
+                                label="Log out"
+                                title="Logout"
+                            />
+                        </form>
+                    </div>
+                </div>
+
+                <!-- for deleting the passwords -->
+
+                <div
+                    class="border border-gray-300 rounded-full px-10 py-5 flex items-center justify-between"
+                >
+                    <div>
+                        <h1 class="text-2xl font-bold first-letter:capitalize">
+                            log out
+                        </h1>
+                        <p class="text-lg text-gray-500">
+                            You will be redirected to the log in page.
+                        </p>
+                    </div>
+
+                    <div>
+                        <form
+                            action="?/logOutUsers"
+                            method="POST"
+                            use:enhance={() => {
+                                isLoggingOut = true;
+                                return async ({ update, result }) => {
+                                    await update();
+                                    isLoggingOut = false;
+
+                                    if (result.type === "failure") {
+                                        toast.error(
+                                            "Something went wrong!. Try again",
+                                        );
+                                    }
+
+                                    if (result.type === "error") {
+                                        toast.error(
+                                            "Something went wrong!. Try again",
+                                        );
+                                    }
+
+                                    if (result.type === "success") {
+                                        toast.success(
+                                            "Logged out successfully",
+                                        );
+                                        goto("/");
+                                    }
+                                };
+                            }}
+                        >
+                            <StyledButton
+                                isLoading={isLoggingOut}
+                                label="Log out"
+                                title="Logout"
+                            />
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
