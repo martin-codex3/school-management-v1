@@ -8,9 +8,12 @@
         title: string;
         description: string;
         label: string;
+        index: number;
     }
 
-    const { Icon, value, title, description, label }: Props = $props();
+    const { Icon, value, title, description, label, index }: Props = $props();
+
+    const currentIndex = $derived(index + 1);
 </script>
 
 <!-- we will hae the card header -->
@@ -21,8 +24,8 @@
         </div>
 
         <div>
-            <h1>{label}</h1>
-            <p>{description}</p>
+            <h1 class="text-lg capitalize font-semibold">{label}</h1>
+            <p class="text-lg first-letter:uppercase">{description}</p>
         </div>
     </div>
 {/snippet}
@@ -39,14 +42,23 @@
             <button
                 aria-label="for opening the modal"
                 {title}
-                class="flex items-center justify-center p-2 rounded-full hover:bg-gray-100"
+                class="flex items-center justify-center p-2 rounded-full hover:bg-purple-200 hover:text-purple-950 cursor-pointer transition duration-300"
             >
-                <EditIcon height="2em" />
+                <EditIcon height="1.5em" />
             </button>
         </div>
     </div>
 {/snippet}
-<div class={["flex items-center justify-between bg-gray-100"]}>
+<div
+    class={[
+        "flex items-center justify-between bg-gray-100 px-3 py-2",
+        currentIndex === 1
+            ? "rounded-tr-3xl rounded-tl-3xl rounded-bl-lg rounded-br-lg"
+            : "rounded-lg",
+
+        currentIndex === 6 ? "rounded-bl-3xl rounded-br-3xl" : "",
+    ]}
+>
     <!-- card header -->
     {@render cardHeader(label, description, Icon)}
     {@render profileBody(title, value)}

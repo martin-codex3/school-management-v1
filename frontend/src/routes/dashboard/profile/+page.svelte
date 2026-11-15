@@ -86,14 +86,15 @@
             </div>
 
             <!-- for the main content here -->
-            <div class="">
-                {#each profileData as profile}
+            <div class="space-y-1">
+                {#each profileData as profile, index (profile.label)}
                     <ProfileCard
                         value={profile.value}
                         Icon={profile.iconData}
                         description={profile.description}
                         title={profile.title}
                         label={profile.label}
+                        {index}
                     />
                 {/each}
             </div>
