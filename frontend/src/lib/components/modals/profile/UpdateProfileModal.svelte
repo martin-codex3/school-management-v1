@@ -4,6 +4,7 @@
     import { enhance } from "$app/forms";
     import CloseIcon from "@iconify-svelte/material-symbols/close";
     import { toast } from "svelte-sonner";
+    import type { ActionData } from "../../../../routes/$types";
 
     interface Props {
         toggleModal: boolean;
@@ -11,11 +12,29 @@
         name: string;
         label: string;
         fieldValue: string;
+        form: ActionData;
     }
 
-    let { closeModal, toggleModal, name, label, fieldValue }: Props = $props();
+    let { closeModal, toggleModal, name, label, fieldValue, form }: Props =
+        $props();
 
     let isUpdatingProfile: boolean = $state(false);
+    let errorTitle: string = $state("");
+
+    $effect(() => {
+        if (form?.problem) {
+            errorTitle = form.problem.title;
+        }
+
+        if (form?.problem?.detail) {
+            errorTitle = form.problem.detail;
+        }
+    });
+
+    // for the returned form errors here
+    const fieldError = $derived((field: string) => {
+        return form?.problem?.errors.find((e) => e.pointer === field);
+    });
 </script>
 
 {#snippet formInput()}
@@ -30,11 +49,11 @@
                 }
 
                 if (result.type === "error") {
-                    toast.error("Another error mate");
+                    toast.error(errorTitle);
                 }
 
                 if (result.type === "success") {
-                    toast.success("All good now");
+                    toast.success(errorTitle);
                 }
             };
         }}
