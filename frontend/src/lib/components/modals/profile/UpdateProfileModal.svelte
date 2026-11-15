@@ -5,6 +5,7 @@
     import CloseIcon from "@iconify-svelte/material-symbols/close";
     import { toast } from "svelte-sonner";
     import type { ActionData } from "../../../../routes/$types";
+    import TextAreaInput from "#lib/components/inputs/TextAreaInput.svelte";
 
     interface Props {
         toggleModal: boolean;
@@ -22,7 +23,7 @@
     let errorTitle: string = $state("");
 
     $effect(() => {
-        if (form?.problem) {
+        if (form?.problem?.title) {
             errorTitle = form.problem.title;
         }
 
@@ -44,8 +45,16 @@
         use:enhance={() => {
             isUpdatingProfile = false;
             return async ({ result, update }) => {
+                await update({
+                    reset: false,
+                    refreshAll: true,
+                    invalidateAll: true,
+                });
+                isUpdatingProfile = false;
+
+                // we will update the states here
                 if (result.type === "failure") {
-                    toast.error("Error man");
+                    toast.error(errorTitle);
                 }
 
                 if (result.type === "error") {
@@ -53,21 +62,48 @@
                 }
 
                 if (result.type === "success") {
-                    toast.success(errorTitle);
+                    toast.success("Updated successfully");
                 }
             };
         }}
     >
         <div class="space-y-7">
-            <TextInput
-                type="text"
-                {name}
-                placeholder=""
-                id={label}
-                {label}
-                valueError=""
-                value={fieldValue}
-            />
+            {#if name === "email"}
+                <div class="bg-green-200 text-green-950 px-4 py-2 rounded-lg">
+                    <p class="first-letter:uppercase">
+                        once you chage your email, the changes will be reflected
+                        the next time you try to login.
+                    </p>
+                </div>
+                <TextInput
+                    type="email"
+                    {name}
+                    placeholder=""
+                    id={label}
+                    {label}
+                    valueError={fieldError(`#/${name}`)?.detail}
+                    value={fieldValue}
+                />
+            {:else if name === "bio"}
+                <TextAreaInput
+                    {name}
+                    placeholder=""
+                    id={label}
+                    {label}
+                    valueError={fieldError(`#/${name}`)?.detail}
+                    value={fieldValue}
+                />
+            {:else}
+                <TextInput
+                    type="text"
+                    {name}
+                    placeholder=""
+                    id={label}
+                    {label}
+                    valueError={fieldError(`#/${name}`)?.detail}
+                    value={fieldValue}
+                />
+            {/if}
 
             <StyledButton
                 label="Update detail"
@@ -83,7 +119,7 @@
 >
     <div
         class={[
-            "bg-white rounded-4xl border border-black/30 w-lg h-fit px-10 py-5 space-y-5",
+            "bg-white rounded-4xl border border-black/30 w-lg h-fit px-10 py-7 space-y-5",
             toggleModal
                 ? "motion-preset-slide-down-sm motion-duration-200"
                 : "motion-translate-y-out-150 motion-duration-300",
@@ -91,7 +127,7 @@
     >
         <!-- for the header -->
         <div class="flex items-center justify-between">
-            <h1 class="text-2xl first-letter:capitalize font-bold">
+            <h1 class="text-3xl first-letter:capitalize font-bold">
                 Update detail
             </h1>
             <button
@@ -105,7 +141,7 @@
         </div>
 
         <div>
-            <p>
+            <p class="text-lg text-gray-400">
                 Make changes to your profile details. The changes will be synced
                 automatically
             </p>

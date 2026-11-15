@@ -1,12 +1,12 @@
 <script lang="ts">
     import ProfileCard from "#lib/components/cards/ProfileCard.svelte";
-    import type { PageProps } from "../$types";
     import ProfileIcon from "@iconify-svelte/tabler/user";
     import Emailcon from "@iconify-svelte/tabler/mail";
     import PhoneNumberIcon from "@iconify-svelte/tabler/phone";
     import BiographyIcon from "@iconify-svelte/tabler/file-text";
     import ProfileeImageIcon from "@iconify-svelte/tabler/photo";
     import UpdateProfileModal from "#lib/components/modals/profile/UpdateProfileModal.svelte";
+    import type { PageProps } from "./$types";
 
     interface Props {
         label: string;
@@ -16,7 +16,7 @@
         value: any;
         name: string;
     }
-    let { data }: PageProps = $props();
+    let { data, form }: PageProps = $props();
 
     let profileData: Props[] = $derived([
         {
@@ -96,12 +96,19 @@
     const handleCloseUpdateModal = () => {
         toggleUpdateModal = false;
     };
+
+    const truncatedDescription = $derived(() => {
+        const description = `${data.user.bio?.slice(1, 40)}...`;
+        return description;
+    });
+
+    $inspect(truncatedDescription());
 </script>
 
 <div class="">
     <div class="h-screen flex items-center justify-center">
         <div
-            class="bg-white rounded-4xl w-full max-w-3xl h-[calc(100vh-2rem)] space-y-10 mx-auto px-10 py-5"
+            class="bg-white rounded-4xl w-full max-w-4xl h-[calc(100vh-2rem)] space-y-10 mx-auto px-10 py-5"
         >
             <!-- for the main header -->
             <div
@@ -120,7 +127,9 @@
             <div class="space-y-1">
                 {#each profileData as profile, index (profile.label)}
                     <ProfileCard
-                        value={profile.value}
+                        value={profile.label === "Bio"
+                            ? truncatedDescription()
+                            : profile.value}
                         Icon={profile.iconData}
                         description={profile.description}
                         title={profile.title}
@@ -147,5 +156,6 @@
         name={fieldName}
         label={fieldLabel}
         {fieldValue}
+        {form}
     />
 {/if}

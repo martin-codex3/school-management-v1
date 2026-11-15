@@ -24,7 +24,7 @@ export const actions: Actions = {
         }
 
         const data = await request.formData();
-        const payload = Object.fromEntries(data)
+        const payload = Object.fromEntries(data);
 
         const response = await fetch(`${PUBLIC_BACKEND_API}/users/update-account/${user.id}`, {
             method: "PATCH",
@@ -32,7 +32,7 @@ export const actions: Actions = {
                 "Content-Type": "application/json",
                 "Authorization": `Bearer ${token}`
             },
-            body: JSON.stringify(payload).toString().trim() ?? ""
+            body: JSON.stringify(payload)
         });
 
         if (!response.ok) {
