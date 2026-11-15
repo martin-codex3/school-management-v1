@@ -11,6 +11,7 @@
     import { enhance } from "$app/forms";
     import { toast } from "svelte-sonner";
     import { goto } from "$app/navigation";
+    import LoadingSVG from "@iconify-svelte/svg-spinners/180-ring";
 
     interface Props {
         label: string;
@@ -80,6 +81,7 @@
 
     let toggleUpdateModal: boolean = $state(false);
     let isLoggingOut: boolean = $state(false);
+    let isDeletingAccount: boolean = $state(false);
 
     let fieldName: string = $state("");
     let fieldLabel: string = $state("");
@@ -155,7 +157,7 @@
 
                 <!-- for the logout -->
                 <div
-                    class="border border-gray-300 rounded-full px-10 py-5 flex items-center justify-between"
+                    class="border border-gray-300 rounded-4xl px-10 py-5 flex items-center justify-between"
                 >
                     <div>
                         <h1 class="text-2xl font-bold first-letter:capitalize">
@@ -209,26 +211,29 @@
                 <!-- for deleting the passwords -->
 
                 <div
-                    class="border border-gray-300 rounded-full px-10 py-5 flex items-center justify-between"
+                    class="border border-red-300 bg-red-50/50 rounded-4xl px-10 py-5 space-y-5"
                 >
                     <div>
                         <h1 class="text-2xl font-bold first-letter:capitalize">
-                            log out
+                            delete account
                         </h1>
                         <p class="text-lg text-gray-500">
-                            You will be redirected to the log in page.
+                            Permanently delete your account and its data. Once
+                            you delete your account you'll not be able to
+                            recover any data which is associated to this
+                            account.
                         </p>
                     </div>
 
                     <div>
                         <form
-                            action="?/logOutUsers"
+                            action="?/deleteAccount"
                             method="POST"
                             use:enhance={() => {
-                                isLoggingOut = true;
+                                isDeletingAccount = true;
                                 return async ({ update, result }) => {
                                     await update();
-                                    isLoggingOut = false;
+                                    isDeletingAccount = false;
 
                                     if (result.type === "failure") {
                                         toast.error(
@@ -251,11 +256,23 @@
                                 };
                             }}
                         >
-                            <StyledButton
-                                isLoading={isLoggingOut}
-                                label="Log out"
-                                title="Logout"
-                            />
+                            <button
+                                aria-label="Custom styled button"
+                                title="Delete Account"
+                                class="flex items-center justify-center w-44 h-12 cursor-pointer text-red-100 hover:drop-shadow-sm transition duration-300 font-semibold rounded-full bg-red-600 capitalize"
+                            >
+                                {#if isDeletingAccount}
+                                    <div class="flex items-center gap-2">
+                                        <LoadingSVG
+                                            height="1.3em"
+                                            class="shrink-0"
+                                        />
+                                        <p class="text-sm">Processing...</p>
+                                    </div>
+                                {:else}
+                                    <span>Delete Account</span>
+                                {/if}
+                            </button>
                         </form>
                     </div>
                 </div>

@@ -33,7 +33,7 @@
         {value}
         rows="4"
         class={[
-            "w-full mt-1 py-3 px-3 rounded-lg outline-none border border-gray-300 focus:border-primary-main-purple focus:ring-primary-main-purple",
+            "w-full mt-1 py-3 px-3 rounded-lg outline-none resize-none border border-gray-300 focus:border-primary-main-purple focus:ring-primary-main-purple",
             valueError ? "bg-red-50 border-red-600" : "",
         ]}></textarea>
     {@render fieldError(valueError)}

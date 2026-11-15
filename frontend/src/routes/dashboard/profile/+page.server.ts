@@ -46,5 +46,15 @@ export const actions: Actions = {
     // for logging the users out 
     logOutUsers: async ({ cookies }) => {
         cookies.delete("access_token", { path: "/" })
+    },
+
+    // for deleting the user account 
+    deleteAccount: async ({ fetch, locals }) => {
+        const user = locals.user;
+        if (!user) {
+            redirect(307, "/")
+        }
+
+        console.log("We will start here tomorrow");
     }
 }
