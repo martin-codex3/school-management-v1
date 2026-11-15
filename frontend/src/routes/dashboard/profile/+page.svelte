@@ -1,7 +1,68 @@
 <script lang="ts">
+    import ProfileCard from "#lib/components/cards/ProfileCard.svelte";
+    import type { UserResponse } from "#lib/types/users/user_response.ts";
     import type { PageProps } from "../$types";
+    import ProfileIcon from "@iconify-svelte/tabler/user";
 
+    interface Props {
+        label: string;
+        title: string;
+        description: string;
+        iconData: any;
+        value: any;
+    }
     let { data }: PageProps = $props();
+
+    let profileData: Props[] = $state([
+        {
+            label: "First name",
+            title: "Open Update Modal",
+            description: "The name associated with your accoun",
+            iconData: ProfileIcon,
+            value: "",
+        },
+
+        {
+            label: "Last name",
+            title: "Open Update Modal",
+            description: "The name associated with your accoun",
+            iconData: "",
+            value: "",
+        },
+
+        {
+            label: "Email",
+            title: "Open Update Modal",
+            description: "The name associated with your accoun",
+            iconData: "",
+            value: "",
+        },
+
+        {
+            label: "Phone number",
+            title: "Open Update Modal",
+            description: "The name associated with your accoun",
+            iconData: "",
+            onclick: () => {},
+            value: "",
+        },
+
+        {
+            label: "Bio",
+            title: "Open Update Modal",
+            description: "The name associated with your accoun",
+            iconData: "",
+            value: "",
+        },
+
+        {
+            label: "Profile Image",
+            title: "Open Update Modal",
+            description: "The name associated with your accoun",
+            iconData: "",
+            value: "",
+        },
+    ]);
 </script>
 
 <div class="">
@@ -24,30 +85,12 @@
 
             <!-- for the main content here -->
             <div class="">
-                <div
-                    class="rounded-tr-3xl rounded-tl-3xl flex items-center justify-between px-5 py-2 rounded-bl-lg rounded-br-lg bg-gray-100"
-                >
-                    <div class="flex items-center gap-5">
-                        <div>
-                            <h1>icon</h1>
-                        </div>
-
-                        <div>
-                            <h1>First name</h1>
-                            <p>The name associated with your account</p>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h2>{data.user.first_name}</h2>
-                        <button
-                            aria-label="open update modal"
-                            title="Open Update Modal"
-                        >
-                            <span>open</span>
-                        </button>
-                    </div>
-                </div>
+                {#each profileData as profile}
+                    <ProfileCard
+                        value={profile.value}
+                        Icon={profile.iconData}
+                    />
+                {/each}
             </div>
         </div>
     </div>
