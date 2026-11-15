@@ -14,6 +14,7 @@
         description: string;
         iconData: any;
         value: any;
+        name: string;
     }
     let { data }: PageProps = $props();
 
@@ -23,6 +24,7 @@
             title: "Open Update Modal",
             description: "The first name associated with your account",
             iconData: ProfileIcon,
+            name: "first_name",
             value: data.user.first_name,
         },
 
@@ -31,6 +33,7 @@
             title: "Open Update Modal",
             description: "The last name associated with your account",
             iconData: ProfileIcon,
+            name: "last_name",
             value: data.user.last_name,
         },
 
@@ -39,6 +42,7 @@
             title: "Open Update Modal",
             description: "your account email",
             iconData: Emailcon,
+            name: "email",
             value: data.user.email,
         },
 
@@ -47,6 +51,7 @@
             title: "Open Update Modal",
             description: "Your contact phone number",
             iconData: PhoneNumberIcon,
+            name: "phone_number",
             value: data.user.phone_number,
         },
 
@@ -55,6 +60,7 @@
             title: "Open Update Modal",
             description: "Account biography",
             iconData: BiographyIcon,
+            name: "bio",
             value: data.user.bio ?? "Not set",
         },
 
@@ -63,14 +69,28 @@
             title: "Open Update Modal",
             description: "Your profile image path",
             iconData: ProfileeImageIcon,
+            name: "profile_image",
             value: data.user.profile_image_url ?? "Not set",
         },
     ]);
 
     let toggleUpdateModal: boolean = $state(false);
 
-    const handleOpenUpdateModal = () => {
+    let fieldName: string = $state("");
+    let fieldLabel: string = $state("");
+    let fieldValue: string = $state("");
+
+    const handleOpenUpdateModal = (
+        name: string,
+        label: string,
+        value: string,
+    ) => {
         toggleUpdateModal = true;
+        if (toggleUpdateModal) {
+            fieldName = name;
+            fieldLabel = label;
+            fieldValue = value;
+        }
     };
 
     const handleCloseUpdateModal = () => {
@@ -106,7 +126,12 @@
                         title={profile.title}
                         label={profile.label}
                         {index}
-                        openModal={handleOpenUpdateModal}
+                        openModal={() =>
+                            handleOpenUpdateModal(
+                                profile.name,
+                                profile.label,
+                                profile.value,
+                            )}
                     />
                 {/each}
             </div>
@@ -119,5 +144,8 @@
     <UpdateProfileModal
         closeModal={handleCloseUpdateModal}
         toggleModal={toggleUpdateModal}
+        name={fieldName}
+        label={fieldLabel}
+        {fieldValue}
     />
 {/if}

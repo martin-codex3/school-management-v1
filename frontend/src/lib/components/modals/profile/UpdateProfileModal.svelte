@@ -1,28 +1,53 @@
 <script lang="ts">
     import StyledButton from "#lib/components/buttons/StyledButton.svelte";
     import TextInput from "#lib/components/inputs/TextInput.svelte";
+    import { enhance } from "$app/forms";
     import CloseIcon from "@iconify-svelte/material-symbols/close";
+    import { toast } from "svelte-sonner";
 
     interface Props {
         toggleModal: boolean;
         closeModal: () => void;
+        name: string;
+        label: string;
+        fieldValue: string;
     }
 
-    let { closeModal, toggleModal }: Props = $props();
+    let { closeModal, toggleModal, name, label, fieldValue }: Props = $props();
 
     let isUpdatingProfile: boolean = $state(false);
 </script>
 
 {#snippet formInput()}
-    <form action="">
+    <form
+        action="?/updateProfile"
+        method="POST"
+        use:enhance={() => {
+            isUpdatingProfile = false;
+            return async ({ result, update }) => {
+                if (result.type === "failure") {
+                    toast.error("Error man");
+                }
+
+                if (result.type === "error") {
+                    toast.error("Another error mate");
+                }
+
+                if (result.type === "success") {
+                    toast.success("All good now");
+                }
+            };
+        }}
+    >
         <div class="space-y-7">
             <TextInput
                 type="text"
-                name="first_name"
-                placeholder="John"
-                id="FirstName"
-                label="First name"
+                {name}
+                placeholder=""
+                id={label}
+                {label}
                 valueError=""
+                value={fieldValue}
             />
 
             <StyledButton
@@ -47,14 +72,14 @@
     >
         <!-- for the header -->
         <div class="flex items-center justify-between">
-            <h1 class="text-xl first-letter:capitalize font-bold">
+            <h1 class="text-2xl first-letter:capitalize font-bold">
                 Update detail
             </h1>
             <button
                 aria-label="close button"
                 title="Close Modal"
                 onclick={closeModal}
-                class="flex items-center justify-center p-2 cursor-pointer hover:gray-50 rounded-full transition duration-200"
+                class="flex items-center justify-center p-2 cursor-pointer hover:bg-purple-100 rounded-full transition duration-200"
             >
                 <CloseIcon height="1.5em" class="shrink-0" />
             </button>

@@ -5,6 +5,7 @@
         placeholder: string;
         name: string;
         label: string;
+        value: string;
         valueError: string | undefined;
     }
 
@@ -14,6 +15,7 @@
         placeholder,
         name,
         label,
+        value,
         valueError = "",
     }: Props = $props();
 </script>
@@ -31,6 +33,7 @@
         {id}
         {placeholder}
         {name}
+        {value}
         class={[
             "w-full mt-1 py-3 px-3 rounded-lg outline-none border border-gray-300 focus:border-primary-main-purple focus:ring-primary-main-purple",
             valueError ? "bg-red-50 border-red-600" : "",
