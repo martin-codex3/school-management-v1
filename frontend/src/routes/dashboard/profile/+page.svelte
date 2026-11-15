@@ -6,6 +6,7 @@
     import PhoneNumberIcon from "@iconify-svelte/tabler/phone";
     import BiographyIcon from "@iconify-svelte/tabler/file-text";
     import ProfileeImageIcon from "@iconify-svelte/tabler/photo";
+    import UpdateProfileModal from "#lib/components/modals/profile/UpdateProfileModal.svelte";
 
     interface Props {
         label: string;
@@ -65,6 +66,16 @@
             value: data.user.profile_image_url ?? "Not set",
         },
     ]);
+
+    let toggleUpdateModal: boolean = $state(false);
+
+    const handleOpenUpdateModal = () => {
+        toggleUpdateModal = true;
+    };
+
+    const handleCloseUpdateModal = () => {
+        toggleUpdateModal = false;
+    };
 </script>
 
 <div class="">
@@ -95,9 +106,18 @@
                         title={profile.title}
                         label={profile.label}
                         {index}
+                        openModal={handleOpenUpdateModal}
                     />
                 {/each}
             </div>
         </div>
     </div>
 </div>
+
+<!-- for the modals here -->
+{#if toggleUpdateModal}
+    <UpdateProfileModal
+        closeModal={handleCloseUpdateModal}
+        toggleModal={toggleUpdateModal}
+    />
+{/if}

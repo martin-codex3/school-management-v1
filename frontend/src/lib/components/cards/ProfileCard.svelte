@@ -9,9 +9,11 @@
         description: string;
         label: string;
         index: number;
+        openModal: () => void;
     }
 
-    const { Icon, value, title, description, label, index }: Props = $props();
+    const { Icon, value, title, description, label, index, openModal }: Props =
+        $props();
 
     const currentIndex = $derived(index + 1);
 </script>
@@ -42,6 +44,7 @@
             <button
                 aria-label="for opening the modal"
                 {title}
+                onclick={openModal}
                 class="flex items-center justify-center p-2 rounded-full hover:bg-purple-200 hover:text-purple-950 cursor-pointer transition duration-300"
             >
                 <EditIcon height="1.5em" />

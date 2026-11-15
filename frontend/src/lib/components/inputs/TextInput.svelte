@@ -24,7 +24,7 @@
 
 <div class="">
     {#if label}
-        <label for={id}>{label}</label>
+        <label for={id} class="text-lg">{label}</label>
     {/if}
     <input
         {type}

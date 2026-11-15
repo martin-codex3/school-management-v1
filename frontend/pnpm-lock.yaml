@@ -10,13 +10,16 @@ importers:
     dependencies:
       '@iconify-svelte/devicon':
         specifier: gitlab:iconify-icons/svelte#devicon
-        version: https://gitlab.com/iconify-icons/svelte/-/archive/eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0/svelte-eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0.tar.gz(svelte@5.57.3)
+        version: https://gitlab.com/iconify-icons/svelte/-/archive/65b8eeb9f56f089f6a9c815a4fbb4249c73abac7/svelte-65b8eeb9f56f089f6a9c815a4fbb4249c73abac7.tar.gz(svelte@5.57.3)
+      '@iconify-svelte/material-symbols':
+        specifier: gitlab:iconify-icons/svelte#material-symbols
+        version: https://gitlab.com/iconify-icons/svelte/-/archive/202421baf2363ed1361fb4e56f5a6cdfcda0777f/svelte-202421baf2363ed1361fb4e56f5a6cdfcda0777f.tar.gz(svelte@5.57.3)
       '@iconify-svelte/svg-spinners':
         specifier: gitlab:iconify-icons/svelte#svg-spinners
         version: https://gitlab.com/iconify-icons/svelte/-/archive/66eac294894020c87774191f0b5ca7a59247c5c5/svelte-66eac294894020c87774191f0b5ca7a59247c5c5.tar.gz(svelte@5.57.3)
       '@iconify-svelte/tabler':
         specifier: gitlab:iconify-icons/svelte#tabler
-        version: https://gitlab.com/iconify-icons/svelte/-/archive/3d99fde37bdca1d991444c40aa0604be5fd48ddd/svelte-3d99fde37bdca1d991444c40aa0604be5fd48ddd.tar.gz(svelte@5.57.3)
+        version: https://gitlab.com/iconify-icons/svelte/-/archive/e2e84af0676d0932e1b0c18bb645c181e2a79b22/svelte-e2e84af0676d0932e1b0c18bb645c181e2a79b22.tar.gz(svelte@5.57.3)
       countries-list:
         specifier: ^3.4.1
         version: 3.4.1
@@ -63,17 +66,21 @@ importers:
 
 packages:
 
-  '@iconify-svelte/devicon@https://gitlab.com/iconify-icons/svelte/-/archive/eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0/svelte-eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0.tar.gz':
-    resolution: {gitHosted: true, integrity: sha512-7gTdX4P+xD8D3NkGOG7QwsZK8dbLstuS9uZg4R0k8Ka0YQLB6IWLP7/Sb0Fs5KKd2vWubN396mX5xAjBEyMcyg==, tarball: https://gitlab.com/iconify-icons/svelte/-/archive/eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0/svelte-eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0.tar.gz}
-    version: 1.0.14
+  '@iconify-svelte/devicon@https://gitlab.com/iconify-icons/svelte/-/archive/65b8eeb9f56f089f6a9c815a4fbb4249c73abac7/svelte-65b8eeb9f56f089f6a9c815a4fbb4249c73abac7.tar.gz':
+    resolution: {gitHosted: true, integrity: sha512-h9xzbQDnwIRrVIdQAKVX/1Z77xT+HbH4u0mX/Y6sIfP4EYbJ/mE42VLyqO6J2miQpM6QxrSs/gqJHzLeUJZu3Q==, tarball: https://gitlab.com/iconify-icons/svelte/-/archive/65b8eeb9f56f089f6a9c815a4fbb4249c73abac7/svelte-65b8eeb9f56f089f6a9c815a4fbb4249c73abac7.tar.gz}
+    version: 1.0.15
+
+  '@iconify-svelte/material-symbols@https://gitlab.com/iconify-icons/svelte/-/archive/202421baf2363ed1361fb4e56f5a6cdfcda0777f/svelte-202421baf2363ed1361fb4e56f5a6cdfcda0777f.tar.gz':
+    resolution: {gitHosted: true, integrity: sha512-gULfdJPjPnnPrXjAZKaKapN3Eij6u8LOXgJ3xoobz68dnHO0GUBPjiSaR7/0z4SWMb3PCd4Ft9pN3LTuCe3sJQ==, tarball: https://gitlab.com/iconify-icons/svelte/-/archive/202421baf2363ed1361fb4e56f5a6cdfcda0777f/svelte-202421baf2363ed1361fb4e56f5a6cdfcda0777f.tar.gz}
+    version: 1.0.58
 
   '@iconify-svelte/svg-spinners@https://gitlab.com/iconify-icons/svelte/-/archive/66eac294894020c87774191f0b5ca7a59247c5c5/svelte-66eac294894020c87774191f0b5ca7a59247c5c5.tar.gz':
     resolution: {gitHosted: true, integrity: sha512-K9ek/iQdLUq/JV+ZM5tTuQofzv2ZdZeDtTF5SMoKiSg4DsvnczFZEvTOxTXIUUStDfq8fXNl3zCi0Ow+MjFUjw==, tarball: https://gitlab.com/iconify-icons/svelte/-/archive/66eac294894020c87774191f0b5ca7a59247c5c5/svelte-66eac294894020c87774191f0b5ca7a59247c5c5.tar.gz}
     version: 1.0.0
 
-  '@iconify-svelte/tabler@https://gitlab.com/iconify-icons/svelte/-/archive/3d99fde37bdca1d991444c40aa0604be5fd48ddd/svelte-3d99fde37bdca1d991444c40aa0604be5fd48ddd.tar.gz':
-    resolution: {gitHosted: true, integrity: sha512-WKs+vF8iaG92PmWkvVzPf2EXB7PjxHeID6Fco7Y/0PssSPXbfzhvNJ9Sib7kG4JsoTjmb8fyVZyTbI759Kzf+Q==, tarball: https://gitlab.com/iconify-icons/svelte/-/archive/3d99fde37bdca1d991444c40aa0604be5fd48ddd/svelte-3d99fde37bdca1d991444c40aa0604be5fd48ddd.tar.gz}
-    version: 1.0.6
+  '@iconify-svelte/tabler@https://gitlab.com/iconify-icons/svelte/-/archive/e2e84af0676d0932e1b0c18bb645c181e2a79b22/svelte-e2e84af0676d0932e1b0c18bb645c181e2a79b22.tar.gz':
+    resolution: {gitHosted: true, integrity: sha512-w7rCqWJYW+T9lseu2hJP87xE2OuFidBnQR30OkIj/GiF5AQU1b8ufc2HBHmeUj1zRjoa0tNGu0vl0TIP8iIqKg==, tarball: https://gitlab.com/iconify-icons/svelte/-/archive/e2e84af0676d0932e1b0c18bb645c181e2a79b22/svelte-e2e84af0676d0932e1b0c18bb645c181e2a79b22.tar.gz}
+    version: 1.0.7
 
   '@iconify/css-svelte@1.0.3':
     resolution: {integrity: sha512-RFI9mCvy0bUdEaxd/9LMfzkIDBrIhNPf2hPRdy3oXmTJ4RTlFgY/nF0Gm9rgQJUq5qHWWBEl0tdOFR8fJVBmng==}
@@ -674,7 +681,13 @@ packages:
 
 snapshots:
 
-  '@iconify-svelte/devicon@https://gitlab.com/iconify-icons/svelte/-/archive/eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0/svelte-eb2d172d36fe0a7fd4d4d0d7109254e5d5acb9d0.tar.gz(svelte@5.57.3)':
+  '@iconify-svelte/devicon@https://gitlab.com/iconify-icons/svelte/-/archive/65b8eeb9f56f089f6a9c815a4fbb4249c73abac7/svelte-65b8eeb9f56f089f6a9c815a4fbb4249c73abac7.tar.gz(svelte@5.57.3)':
+    dependencies:
+      '@iconify/css-svelte': 1.0.3(svelte@5.57.3)
+    transitivePeerDependencies:
+      - svelte
+
+  '@iconify-svelte/material-symbols@https://gitlab.com/iconify-icons/svelte/-/archive/202421baf2363ed1361fb4e56f5a6cdfcda0777f/svelte-202421baf2363ed1361fb4e56f5a6cdfcda0777f.tar.gz(svelte@5.57.3)':
     dependencies:
       '@iconify/css-svelte': 1.0.3(svelte@5.57.3)
     transitivePeerDependencies:
@@ -686,7 +699,7 @@ snapshots:
     transitivePeerDependencies:
       - svelte
 
-  '@iconify-svelte/tabler@https://gitlab.com/iconify-icons/svelte/-/archive/3d99fde37bdca1d991444c40aa0604be5fd48ddd/svelte-3d99fde37bdca1d991444c40aa0604be5fd48ddd.tar.gz(svelte@5.57.3)':
+  '@iconify-svelte/tabler@https://gitlab.com/iconify-icons/svelte/-/archive/e2e84af0676d0932e1b0c18bb645c181e2a79b22/svelte-e2e84af0676d0932e1b0c18bb645c181e2a79b22.tar.gz(svelte@5.57.3)':
     dependencies:
       '@iconify/css-svelte': 1.0.3(svelte@5.57.3)
     transitivePeerDependencies:

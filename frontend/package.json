@@ -31,6 +31,7 @@
 	},
 	"dependencies": {
 		"@iconify-svelte/devicon": "gitlab:iconify-icons/svelte#devicon",
+		"@iconify-svelte/material-symbols": "gitlab:iconify-icons/svelte#material-symbols",
 		"@iconify-svelte/svg-spinners": "gitlab:iconify-icons/svelte#svg-spinners",
 		"@iconify-svelte/tabler": "gitlab:iconify-icons/svelte#tabler",
 		"countries-list": "^3.4.1",
