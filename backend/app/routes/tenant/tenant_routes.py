@@ -9,10 +9,10 @@ from app.models.tenant.tenant import Tenant
 from app.models.tenant_user.tenant_user import TenantUser
 from app.services.user_service import CurrentUser
 
-tenant_routes = APIRouter()
+tenant_router = APIRouter()
 
 
-@tenant_routes.get("/tenant", status_code=status)
+@tenant_router.get("/tenant", status_code=status)
 async def get_current_tenant(
     current_user: CurrentUser, session: Annotated[AsyncSession, Depends(app_session)]
 ):

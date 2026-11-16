@@ -8,6 +8,7 @@ from fastapi_faults import FaultRegistry
 from app.config.database.app_database import app_database_engine, database_init
 from app.routes.application_user.application_user_routes import appliication_user_router
 from app.routes.auth.auth_router import auth_router
+from app.routes.tenant.tenant_routes import tenant_router
 
 
 # the context manager
@@ -35,7 +36,7 @@ app.include_router(
 )
 
 app.include_router(router=appliication_user_router, prefix="/api/users", tags=["User"])
-
+app.include_router(router=tenant_router, prefix="/api/tenants", tags=["Tenants"])
 # for the cords here
 allowed_origins = ["http://localhost:5173"]
 
