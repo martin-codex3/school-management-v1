@@ -1,7 +1,8 @@
-import { fail, redirect } from "@sveltejs/kit";
-import type { LayoutServerLoad } from "../$types";
+import { error, redirect } from "@sveltejs/kit";
+import type { LayoutServerLoad } from "./$types";
 import { PUBLIC_BACKEND_API } from "$app/env/public";
-import type { ValidationErrors } from "#lib/types/errors/validation_errors.ts";
+import type { SchoolResponse } from "#lib/types/school/school_response.ts";
+
 
 export const load: LayoutServerLoad = async ({ locals, fetch }) => {
     const user = locals.user;
@@ -21,10 +22,11 @@ export const load: LayoutServerLoad = async ({ locals, fetch }) => {
     });
 
     if (!response.ok) {
-        const responseData: ValidationErrors = await response.json();
-        return fail(response.status, { problem: responseData });
+
+        error(response.status, "Failed to fetch the record");
     }
 
-    return { success: true }
+    const school: SchoolResponse = await response.json();
+    return { school }
 
 }
