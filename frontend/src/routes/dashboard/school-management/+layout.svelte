@@ -50,7 +50,7 @@
 </script>
 
 <nav
-    class="fixed h-screen overflow-hidden w-70 space-y-10 border-x bg-white border-gray-300 py-2 px-3"
+    class="fixed h-screen overflow-hidden w-90 space-y-10 border-x bg-white border-gray-300 py-2 px-3"
 >
     <div class="flex items-center justify-between">
         <div>
@@ -96,7 +96,7 @@
 </nav>
 
 <main>
-    <section class="ms-70">
+    <section class="ms-90">
         {@render children()}
     </section>
 </main>

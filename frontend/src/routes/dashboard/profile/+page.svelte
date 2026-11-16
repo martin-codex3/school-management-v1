@@ -12,6 +12,7 @@
     import { toast } from "svelte-sonner";
     import { goto } from "$app/navigation";
     import LoadingSVG from "@iconify-svelte/svg-spinners/180-ring";
+    import ChevronIcon from "@iconify-svelte/tabler/chevron-right";
 
     interface Props {
         label: string;
@@ -122,14 +123,29 @@
             >
                 <!-- for the main header -->
                 <div
-                    class="flex items-center gap-3 w-full border border-gray-300 bg-gray-50 rounded-full px-2 py-2"
+                    class="flex items-center justify-between w-full border border-gray-300 bg-gray-50 rounded-full px-2 py-2"
                 >
-                    <div class="h-20 w-20 rounded-full bg-purple-400"></div>
+                    <div class="flex items-center gap-5">
+                        <div class="h-20 w-20 rounded-full bg-purple-400"></div>
+                        <div>
+                            <h1 class="text-lg capitalize font-semibold">
+                                {data.user.first_name}
+                            </h1>
+                            <p>{data.user.email}</p>
+                        </div>
+                    </div>
+
                     <div>
-                        <h1 class="text-lg capitalize font-semibold">
-                            {data.user.first_name}
-                        </h1>
-                        <p>{data.user.email}</p>
+                        <button
+                            aria-label="update password button"
+                            title="Update Password"
+                            class="flex items-center justify-center gap-3 text-purple-900 cursor-pointer bg-purple-300 p-3 rounded-full"
+                        >
+                            <span class="first-letter:capitalize"
+                                >update password</span
+                            >
+                            <ChevronIcon height="1.5em" />
+                        </button>
                     </div>
                 </div>
 
