@@ -5,7 +5,7 @@
     import LocationIcon from "@iconify-svelte/tabler/location";
     import SchoolDetailsIcon from "@iconify-svelte/tabler/school";
     import LeaderShipIcon from "@iconify-svelte/tabler/users";
-    import BrandingIcon from "@iconify-svelte/tabler/color-picker";
+    import BrandingIcon from "@iconify-svelte/tabler/palette";
     import DocumentIcon from "@iconify-svelte/tabler/files";
     let { data }: PageProps = $props();
 
@@ -18,7 +18,7 @@
 
     const dashboardLinks: Props[] = $state([
         {
-            to: "/dashboard/school-profile/general-information",
+            to: "/dashboard/school-management/general-information",
             title: "General identity and registration",
             description: "School identity and registration",
             icon: BuildingIcon,
@@ -68,7 +68,7 @@
     ]);
 </script>
 
-<div class="h-screen flex items-center justify-center px-5 overflow-hidden">
+<div class="h-screen flex items-center justify-center overflow-hidden">
     <div
         class="h-[calc(100vh-1rem)] bg-white rounded-4xl border py-5 px-5 border-gray-300 w-full"
     >
@@ -98,26 +98,23 @@
             </div>
 
             <!-- for the links here  -->
-            <div class="">
-                <div
-                    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-5"
-                >
-                    {#each dashboardLinks as link (link.title)}
-                        <div
-                            class="border border-gray-400 bg-gray-100 px-5 py-3 space-y-5 rounded-xl"
+            <div
+                class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-5 items-stretch"
+            >
+                {#each dashboardLinks as link (link.title)}
+                    <div class="">
+                        <a
+                            href={link.to}
+                            class="bg-gray-100 rounded-3xl px-5 py-4 space-y-4 block h-full"
                         >
-                            <link.icon height="2em" class="shrink-0" />
-                            <div class="space-y-2">
-                                <h1 class="text-xl font-bold capitalize">
-                                    {link.title}
-                                </h1>
-                                <p class="text-lg">
-                                    {link.description}
-                                </p>
+                            <link.icon height="1.8em" />
+                            <div class="space-y-1">
+                                <h1 class="font-bold text-xl">{link.title}</h1>
+                                <p>{link.description}</p>
                             </div>
-                        </div>
-                    {/each}
-                </div>
+                        </a>
+                    </div>
+                {/each}
             </div>
         </div>
     </div>

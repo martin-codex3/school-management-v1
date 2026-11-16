@@ -2,17 +2,25 @@
     import ClosePanelIcon from "@iconify-svelte/tabler/layout-navbar";
     import BuildingIcon from "@iconify-svelte/tabler/building";
     import BranchIcon from "@iconify-svelte/tabler/link";
+    import ContactIcon from "@iconify-svelte/tabler/phone";
+    import LocationIcon from "@iconify-svelte/tabler/location";
+    import SchoolDetailsIcon from "@iconify-svelte/tabler/school";
+    import LeaderShipIcon from "@iconify-svelte/tabler/users";
+    import BrandingIcon from "@iconify-svelte/tabler/color-picker";
+    import DocumentIcon from "@iconify-svelte/tabler/files";
     import { page } from "$app/state";
 
     const { children } = $props();
+
     interface Props {
         label: string;
         to: string;
         icon: any;
     }
+
     let SchoolManagementLinks: Props[] = [
         {
-            label: "Profile",
+            label: "Schhol Profile",
             to: "/dashboard/school-management",
             icon: BuildingIcon,
         },
@@ -96,7 +104,7 @@
 </nav>
 
 <main>
-    <section class="ms-90">
+    <section class="ms-90 px-5">
         {@render children()}
     </section>
 </main>
