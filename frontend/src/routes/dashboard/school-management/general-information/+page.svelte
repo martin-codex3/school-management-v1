@@ -100,7 +100,7 @@
             icon: SettingsIcon,
             title: "School Settings",
             description: "All settings",
-            value: data.school.settings ?? "Not set",
+            value: data.school.settings ?? {},
         },
     ]);
 
@@ -116,33 +116,38 @@
 </script>
 
 <div class="h-screen flex items-center justify-center overflow-hidden">
-    <div class="bg-white rounded-4xl px-10 py-5 h-[calc(100vh-1rem)] w-full">
-        <!-- for the upper header -->
-        <div class="flex items-center gap-3">
-            <button
-                aria-label="Go back button"
-                title="Go Back"
-                onclick={() => goto("/")}
-                class="flex items-center justify-center p-3 rounded-full bg-gray-100 cursor-pointer hover:drop-shadow-sm transition duration-200"
-            >
-                <ChevronBackIcon height="1.3em" />
-            </button>
+    <div class="bg-white rounded-4xl px-5 py-5 h-[calc(100vh-1rem)] w-full">
+        <div class="h-full overflow-auto scrollbar-thin px-5">
+            <!-- for the upper header -->
+            <div class="flex items-center gap-3">
+                <button
+                    aria-label="Go back button"
+                    title="Go Back"
+                    onclick={() => goto("/")}
+                    class="flex items-center justify-center p-3 rounded-full bg-gray-100 cursor-pointer hover:drop-shadow-sm transition duration-200"
+                >
+                    <ChevronBackIcon height="1.3em" />
+                </button>
 
-            <h1 class="capitalize font-bold text-2xl">general information</h1>
-        </div>
+                <h1 class="capitalize font-bold text-2xl">
+                    general information
+                </h1>
+            </div>
 
-        <!-- for the information -->
-        <div>
-            {#each schoolDetails as school, index}
-                <SchoolDetailsCard
-                    Icon={school.icon}
-                    value={school.value}
-                    title={school.title}
-                    description={school.description}
-                    {index}
-                    openModal={handleOpenUpdateModal}
-                />
-            {/each}
+            <!-- for the information -->
+            <div class="space-y-1">
+                {#each schoolDetails as school, index}
+                    <SchoolDetailsCard
+                        Icon={school.icon}
+                        value={school.value}
+                        title={school.title}
+                        description={school.description}
+                        {index}
+                        length={schoolDetails.length}
+                        openModal={handleOpenUpdateModal}
+                    />
+                {/each}
+            </div>
         </div>
     </div>
 </div>

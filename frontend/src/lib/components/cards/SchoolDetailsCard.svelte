@@ -8,10 +8,11 @@
         title: string;
         description: string;
         index: number;
+        length: number;
         openModal: () => void;
     }
 
-    const { Icon, value, title, description, index, openModal }: Props =
+    const { Icon, value, title, description, index, openModal, length }: Props =
         $props();
 
     const currentIndex = $derived(index + 1);
@@ -58,7 +59,7 @@
             ? "rounded-tr-3xl rounded-tl-3xl rounded-bl-lg rounded-br-lg"
             : "rounded-lg",
 
-        currentIndex === 6 ? "rounded-bl-3xl rounded-br-3xl" : "",
+        currentIndex === length ? "rounded-bl-3xl rounded-br-3xl" : "",
     ]}
 >
     <!-- card header -->
