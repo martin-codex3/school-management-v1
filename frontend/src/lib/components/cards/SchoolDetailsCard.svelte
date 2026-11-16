@@ -4,7 +4,7 @@
 
     interface Props {
         Icon: Component;
-        value: string | undefined;
+        value: string | undefined | object;
         title: string;
         description: string;
         index: number;
@@ -33,7 +33,7 @@
 
 <!-- we will also have the card body -->
 
-{#snippet cardBody(value: string | undefined)}
+{#snippet cardBody(value: string | undefined | object)}
     <div class="flex items-center gap-5">
         <div>
             <h2>{value}</h2>

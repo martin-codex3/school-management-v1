@@ -15,7 +15,7 @@
         icon: any;
         title: string;
         description: string;
-        value: string | undefined;
+        value: string | undefined | object;
     }
 
     const schoolDetails: Props[] = $derived([
@@ -69,9 +69,37 @@
         },
         {
             icon: BuildingIcon,
-            title: "School name",
-            description: "Name associated with the school",
+            title: "School webiste",
+            description: "Website url",
             value: data.school.website_url ?? "Not set",
+        },
+
+        {
+            icon: BuildingIcon,
+            title: "Registration number",
+            description: "Registration number",
+            value: data.school.registration_number ?? "Not set",
+        },
+
+        {
+            icon: BuildingIcon,
+            title: "School code",
+            description: "Name associated with the school",
+            value: data.school.school_code ?? "Not set",
+        },
+
+        {
+            icon: BuildingIcon,
+            title: "Description",
+            description: "Description",
+            value: data.school.description ?? "Not set",
+        },
+
+        {
+            icon: BuildingIcon,
+            title: "School Settings",
+            description: "All settings",
+            value: data.school.settings ?? "Not set",
         },
     ]);
 

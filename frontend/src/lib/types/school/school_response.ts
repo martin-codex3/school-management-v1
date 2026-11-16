@@ -11,5 +11,5 @@ export interface SchoolResponse {
     registration_number: string | undefined
     school_code: string | undefined
     description: string | undefined
-    settings: object | undefined
+    settings: object
 }
