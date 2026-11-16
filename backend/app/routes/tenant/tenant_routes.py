@@ -12,7 +12,7 @@ from app.services.user_service import CurrentUser
 tenant_router = APIRouter()
 
 
-@tenant_router.get("/tenant", status_code=status)
+@tenant_router.get("/tenant", status_code=status.HTTP_200_OK)
 async def get_current_tenant(
     current_user: CurrentUser, session: Annotated[AsyncSession, Depends(app_session)]
 ):
