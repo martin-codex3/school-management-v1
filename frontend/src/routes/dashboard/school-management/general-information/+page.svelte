@@ -8,6 +8,17 @@
     import type { Component } from "svelte";
     import SchoolDetailsCard from "#lib/components/cards/SchoolDetailsCard.svelte";
     import { Icon } from "svelte-sonner";
+    import BuildingsIcon from "@iconify-svelte/tabler/buildings";
+    import MailIcon from "@iconify-svelte/tabler/mail";
+    import PhoneIcon from "@iconify-svelte/tabler/phone";
+    import MapPinIcon from "@iconify-svelte/tabler/map-pin";
+    import MapIcon from "@iconify-svelte/tabler/map";
+    import WorldIcon from "@iconify-svelte/tabler/world";
+    import GlobeIcon from "@iconify-svelte/tabler/globe";
+    import FileTextIcon from "@iconify-svelte/tabler/file-text";
+    import HashIcon from "@iconify-svelte/tabler/hash";
+    import InfoSquareIcon from "@iconify-svelte/tabler/info-square";
+    import SettingsIcon from "@iconify-svelte/tabler/settings";
 
     const { data }: PageProps = $props();
 
@@ -25,78 +36,68 @@
             description: "Current name",
             value: data.school.school_name,
         },
-
         {
-            icon: BuildingIcon,
+            icon: BuildingsIcon,
             title: "School type",
             description: "The school type",
             value: data.school.school_type,
         },
-
         {
-            icon: BuildingIcon,
+            icon: MailIcon,
             title: "School email",
             description: "school email",
             value: data.school.school_email,
         },
-
         {
-            icon: BuildingIcon,
+            icon: PhoneIcon,
             title: "School phone",
             description: "school contact",
             value: data.school.school_phone,
         },
-
         {
-            icon: BuildingIcon,
+            icon: MapPinIcon,
             title: "address",
             description: "Schools address",
             value: data.school.address ?? "Not set",
         },
-
         {
-            icon: BuildingIcon,
+            icon: MapIcon,
             title: "city",
             description: "school city",
             value: data.school.city ?? "Not set",
         },
-
         {
-            icon: BuildingIcon,
+            icon: WorldIcon,
             title: "country",
             description: "Current school location",
             value: data.school.country ?? "Not set",
         },
         {
-            icon: BuildingIcon,
-            title: "School webiste",
+            icon: GlobeIcon,
+            title: "School website",
             description: "Website url",
             value: data.school.website_url ?? "Not set",
         },
-
         {
-            icon: BuildingIcon,
+            icon: FileTextIcon,
             title: "Registration number",
             description: "Registration number",
             value: data.school.registration_number ?? "Not set",
         },
-
         {
-            icon: BuildingIcon,
+            icon: HashIcon,
             title: "School code",
             description: "Name associated with the school",
             value: data.school.school_code ?? "Not set",
         },
-
         {
-            icon: BuildingIcon,
+            icon: InfoSquareIcon,
             title: "Description",
             description: "Description",
             value: data.school.description ?? "Not set",
         },
-
         {
-            icon: BuildingIcon,
+            icon: SettingsIcon,
             title: "School Settings",
             description: "All settings",
             value: data.school.settings ?? "Not set",

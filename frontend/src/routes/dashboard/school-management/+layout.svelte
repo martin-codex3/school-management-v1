@@ -1,13 +1,11 @@
 <script lang="ts">
     import ClosePanelIcon from "@iconify-svelte/tabler/layout-navbar";
     import BuildingIcon from "@iconify-svelte/tabler/building";
-    import BranchIcon from "@iconify-svelte/tabler/link";
-    import ContactIcon from "@iconify-svelte/tabler/phone";
-    import LocationIcon from "@iconify-svelte/tabler/location";
-    import SchoolDetailsIcon from "@iconify-svelte/tabler/school";
-    import LeaderShipIcon from "@iconify-svelte/tabler/users";
-    import BrandingIcon from "@iconify-svelte/tabler/color-picker";
-    import DocumentIcon from "@iconify-svelte/tabler/files";
+    import SitemapIcon from "@iconify-svelte/tabler/sitemap";
+    import HierarchyIcon from "@iconify-svelte/tabler/hierarchy";
+    import UsersIcon from "@iconify-svelte/tabler/users";
+    import ShieldCheckIcon from "@iconify-svelte/tabler/shield-check";
+    import SettingsIcon from "@iconify-svelte/tabler/settings";
     import { page } from "$app/state";
 
     const { children } = $props();
@@ -20,39 +18,34 @@
 
     let SchoolManagementLinks: Props[] = [
         {
-            label: "Schhol Profile",
+            label: "School Profile",
             to: "/dashboard/school-management",
             icon: BuildingIcon,
         },
-
         {
-            label: "Braches",
+            label: "Branches",
             to: "/dashboard/school-management/branches",
-            icon: BranchIcon,
+            icon: SitemapIcon,
         },
-
         {
             label: "Departments",
             to: "/dashboard/school-management/departments",
-            icon: "",
+            icon: HierarchyIcon,
         },
-
         {
             label: "Users",
             to: "/dashboard/school-management/users",
-            icon: "",
+            icon: UsersIcon,
         },
-
         {
             label: "Roles & Permissions",
             to: "/dashboard/school-management/roles-permissions",
-            icon: "",
+            icon: ShieldCheckIcon,
         },
-
         {
             label: "School Settings",
             to: "/dashboard/school-management/school-settings",
-            icon: "",
+            icon: SettingsIcon,
         },
     ];
 </script>
