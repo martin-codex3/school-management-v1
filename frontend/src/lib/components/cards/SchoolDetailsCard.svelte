@@ -9,11 +9,20 @@
         description: string;
         index: number;
         length: number;
+        name: string;
         openModal: () => void;
     }
 
-    const { Icon, value, title, description, index, openModal, length }: Props =
-        $props();
+    const {
+        Icon,
+        value,
+        title,
+        description,
+        index,
+        openModal,
+        length,
+        name,
+    }: Props = $props();
 
     const currentIndex = $derived(index + 1);
 </script>
@@ -41,14 +50,16 @@
         </div>
 
         <div>
-            <button
-                aria-label="for opening the modal"
-                {title}
-                onclick={openModal}
-                class="flex items-center justify-center p-2 rounded-full hover:bg-purple-200 hover:text-purple-950 cursor-pointer transition duration-300"
-            >
-                <EditIcon height="1.5em" />
-            </button>
+            {#if name !== "school_code"}
+                <button
+                    aria-label="for opening the modal"
+                    {title}
+                    onclick={openModal}
+                    class="flex items-center justify-center p-2 rounded-full hover:bg-purple-200 hover:text-purple-950 cursor-pointer transition duration-300"
+                >
+                    <EditIcon height="1.5em" />
+                </button>
+            {/if}
         </div>
     </div>
 {/snippet}

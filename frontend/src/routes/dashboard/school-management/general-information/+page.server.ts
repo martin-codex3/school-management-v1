@@ -16,6 +16,7 @@ export const actions: Actions = {
         const data = await request.formData();
         const payload = Object.fromEntries(data);
 
+
         const response = await fetch(`${PUBLIC_BACKEND_API}/tenants`, {
             method: "PATCH",
             headers: {
@@ -29,6 +30,7 @@ export const actions: Actions = {
             const responseData: ValidationErrors = await response.json();
             return fail(response.status, { problem: responseData });
         }
+        console.log(payload)
 
         return { success: true }
     }

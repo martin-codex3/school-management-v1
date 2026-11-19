@@ -104,6 +104,13 @@
                     value={`${fieldValue}`}
                 >
                     <option value="">Select option</option>
+                    <option value="Primary School">Primary School</option>
+                    <option value="Secondary School">Secondary School</option>
+                    <option value="Combined School">Combined School</option>
+                    <option value="International School"
+                        >International School</option
+                    >
+                    <option value="Other">Other</option>
                 </SelectInput>
             {:else}
                 <TextInput

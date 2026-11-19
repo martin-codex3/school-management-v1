@@ -67,7 +67,7 @@
             title: "address",
             description: "Schools address",
             value: data.school.address ?? "Not set",
-            name: "school_address",
+            name: "address",
         },
         {
             icon: MapIcon,
@@ -137,6 +137,21 @@
     const handleCloseUpdateModal = () => {
         toggleUpdateModal = false;
     };
+
+    // for the truncanted schoolname
+    const trucantedSchoolName = $derived(() => {
+        return schoolDetails.find((s) =>
+            s.name === "school_name"
+                ? data.school.school_name.slice(0, 20)
+                : s.value,
+        );
+    });
+
+    const trucantedSchoolCode = $derived(() => {
+        return `${data?.school.school_code?.slice(0, 20)}...`;
+    });
+
+    $inspect(trucantedSchoolName());
 </script>
 
 <div class="h-screen flex items-center justify-center overflow-hidden">
@@ -163,11 +178,16 @@
                 {#each schoolDetails as school, index}
                     <SchoolDetailsCard
                         Icon={school.icon}
-                        value={school.value}
+                        value={school.name === "school_name"
+                            ? data.school.school_name.slice(0, 20)
+                            : school.value && school.name === "school_code"
+                              ? data.school.school_code?.slice(0, 20)
+                              : school.value}
                         title={school.title}
                         description={school.description}
                         {index}
                         length={schoolDetails.length}
+                        name={school.name}
                         openModal={() =>
                             handleOpenUpdateModal(
                                 school.name,

@@ -109,8 +109,6 @@
         const description = `${data.user.bio?.slice(1, 40)}...`;
         return description;
     });
-
-    $inspect(truncatedDescription());
 </script>
 
 <div class="">
