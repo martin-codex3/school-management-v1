@@ -19,7 +19,6 @@ class CreateAccountSchema(BaseModel):
     school_type: str = Field(min_length=3, max_length=50)
     school_email: EmailStr
     school_phone: MalawiPhone
-    school_code: str = Field(min_length=10, max_length=30)
     address: str = Field(min_length=5, max_length=100)
     city: str = Field(min_length=5, max_length=50)
     country: str = Field(min_length=5, max_length=100)

@@ -1,3 +1,4 @@
+import secrets
 import uuid
 from typing import TYPE_CHECKING
 
@@ -24,7 +25,9 @@ class Tenant(Base):
     country: Mapped[str] = mapped_column(String(100))
     website_url: Mapped[str | None] = mapped_column(String(255), nullable=True)
     registration_number: Mapped[str | None] = mapped_column(String(30), nullable=True)
-    school_code: Mapped[str | None] = mapped_column(String(50), nullable=True)
+    school_code: Mapped[str | None] = mapped_column(
+        String(50), nullable=True, default=f"SCH-{secrets.token_hex(16)}"
+    )
     description: Mapped[str | None] = mapped_column(String(255), nullable=True)
     settings: Mapped[dict[str, any]] = mapped_column(JSON, default={}, nullable=True)
     is_deleted: Mapped[bool | None] = mapped_column(default=False)
