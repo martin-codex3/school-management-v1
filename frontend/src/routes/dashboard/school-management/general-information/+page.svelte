@@ -109,7 +109,7 @@
             title: "Description",
             description: "Description",
             value: data.school.description ?? "Not set",
-            name: "school_description",
+            name: "description",
         },
         {
             icon: SettingsIcon,
@@ -180,7 +180,9 @@
                             ? data.school.school_name.slice(0, 20)
                             : school.value && school.name === "school_code"
                               ? data.school.school_code?.slice(0, 20)
-                              : school.value}
+                              : school.value && school.name === "description"
+                                ? data.school.description?.slice(0, 20)
+                                : school.value}
                         title={school.title}
                         description={school.description}
                         {index}
