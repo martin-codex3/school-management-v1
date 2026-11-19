@@ -1,13 +1,9 @@
 <script lang="ts">
     import type { SchoolResponse } from "#lib/types/school/school_response.ts";
     import { goto } from "$app/navigation";
-    import { page } from "$app/state";
     import ChevronBackIcon from "@iconify-svelte/tabler/chevron-left";
-    import type { PageProps } from "../$types";
     import BuildingIcon from "@iconify-svelte/tabler/buildings";
-    import type { Component } from "svelte";
     import SchoolDetailsCard from "#lib/components/cards/SchoolDetailsCard.svelte";
-    import { Icon } from "svelte-sonner";
     import BuildingsIcon from "@iconify-svelte/tabler/buildings";
     import MailIcon from "@iconify-svelte/tabler/mail";
     import PhoneIcon from "@iconify-svelte/tabler/phone";
@@ -19,8 +15,10 @@
     import HashIcon from "@iconify-svelte/tabler/hash";
     import InfoSquareIcon from "@iconify-svelte/tabler/info-square";
     import SettingsIcon from "@iconify-svelte/tabler/settings";
+    import UpdateProfileModal from "#lib/components/modals/profile/UpdateProfileModal.svelte";
+    import type { PageProps } from "./$types";
 
-    const { data }: PageProps = $props();
+    const { data, form }: PageProps = $props();
 
     interface Props {
         icon: any;
@@ -28,6 +26,10 @@
         description: string;
         value: string | undefined | object;
     }
+
+    let fieldName: string = $state("");
+    let fieldLabel: string = $state("");
+    let fieldValue: string = $state("");
 
     const schoolDetails: Props[] = $derived([
         {
@@ -117,7 +119,7 @@
 
 <div class="h-screen flex items-center justify-center overflow-hidden">
     <div class="bg-white rounded-4xl px-5 py-5 h-[calc(100vh-1rem)] w-full">
-        <div class="h-full overflow-auto scrollbar-thin px-5">
+        <div class="h-full overflow-auto scrollbar-thin px-5 space-y-10">
             <!-- for the upper header -->
             <div class="flex items-center gap-3">
                 <button
@@ -151,3 +153,15 @@
         </div>
     </div>
 </div>
+
+<!-- for the modals here -->
+{#if toggleUpdateModal}
+    <UpdateProfileModal
+        closeModal={handleCloseUpdateModal}
+        toggleModal={toggleUpdateModal}
+        name={fieldName}
+        label={fieldLabel}
+        {fieldValue}
+        {form}
+    />
+{/if}

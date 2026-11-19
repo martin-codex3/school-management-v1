@@ -43,7 +43,7 @@
         action="?/updateProfile"
         method="POST"
         use:enhance={() => {
-            isUpdatingProfile = false;
+            isUpdatingProfile = true;
             return async ({ result, update }) => {
                 await update({
                     reset: false,
