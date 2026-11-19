@@ -15,8 +15,8 @@ class CreateAccountSchema(BaseModel):
     last_name: str = Field(min_length=3, max_length=20)
     email: EmailStr
     phone_number: MalawiPhone
-    school_name: str = Field(min_length=5, max_length=50)
-    school_type: str = Field(min_length=3, max_length=50)
+    school_name: str = Field(min_length=5, max_length=100)
+    school_type: str = Field(min_length=3, max_length=100)
     school_email: EmailStr
     school_phone: MalawiPhone
     address: str = Field(min_length=5, max_length=100)

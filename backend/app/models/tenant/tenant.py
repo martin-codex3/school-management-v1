@@ -26,10 +26,29 @@ class Tenant(Base):
     website_url: Mapped[str | None] = mapped_column(String(255), nullable=True)
     registration_number: Mapped[str | None] = mapped_column(String(30), nullable=True)
     school_code: Mapped[str | None] = mapped_column(
-        String(50), nullable=True, default=f"SCH-{secrets.token_hex(16)}"
+        String(50), nullable=True, default=f"SCH-{secrets.token_hex(10)}"
     )
+
+    # additional fields
+    display_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    secondary_email: Mapped[str | None] = mapped_column(
+        String(255), nullable=True, unique=True
+    )
+    ownership_type: Mapped[str, None] = mapped_column(String(255), nullable=True)
+    official_contact_person: Mapped[str | None] = mapped_column(
+        String(255), nullable=True
+    )
+    contact_person_email: Mapped[str | None] = mapped_column(
+        String(255), nullable=True, unique=True
+    )
+    contact_person_phone: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    district: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    region: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    postal_code: Mapped[str | None] = mapped_column(String(255), nullable=True)
+
     description: Mapped[str | None] = mapped_column(String(255), nullable=True)
     settings: Mapped[dict[str, any]] = mapped_column(JSON, default={}, nullable=True)
+
     is_deleted: Mapped[bool | None] = mapped_column(default=False)
 
     application_users: Mapped[list[TenantUser]] = relationship(

@@ -33,10 +33,9 @@ async def get_current_tenant(
 
 
 @tenant_router.patch(
-    "/{tenant_id}", response_model=TenantResponseSchema, status_code=status.HTTP_200_OK
+    "", response_model=TenantResponseSchema, status_code=status.HTTP_200_OK
 )
 async def update_tenant_details(
-    tenant_id: uuid.UUID,
     current_user: CurrentUser,
     tenant_data: UpdateTenantSchema,
     session: Annotated[AsyncSession, Depends(app_session)],
@@ -45,13 +44,6 @@ async def update_tenant_details(
     tenant_to_update = await get_current_tenant(
         current_user=current_user, session=session
     )
-
-    if tenant_id != tenant_to_update.id:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Not authorized to update this record",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
 
     tenant_data_dict = tenant_data.model_dump(exclude_unset=True)
 
