@@ -35,6 +35,17 @@ class UpdateTenantSchema(BaseModel):
     school_code: str | None = Field(default=None, min_length=3, max_length=30)
     description: str | None = Field(default=None, min_length=3, max_length=30)
     settings: dict | None = Field(default=None, min_length=3, max_length=30)
+    display_name: str | None = Field(default=None, min_length=5, max_length=50)
+    secondary_email: EmailStr
+    ownership_type: str | None = Field(default=None, min_length=5, max_length=50)
+    official_contact_person: str | None = Field(
+        default=None, min_length=5, max_length=50
+    )
+    contact_person_email: EmailStr
+    contact_person_phone: MalawiPhone
+    district: str | None = Field(default=None, min_length=2, max_length=50)
+    region: str | None = Field(default=None, min_length=5, max_length=50)
+    postal_code: str | None = Field(default=None, min_length=5, max_length=50)
 
 
 class TenantResponseSchema(BaseModel):

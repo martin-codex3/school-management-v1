@@ -34,7 +34,7 @@ class Tenant(Base):
     secondary_email: Mapped[str | None] = mapped_column(
         String(255), nullable=True, unique=True
     )
-    ownership_type: Mapped[str, None] = mapped_column(String(255), nullable=True)
+    ownership_type: Mapped[str | None] = mapped_column(String(255), nullable=True)
     official_contact_person: Mapped[str | None] = mapped_column(
         String(255), nullable=True
     )
@@ -50,6 +50,7 @@ class Tenant(Base):
     settings: Mapped[dict[str, any]] = mapped_column(JSON, default={}, nullable=True)
 
     is_deleted: Mapped[bool | None] = mapped_column(default=False)
+    status: Mapped[str | None] = mapped_column(default="active", nullable=True)
 
     application_users: Mapped[list[TenantUser]] = relationship(
         back_populates="tenant", lazy="selectin"
