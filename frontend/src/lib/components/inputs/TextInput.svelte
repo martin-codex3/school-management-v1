@@ -5,7 +5,7 @@
         placeholder: string;
         name: string;
         label: string;
-        value: string;
+        value: string | boolean | undefined | object;
         valueError: string | undefined;
     }
 

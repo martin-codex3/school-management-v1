@@ -17,6 +17,7 @@
     import SettingsIcon from "@iconify-svelte/tabler/settings";
     import UpdateProfileModal from "#lib/components/modals/profile/UpdateProfileModal.svelte";
     import type { PageProps } from "./$types";
+    import UpdateSchoolDetails from "#lib/components/modals/profile/schools/UpdateSchoolDetails.svelte";
 
     const { data, form }: PageProps = $props();
 
@@ -25,11 +26,12 @@
         title: string;
         description: string;
         value: string | undefined | object;
+        name: string;
     }
 
     let fieldName: string = $state("");
     let fieldLabel: string = $state("");
-    let fieldValue: string = $state("");
+    let fieldValue: string | boolean | undefined | object = $state("");
 
     const schoolDetails: Props[] = $derived([
         {
@@ -37,79 +39,99 @@
             title: "School name",
             description: "Current name",
             value: data.school.school_name,
+            name: "school_name",
         },
         {
             icon: BuildingsIcon,
             title: "School type",
             description: "The school type",
             value: data.school.school_type,
+            name: "school_type",
         },
         {
             icon: MailIcon,
             title: "School email",
             description: "school email",
             value: data.school.school_email,
+            name: "school_email",
         },
         {
             icon: PhoneIcon,
             title: "School phone",
             description: "school contact",
             value: data.school.school_phone,
+            name: "school_phone",
         },
         {
             icon: MapPinIcon,
             title: "address",
             description: "Schools address",
             value: data.school.address ?? "Not set",
+            name: "school_address",
         },
         {
             icon: MapIcon,
             title: "city",
             description: "school city",
             value: data.school.city ?? "Not set",
+            name: "city",
         },
         {
             icon: WorldIcon,
             title: "country",
             description: "Current school location",
             value: data.school.country ?? "Not set",
+            name: "country",
         },
         {
             icon: GlobeIcon,
             title: "School website",
             description: "Website url",
             value: data.school.website_url ?? "Not set",
+            name: "website_url",
         },
         {
             icon: FileTextIcon,
             title: "Registration number",
             description: "Registration number",
             value: data.school.registration_number ?? "Not set",
+            name: "registration_number",
         },
         {
             icon: HashIcon,
             title: "School code",
             description: "Name associated with the school",
             value: data.school.school_code ?? "Not set",
+            name: "school_code",
         },
         {
             icon: InfoSquareIcon,
             title: "Description",
             description: "Description",
             value: data.school.description ?? "Not set",
+            name: "school_description",
         },
         {
             icon: SettingsIcon,
             title: "School Settings",
             description: "All settings",
             value: data.school.settings ?? {},
+            name: "school_settings",
         },
     ]);
 
     let toggleUpdateModal: boolean = $state(false);
     // for opening and closing the modals here
-    const handleOpenUpdateModal = () => {
+    const handleOpenUpdateModal = (
+        name: string,
+        value: string | boolean | undefined | object,
+        label: string,
+    ) => {
         toggleUpdateModal = true;
+
+        if (toggleUpdateModal) {
+            (fieldName = name), (fieldValue = value), (fieldLabel = label);
+        }
     };
 
     const handleCloseUpdateModal = () => {
@@ -146,7 +168,12 @@
                         description={school.description}
                         {index}
                         length={schoolDetails.length}
-                        openModal={handleOpenUpdateModal}
+                        openModal={() =>
+                            handleOpenUpdateModal(
+                                school.name,
+                                school.value,
+                                school.title,
+                            )}
                     />
                 {/each}
             </div>
@@ -156,7 +183,7 @@
 
 <!-- for the modals here -->
 {#if toggleUpdateModal}
-    <UpdateProfileModal
+    <UpdateSchoolDetails
         closeModal={handleCloseUpdateModal}
         toggleModal={toggleUpdateModal}
         name={fieldName}
