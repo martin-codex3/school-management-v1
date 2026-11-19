@@ -24,17 +24,17 @@
 
     $effect(() => {
         if (form?.problem?.title) {
-            errorTitle = form.problem.title;
+            errorTitle = form?.problem?.title;
         }
 
         if (form?.problem?.detail) {
-            errorTitle = form.problem.detail;
+            errorTitle = form?.problem?.detail;
         }
     });
 
     // for the returned form errors here
     const fieldError = $derived((field: string) => {
-        return form?.problem?.errors.find((e) => e.pointer === field);
+        return form?.problem?.errors?.find((e) => e.pointer === field);
     });
 </script>
 

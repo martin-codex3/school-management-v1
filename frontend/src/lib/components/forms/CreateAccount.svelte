@@ -73,6 +73,7 @@
                     id="FirstName"
                     label="First name"
                     valueError={fieldErrors("#/first_name")?.detail}
+                    value=""
                 />
 
                 <TextInput
@@ -82,6 +83,7 @@
                     id="LastName"
                     label="Last name"
                     valueError={fieldErrors("#/last_name")?.detail}
+                    value=""
                 />
             </div>
 
@@ -93,6 +95,7 @@
                     id="Email"
                     label="Email"
                     valueError={fieldErrors("#/email")?.detail}
+                    value=""
                 />
 
                 <TextInput
@@ -102,6 +105,7 @@
                     id="PhoneNumber"
                     label="Phone number"
                     valueError={fieldErrors("#/phone_number")?.detail}
+                    value=""
                 />
             </div>
 
@@ -113,6 +117,7 @@
                     id="SchoolName"
                     label="School name"
                     valueError={fieldErrors("#/school_name")?.detail}
+                    value=""
                 />
 
                 <SelectInput
@@ -141,6 +146,7 @@
                     id="SchoolEmail"
                     label="School email"
                     valueError={fieldErrors("#/school_email")?.detail}
+                    value=""
                 />
 
                 <TextInput
@@ -150,6 +156,7 @@
                     id="SchoolPhone"
                     label="School phone"
                     valueError={fieldErrors("#/school_phone")?.detail}
+                    value=""
                 />
             </div>
 
@@ -161,6 +168,7 @@
                     id="Address"
                     label="Address"
                     valueError={fieldErrors("#/address")?.detail}
+                    value=""
                 />
 
                 <TextInput
@@ -170,6 +178,7 @@
                     id="City"
                     label="City"
                     valueError={fieldErrors("#/city")?.detail}
+                    value=""
                 />
             </div>
 
@@ -195,6 +204,7 @@
                     placeholder=""
                     id="Password"
                     label="Password"
+                    value=""
                     valueError={fieldErrors("#/password_hash")?.detail}
                 />
             </div>
