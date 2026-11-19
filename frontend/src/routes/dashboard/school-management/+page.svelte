@@ -25,7 +25,7 @@
         },
 
         {
-            to: "/dashboard/school-profile/contact-information",
+            to: "/dashboard/school-management/contact-information",
             title: "Contact information",
             description: "Email and telephone details",
             icon: ContactIcon,
@@ -57,13 +57,6 @@
             title: "Branding",
             description: "Logos and colours",
             icon: BrandingIcon,
-        },
-
-        {
-            to: "/dashboard/school-profile/documents",
-            title: "Documents",
-            description: "Registration and accreditation records",
-            icon: DocumentIcon,
         },
     ]);
 </script>
