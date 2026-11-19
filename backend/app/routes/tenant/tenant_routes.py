@@ -1,18 +1,21 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio.session import AsyncSession
 
 from app.config.database.app_database import app_session
 from app.models.tenant.tenant import Tenant
 from app.models.tenant_user.tenant_user import TenantUser
+from app.schemas.tenants.tenant_schemas import TenantResponseSchema
 from app.services.user_service import CurrentUser
 
 tenant_router = APIRouter()
 
 
-@tenant_router.get("/tenant", status_code=status.HTTP_200_OK)
+@tenant_router.get(
+    "", status_code=status.HTTP_200_OK, response_model=TenantResponseSchema
+)
 async def get_current_tenant(
     current_user: CurrentUser, session: Annotated[AsyncSession, Depends(app_session)]
 ):
