@@ -6,6 +6,7 @@
     import { toast } from "svelte-sonner";
     import TextAreaInput from "#lib/components/inputs/TextAreaInput.svelte";
     import type { ActionData } from "../../../../../routes/$types";
+    import SelectInput from "#lib/components/inputs/SelectInput.svelte";
 
     interface Props {
         toggleModal: boolean;
@@ -93,6 +94,17 @@
                     valueError={fieldError(`#/${name}`)?.detail}
                     value={`${fieldValue}`}
                 />
+            {:else if name === "school_type"}
+                <SelectInput
+                    {name}
+                    placeholder=""
+                    id={label}
+                    {label}
+                    fieldError={fieldError(`#/${name}`)?.detail}
+                    value={`${fieldValue}`}
+                >
+                    <option value="">Select option</option>
+                </SelectInput>
             {:else}
                 <TextInput
                     type="text"

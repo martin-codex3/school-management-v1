@@ -126,6 +126,7 @@
                     placeholder=""
                     label="School type"
                     fieldError={fieldErrors("#/school_type")?.detail}
+                    value=""
                 >
                     <option value="">Select option</option>
                     <option value="Primary School">Primary School</option>
@@ -189,6 +190,7 @@
                     id="Country"
                     label="Country"
                     fieldError={fieldErrors("#/country")?.detail}
+                    value=""
                 >
                     <option value="">Selection option</option>
                     {#each getCountryDataList() as country}

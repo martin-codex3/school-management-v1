@@ -6,12 +6,14 @@
         label,
         children,
         fieldError,
+        value,
     }: {
         id: string;
         placeholder: string;
         name: string;
         label: string;
         fieldError: string | undefined;
+        value: string;
         children: any;
     } = $props();
 </script>
