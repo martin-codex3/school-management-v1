@@ -41,23 +41,22 @@ async def update_tenant_details(
     tenant_data: UpdateTenantSchema,
     session: Annotated[AsyncSession, Depends(app_session)],
 ):
-    """This will used path the tenant details"""
-    if tenant_id != current_user.id:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail={"Not authorized to update this record"},
-            headers={"WWW-Authenticate"},
-        )
-
-    tenant_data_dict = tenant_data.model_dump(exclude_unset=True)
+    """This will use this to update the tenant details"""
     tenant_to_update = await get_current_tenant(
         current_user=current_user, session=session
     )
 
+    if tenant_id != tenant_to_update.id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authorized to update this record",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    tenant_data_dict = tenant_data.model_dump(exclude_unset=True)
+
     for keys, values in tenant_data_dict.items():
         setattr(tenant_to_update, keys, values)
 
-    session.add(tenant_to_update)
-    await session.refresh(tenant_to_update)
     await session.commit()
     return tenant_to_update
