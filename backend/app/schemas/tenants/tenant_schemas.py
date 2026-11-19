@@ -1,4 +1,5 @@
 import uuid
+from datetime import datetime
 from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field
@@ -36,13 +37,13 @@ class UpdateTenantSchema(BaseModel):
     description: str | None = Field(default=None, min_length=3, max_length=30)
     settings: dict | None = Field(default=None, min_length=3, max_length=30)
     display_name: str | None = Field(default=None, min_length=5, max_length=50)
-    secondary_email: EmailStr
+    secondary_email: EmailStr | None = Field(default=None, nnullable=True)
     ownership_type: str | None = Field(default=None, min_length=5, max_length=50)
     official_contact_person: str | None = Field(
         default=None, min_length=5, max_length=50
     )
-    contact_person_email: EmailStr
-    contact_person_phone: MalawiPhone
+    contact_person_email: EmailStr | None = Field(default=None, nullable=True)
+    contact_person_phone: MalawiPhone | None = Field(default=None, nullable=True)
     district: str | None = Field(default=None, min_length=2, max_length=50)
     region: str | None = Field(default=None, min_length=5, max_length=50)
     postal_code: str | None = Field(default=None, min_length=5, max_length=50)
@@ -62,3 +63,12 @@ class TenantResponseSchema(BaseModel):
     school_code: str | None
     description: str | None
     settings: dict | None
+    display_name: str | None
+    secondary_email: EmailStr | None
+    ownership_type: str | None
+    official_contact_person: str | None
+    contact_person_email: EmailStr | None
+    contact_person_phone: MalawiPhone | None
+    district: str | None
+    region: str | None
+    postal_code: str | None
