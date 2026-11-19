@@ -19,6 +19,7 @@ class CreateAccountSchema(BaseModel):
     school_type: str = Field(min_length=3, max_length=50)
     school_email: EmailStr
     school_phone: MalawiPhone
+    school_code: str = Field(min_length=10, max_length=30)
     address: str = Field(min_length=5, max_length=100)
     city: str = Field(min_length=5, max_length=50)
     country: str = Field(min_length=5, max_length=100)
@@ -29,14 +30,14 @@ class CreateAccountSchema(BaseModel):
     @classmethod
     def validate_first_name(cls, first_name: str):
         if not first_name.isalpha():
-            raise ValueError("Name cannot include numbers")
+            raise ValueError("Name cannot include numbers or spaces")
         return first_name
 
     @field_validator("last_name")
     @classmethod
     def validate_last_name(cls, last_name: str):
         if not last_name.isalpha():
-            raise ValueError("Name cannot include numbers")
+            raise ValueError("Name cannot include numbers or spaces")
         return last_name
 
 

@@ -23,10 +23,10 @@ class TenantSchemaBase(BaseModel):
 # for updating the tenant
 class UpdateTenantSchema(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
-    school_name: str | None = Field(default=None, min_length=3, max_length=30)
-    school_type: str | None = Field(default=None, min_length=3, max_length=30)
-    school_email: str | None = Field(default=None, min_length=3, max_length=30)
-    school_phone: str | None = Field(default=None, min_length=3, max_length=30)
+    school_name: str | None = Field(default=None, min_length=5, max_length=30)
+    school_type: str | None = Field(default=None, min_length=5, max_length=30)
+    school_email: EmailStr | None = Field(default=None, min_length=3, max_length=30)
+    school_phone: MalawiPhone | None = Field(default=None, min_length=3, max_length=30)
     address: str | None = Field(default=None, min_length=3, max_length=30)
     city: str | None = Field(default=None, min_length=3, max_length=30)
     country: str | None = Field(default=None, min_length=3, max_length=30)

@@ -1,3 +1,4 @@
+import secrets
 import uuid
 from datetime import UTC, datetime, timedelta
 from typing import Annotated
@@ -108,6 +109,7 @@ async def create_tenant_account(
         address=data.address,
         city=data.city,
         country=data.country,
+        school_code=f"SCH-{secrets.token_hex(16)}",
     )
 
     # we will add the tenant to the session here
