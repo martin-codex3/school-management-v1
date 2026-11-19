@@ -49,7 +49,6 @@
                 await update({
                     reset: false,
                     refreshAll: true,
-                    invalidateAll: true,
                 });
                 isUpdatingProfile = false;
 

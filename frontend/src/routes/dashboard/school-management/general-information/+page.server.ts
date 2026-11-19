@@ -30,7 +30,9 @@ export const actions: Actions = {
             const responseData: ValidationErrors = await response.json();
             return fail(response.status, { problem: responseData });
         }
-        console.log(payload)
+
+        console.log(payload);
+
 
         return { success: true }
     }

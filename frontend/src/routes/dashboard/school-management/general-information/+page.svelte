@@ -150,8 +150,6 @@
     const trucantedSchoolCode = $derived(() => {
         return `${data?.school.school_code?.slice(0, 20)}...`;
     });
-
-    $inspect(trucantedSchoolName());
 </script>
 
 <div class="h-screen flex items-center justify-center overflow-hidden">
