@@ -35,4 +35,4 @@ class Branch(Base):
     tenant_id: Mapped[uuid.UUID] = mapped_column(
         ForeignKey("tenants.id"), primary_key=True
     )
-    tenants: Mapped[list[Tenant]] = relationship(back_populates="branches")
+    tenant: Mapped[Tenant] = relationship(back_populates="branches")

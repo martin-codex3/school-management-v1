@@ -8,6 +8,7 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.utils.base import Base
 
 if TYPE_CHECKING:
+    from app.models.branches.branch import Branch
     from app.models.tenant_user.tenant_user import TenantUser
 
 
@@ -55,3 +56,6 @@ class Tenant(Base):
     application_users: Mapped[list[TenantUser]] = relationship(
         back_populates="tenant", lazy="selectin"
     )
+
+    # for the branch relationship
+    branches: Mapped[list[Tenant]] = relationship(back_populates="tenant")
