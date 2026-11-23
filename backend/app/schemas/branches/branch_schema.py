@@ -1,3 +1,4 @@
+import uuid
 from datetime import datetime
 from typing import Annotated
 
@@ -40,7 +41,7 @@ class UpdateBranchSchema(BaseModel):
 
 
 class BranchResponseSchema(BaseModel):
-    id: str
+    id: uuid.UUID
     branch_name: str
     branch_email: str
     branch_phone: str

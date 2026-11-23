@@ -2,8 +2,9 @@ import uuid
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio.session import AsyncSession
+from sqlalchemy.orm import selectinload
 
 from app.config.database.app_database import app_session
 from app.models.branches.branch import Branch
@@ -34,6 +35,21 @@ async def create_branch(
             headers={"WWW-Authenticate": "Bearer"},
         )
 
+    # we will check if the email already exists
+    statement = await session.execute(
+        select(Branch).where(
+            func.lower(Branch.branch_email) == branch_data.branch_email
+        )
+    )
+
+    branch = statement.scalars().first()
+
+    if branch:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Branch email already registered",
+        )
+
     # we will fetch the tenant based on the user
     statement = await session.execute(
         select(Tenant)
@@ -49,6 +65,28 @@ async def create_branch(
     new_branch.tenant_id = tenant.id
 
     session.add(new_branch)
-    await session.refresh(new_branch)
     await session.commit()
+    await session.refresh(new_branch)
     return new_branch
+
+
+# for all the branches
+@branch_router.get("/{user_id}", response_model=list[BranchResponseSchema])
+async def get_all_branches(
+    user_id: uuid.UUID,
+    current_user: CurrentUser,
+    session: Annotated[AsyncSession, Depends(app_session)],
+):
+    """This will fetch all the branches"""
+    if user_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authorized to perform the action",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    statement = await session.execute(select(Branch))
+
+    all_branches = statement.scalars().all()
+
+    return all_branches
