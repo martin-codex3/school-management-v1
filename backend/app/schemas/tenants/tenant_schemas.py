@@ -1,5 +1,4 @@
 import uuid
-from datetime import datetime
 from typing import Annotated
 
 from pydantic import BaseModel, ConfigDict, EmailStr, Field
@@ -26,27 +25,27 @@ class UpdateTenantSchema(BaseModel):
     model_config = ConfigDict(arbitrary_types_allowed=True)
     school_name: str | None = Field(default=None, min_length=5, max_length=100)
     school_type: str | None = Field(default=None, min_length=5, max_length=100)
-    school_email: EmailStr | None = Field(default=None, min_length=3, max_length=30)
-    school_phone: MalawiPhone | None = Field(default=None, min_length=3, max_length=30)
-    address: str | None = Field(default=None, min_length=3, max_length=30)
-    city: str | None = Field(default=None, min_length=3, max_length=30)
-    country: str | None = Field(default=None, min_length=3, max_length=30)
-    website_url: str | None = Field(default=None, min_length=3, max_length=30)
+    school_email: EmailStr | None = Field(default=None, min_length=3, max_length=255)
+    school_phone: MalawiPhone | None = Field(default=None, min_length=3, max_length=255)
+    address: str | None = Field(default=None, min_length=3, max_length=255)
+    city: str | None = Field(default=None, min_length=3, max_length=255)
+    country: str | None = Field(default=None, min_length=3, max_length=255)
+    website_url: str | None = Field(default=None, min_length=3, max_length=255)
     registration_number: str | None = Field(default=None, min_length=3, max_length=30)
-    school_code: str | None = Field(default=None, min_length=3, max_length=30)
-    description: str | None = Field(default=None, min_length=3, max_length=30)
-    settings: dict | None = Field(default=None, min_length=3, max_length=30)
-    display_name: str | None = Field(default=None, min_length=5, max_length=50)
+    school_code: str | None = Field(default=None, min_length=3, max_length=100)
+    description: str | None = Field(default=None, min_length=3, max_length=255)
+    settings: dict | None = Field(default=None, min_length=3, max_length=100)
+    display_name: str | None = Field(default=None, min_length=5, max_length=100)
     secondary_email: EmailStr | None = Field(default=None, nnullable=True)
-    ownership_type: str | None = Field(default=None, min_length=5, max_length=50)
+    ownership_type: str | None = Field(default=None, min_length=5, max_length=255)
     official_contact_person: str | None = Field(
-        default=None, min_length=5, max_length=50
+        default=None, min_length=5, max_length=100
     )
-    contact_person_email: EmailStr | None = Field(default=None, nullable=True)
-    contact_person_phone: MalawiPhone | None = Field(default=None, nullable=True)
-    district: str | None = Field(default=None, min_length=2, max_length=50)
-    region: str | None = Field(default=None, min_length=5, max_length=50)
-    postal_code: str | None = Field(default=None, min_length=5, max_length=50)
+    contact_person_email: EmailStr | None = Field(default=None)
+    contact_person_phone: MalawiPhone | None = Field(default=None)
+    district: str | None = Field(default=None, min_length=2, max_length=255)
+    region: str | None = Field(default=None, min_length=5, max_length=255)
+    postal_code: str | None = Field(default=None, min_length=5, max_length=255)
 
 
 class TenantResponseSchema(BaseModel):
