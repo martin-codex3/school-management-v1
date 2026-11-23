@@ -4,7 +4,6 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio.session import AsyncSession
-from sqlalchemy.orm import selectinload
 
 from app.config.database.app_database import app_session
 from app.models.branches.branch import Branch
@@ -90,3 +89,33 @@ async def get_all_branches(
     all_branches = statement.scalars().all()
 
     return all_branches
+
+
+@branch_router.get(
+    "/{user_id}/branch/${branch_id}", response_model=BranchResponseSchema
+)
+async def get_branch(
+    user_id: uuid.UUID,
+    branch_id: uuid.UUID,
+    current_user: CurrentUser,
+    session: Annotated[AsyncSession, Depends(app_session)],
+):
+    """This will fetch all the branches"""
+    if user_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authorized to perform the action",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    statement = await session.execute(select(Branch).where(Branch.id == branch_id))
+
+    branch = statement.scalars().first()
+
+    if not branch:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Branch with that id not found",
+        )
+
+    return branch
