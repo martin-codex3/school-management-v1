@@ -18,7 +18,7 @@ class ApplicationUser(Base):
     first_name: Mapped[str] = mapped_column(String(40))
     last_name: Mapped[str] = mapped_column(String(40))
     email: Mapped[str] = mapped_column(String(100), unique=True)
-    phone_number: Mapped[str] = mapped_column(String(20))
+    phone_number: Mapped[str] = mapped_column(String(100))
     profile_image_url: Mapped[str | None] = mapped_column(String(100), nullable=True)
     bio: Mapped[str | None] = mapped_column(String(255), nullable=True)
     password_hash: Mapped[str] = mapped_column(String(255))

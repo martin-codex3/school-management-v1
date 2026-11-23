@@ -2,7 +2,7 @@ import uuid
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey, String
+from sqlalchemy import DateTime, ForeignKey, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.utils.base import Base
@@ -28,8 +28,12 @@ class Branch(Base):
     district: Mapped[str] = mapped_column(String(100))
     is_deleted: Mapped[bool] = mapped_column(default=False)
     is_main_branch: Mapped[bool] = mapped_column(default=True)
-    created_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
-    updated_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
+    created_date: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+    )
+    updated_date: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+    )
 
     # for the relationships
     tenant_id: Mapped[uuid.UUID] = mapped_column(

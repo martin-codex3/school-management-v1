@@ -1,5 +1,5 @@
 import uuid
-from datetime import UTC, datetime
+from datetime import UTC, datetime, timezone
 
 from sqlalchemy import DateTime, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
@@ -15,6 +15,10 @@ class Role(Base):
     )
     name: Mapped[str] = mapped_column(String(100), index=True, unique=True)
     description: Mapped[str] = mapped_column(String(255), index=True)
-    created_date: Mapped[datetime] = mapped_column(DateTime(timezone=True))
-    updated_date: Mapped[datetime] = mapped_column(DateTime(timezone=True))
+    created_date: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+    )
+    updated_date: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=datetime.now(UTC)
+    )
     tenant_users: Mapped[list[UserRole]] = relationship(back_populates="role")

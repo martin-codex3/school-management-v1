@@ -2,7 +2,7 @@ import uuid
 from datetime import UTC, datetime
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey
+from sqlalchemy import DateTime, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.utils.base import Base
@@ -23,8 +23,12 @@ class TenantUser(Base):
         ForeignKey("tenants.id"), nullable=False
     )
 
-    created_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
-    updated_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
+    created_date: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+    )
+    updated_date: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), default=lambda: datetime.now(UTC)
+    )
     application_user: Mapped[ApplicationUser] = relationship(back_populates="tenants")
     tenant: Mapped[Tenant] = relationship(back_populates="application_users")
     # for the roles here
