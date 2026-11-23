@@ -4,16 +4,17 @@
     import TextInput from "#lib/components/inputs/TextInput.svelte";
     import { enhance } from "$app/forms";
     import { getCountryDataList } from "countries-list";
+    import { toast } from "svelte-sonner";
 
     let isSavingBranch: boolean = $state(false);
 </script>
 
 <div class="h-screen overflow-hidden flex items-center justify-center">
     <div
-        class="h-[calc(100vh-1rem)] bg-white w-full px-5 border border-gray-300 rounded-4xl"
+        class="h-[calc(100vh-1rem)] bg-white w-full px-5 border py-5 border-gray-300 rounded-4xl"
     >
         <!-- for the main header -->
-        <div class="h-full scrollbar-thin overflow-auto px-5 py-5">
+        <div class="h-full scrollbar-thin overflow-auto px-5 space-y-10">
             <div>
                 <h1 class="text-2xl font-semibold capitalize">create branch</h1>
             </div>
@@ -24,10 +25,26 @@
                     action="?/createBranch"
                     method="POST"
                     use:enhance={() => {
-                        return async () => {};
+                        isSavingBranch = true;
+                        return async ({ result, update }) => {
+                            await update({ reset: false, refreshAll: true });
+                            isSavingBranch = false;
+
+                            if (result.type === "failure") {
+                                toast.error("Error");
+                            }
+
+                            if (result.type === "error") {
+                                toast.error("Error");
+                            }
+
+                            if (result.type === "success") {
+                                toast.success("Success");
+                            }
+                        };
                     }}
                 >
-                    <div class="form__input__wrapper">
+                    <div class="form__input__wrapper space-y-7">
                         <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
                             <TextInput
                                 type="text"
@@ -147,7 +164,7 @@
                         </div>
 
                         <StyledButton
-                            isLoading={true}
+                            isLoading={isSavingBranch}
                             label="Save Branch"
                             title="Save Branch"
                         />
