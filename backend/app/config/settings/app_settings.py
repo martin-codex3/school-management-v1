@@ -7,7 +7,7 @@ class AppSettings(BaseSettings):
     drivername: str
     password: str
     host: str
-    port: int
+    port: str
     database: str
     username: str
     algorithm: str

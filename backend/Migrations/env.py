@@ -15,10 +15,12 @@ from app.models.tenant_user.tenant_user import TenantUser  # noqa: F401
 from app.models.user_roles.user_role import UserRole  # noqa: F401
 from app.utils.base import Base
 
+database_url = AppSettings.database_url.render_as_string(hide_password=False)
+
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
 config = context.config
-config.set_main_option("sqlalchemy.url", AppSettings.database_url)
+config.set_main_option("sqlalchemy.url", database_url.replace("%", "%%"))
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 if config.config_file_name is not None:
