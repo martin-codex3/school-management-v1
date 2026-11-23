@@ -1,9 +1,11 @@
 import uuid
+from datetime import UTC, datetime
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio.session import AsyncSession
+from sqlalchemy.orm import selectinload
 
 from app.config.database.app_database import app_session
 from app.models.branches.branch import Branch
@@ -127,6 +129,33 @@ async def get_branch(
     return branch
 
 
+# fetching branches based on the tenant
+@branch_router.get(
+    "/{user_id}/tenant-braches/{tenant_id}", status_code=status.HTTP_200_OK
+)
+async def get_branches_by_tenant(
+    user_id: uuid.UUID,
+    tenant_id: uuid.UUID,
+    current_user: CurrentUser,
+    session: Annotated[AsyncSession, Depends(app_session)],
+):
+    """This will fetch all the branches belonging to a tenant"""
+    if user_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authorized to perform the action",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+
+    statement = await session.execute(
+        select(Tenant).options(selectinload(Tenant.branches))
+    )
+
+    all_tenant_branches = statement.scalars().all()
+
+    return all_tenant_branches
+
+
 @branch_router.patch(
     "/{user_id}/branch/${branch_id}", response_model=BranchResponseSchema
 )
@@ -138,13 +167,14 @@ async def update_branch(
     session: Annotated[AsyncSession, Depends(app_session)],
 ):
     """This will be used to update the branch"""
-     if user_id != current_user.id:
+
+    if user_id != current_user.id:
         raise HTTPException(
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Not authorized to perform the action",
             headers={"WWW-Authenticate": "Bearer"},
         )
-    
+
     statement = await session.execute(select(Branch).where(Branch.id == branch_id))
 
     branch = statement.scalars().first()
@@ -154,3 +184,14 @@ async def update_branch(
             status_code=status.HTTP_404_NOT_FOUND,
             detail="Branch with that id not found",
         )
+
+    branch_data_dict = branch_data.model_dump(exclude_unset=True)
+    branch_data_dict["updated_date"] = datetime.now(UTC)
+
+    for keys, values in branch_data_dict.items():
+        setattr(branch, keys, values)
+
+    session.add(branch)
+    await session.commit()
+    await session.refresh(branch)
+    return branch

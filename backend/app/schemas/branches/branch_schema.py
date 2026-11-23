@@ -54,3 +54,5 @@ class BranchResponseSchema(BaseModel):
     is_main_branch: bool
     created_date: datetime
     updated_date: datetime
+
+    model_config = ConfigDict(from_attributes=True)

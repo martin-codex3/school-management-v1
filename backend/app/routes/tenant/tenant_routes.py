@@ -3,7 +3,6 @@ from typing import Annotated
 from fastapi import APIRouter, Depends, status
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio.session import AsyncSession
-from sqlalchemy.orm import contains_eager
 
 from app.config.database.app_database import app_session
 from app.models.tenant.tenant import Tenant
