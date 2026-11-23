@@ -21,3 +21,18 @@ class Branch(Base):
     branch_email: Mapped[str] = mapped_column(String(255), unique=True)
     branch_phone: Mapped[str] = mapped_column(String(100))
     alternative_phone: Mapped[str] = mapped_column(String(100))
+    address_line_1: Mapped[str] = mapped_column(String(100))
+    address_line_2: Mapped[str] = mapped_column(String(100))
+    city: Mapped[str] = mapped_column(String(100))
+    nationality: Mapped[str] = mapped_column(String(100))
+    district: Mapped[str] = mapped_column(String(100))
+    is_deleted: Mapped[str] = mapped_column(default=False)
+    is_main_branch: Mapped[bool] = mapped_column(default=True)
+    created_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
+    updated_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
+
+    # for the relationships
+    tenant_id: Mapped[uuid.UUID] = mapped_column(
+        ForeignKey("tenants.id"), primary_key=True
+    )
+    tenants: Mapped[list[Tenant]] = relationship(back_populates="branches")
