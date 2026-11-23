@@ -24,7 +24,7 @@
         },
         {
             label: "Branches",
-            to: "/dashboard/school-management/branches",
+            to: "/dashboard/school-management/branch",
             icon: SitemapIcon,
         },
         {

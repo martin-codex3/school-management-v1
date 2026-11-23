@@ -32,7 +32,7 @@
         },
 
         {
-            to: "/dashboard/school-profile/address",
+            to: "/dashboard/school-management/addresses",
             title: "Address & location",
             description: "Registered school address",
             icon: LocationIcon,

@@ -36,87 +36,31 @@
     const schoolDetails: Props[] = $derived([
         {
             icon: BuildingIcon,
-            title: "School name",
-            description: "Current name",
-            value: data.school.school_name,
-            name: "school_name",
+            title: "Secondary Email",
+            description: "Other email",
+            value: data.school.secondary_email,
+            name: "secondary_email",
         },
         {
             icon: BuildingsIcon,
-            title: "School type",
-            description: "The school type",
-            value: data.school.school_type,
-            name: "school_type",
+            title: "Contact Person",
+            description: "Contact user",
+            value: data.school.contact_person_phone,
+            name: "contact_person_phone",
         },
         {
             icon: MailIcon,
-            title: "School email",
-            description: "school email",
-            value: data.school.school_email,
-            name: "school_email",
+            title: "Contact email",
+            description: "Contact person email",
+            value: data.school.contact_person_email,
+            name: "contact_person_email",
         },
         {
             icon: PhoneIcon,
-            title: "School phone",
-            description: "school contact",
-            value: data.school.school_phone,
-            name: "school_phone",
-        },
-        {
-            icon: MapPinIcon,
-            title: "address",
-            description: "Schools address",
-            value: data.school.address ?? "Not set",
-            name: "address",
-        },
-        {
-            icon: MapIcon,
-            title: "city",
-            description: "school city",
-            value: data.school.city ?? "Not set",
-            name: "city",
-        },
-        {
-            icon: WorldIcon,
-            title: "country",
-            description: "Current school location",
-            value: data.school.country ?? "Not set",
-            name: "country",
-        },
-        {
-            icon: GlobeIcon,
-            title: "School website",
-            description: "Website url",
-            value: data.school.website_url ?? "Not set",
-            name: "website_url",
-        },
-        {
-            icon: FileTextIcon,
-            title: "Registration number",
-            description: "Registration number",
-            value: data.school.registration_number ?? "Not set",
-            name: "registration_number",
-        },
-        {
-            icon: HashIcon,
-            title: "School code",
-            description: "Name associated with the school",
-            value: data.school.school_code ?? "Not set",
-            name: "school_code",
-        },
-        {
-            icon: InfoSquareIcon,
-            title: "Description",
-            description: "Description",
-            value: data.school.description ?? "Not set",
-            name: "description",
-        },
-        {
-            icon: SettingsIcon,
-            title: "School Settings",
-            description: "All settings",
-            value: data.school.settings ?? {},
-            name: "school_settings",
+            title: "Official contact",
+            description: "contact",
+            value: data.school.official_contact_person,
+            name: "official_contact_person",
         },
     ]);
 
@@ -167,7 +111,7 @@
                 </button>
 
                 <h1 class="capitalize font-bold text-2xl">
-                    general information
+                    contact information
                 </h1>
             </div>
 
