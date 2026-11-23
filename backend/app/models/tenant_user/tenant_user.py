@@ -15,14 +15,12 @@ if TYPE_CHECKING:
 
 class TenantUser(Base):
     __tablename__ = "tenant_users"
-    id: Mapped[uuid.UUID] = mapped_column(
-        primary_key=True, default=lambda: uuid.uuid4()
-    )
+    id: Mapped[uuid.UUID] = mapped_column(primary_key=True, default=uuid.uuid4())
     application_user_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("users.id"), primary_key=True
+        ForeignKey("users.id"), nullable=False
     )
     tenant_id: Mapped[uuid.UUID] = mapped_column(
-        ForeignKey("tenants.id"), primary_key=True
+        ForeignKey("tenants.id"), nullable=False
     )
 
     created_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))

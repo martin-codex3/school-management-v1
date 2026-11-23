@@ -26,7 +26,7 @@ class Branch(Base):
     city: Mapped[str] = mapped_column(String(100))
     nationality: Mapped[str] = mapped_column(String(100))
     district: Mapped[str] = mapped_column(String(100))
-    is_deleted: Mapped[str] = mapped_column(default=False)
+    is_deleted: Mapped[bool] = mapped_column(default=False)
     is_main_branch: Mapped[bool] = mapped_column(default=True)
     created_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))
     updated_date: Mapped[datetime] = mapped_column(default=datetime.now(UTC))

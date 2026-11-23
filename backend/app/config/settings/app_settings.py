@@ -29,7 +29,7 @@ class AppSettings(BaseSettings):
         )
 
     model_config = SettingsConfigDict(
-        env_file=".env", validate_default=False, env_ignore_empty=True
+        env_file=".env", validate_default=False, env_ignore_empty=True, extra="ignore"
     )
 
 

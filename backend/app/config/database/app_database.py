@@ -11,9 +11,7 @@ from app.models.user_roles.user_role import UserRole  # noqa: F401
 from app.utils.base import Base
 
 # we will create the database engine here
-app_database_engine = create_async_engine(
-    url=AppSettings.public_database_url, echo=True
-)
+app_database_engine = create_async_engine(url=AppSettings.database_url, echo=True)
 
 
 # for opening the database connection here
