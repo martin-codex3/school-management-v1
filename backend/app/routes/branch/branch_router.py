@@ -9,7 +9,11 @@ from app.config.database.app_database import app_session
 from app.models.branches.branch import Branch
 from app.models.tenant.tenant import Tenant
 from app.models.tenant_user.tenant_user import TenantUser
-from app.schemas.branches.branch_schema import BranchResponseSchema, CreateBranchSchema
+from app.schemas.branches.branch_schema import (
+    BranchResponseSchema,
+    CreateBranchSchema,
+    UpdateBranchSchema,
+)
 from app.services.user_service import CurrentUser
 
 branch_router = APIRouter()
@@ -92,7 +96,9 @@ async def get_all_branches(
 
 
 @branch_router.get(
-    "/{user_id}/branch/${branch_id}", response_model=BranchResponseSchema
+    "/{user_id}/branch/${branch_id}",
+    response_model=BranchResponseSchema,
+    status_code=status.HTTP_200_OK,
 )
 async def get_branch(
     user_id: uuid.UUID,
@@ -119,3 +125,32 @@ async def get_branch(
         )
 
     return branch
+
+
+@branch_router.patch(
+    "/{user_id}/branch/${branch_id}", response_model=BranchResponseSchema
+)
+async def update_branch(
+    user_id: uuid.UUID,
+    branch_id: uuid.UUID,
+    current_user: CurrentUser,
+    branch_data: UpdateBranchSchema,
+    session: Annotated[AsyncSession, Depends(app_session)],
+):
+    """This will be used to update the branch"""
+     if user_id != current_user.id:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Not authorized to perform the action",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+    
+    statement = await session.execute(select(Branch).where(Branch.id == branch_id))
+
+    branch = statement.scalars().first()
+
+    if not branch:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Branch with that id not found",
+        )
