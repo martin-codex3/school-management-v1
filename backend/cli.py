@@ -1,5 +1,4 @@
 import asyncio
-from datetime import UTC, datetime
 
 from sqlalchemy import select
 from typer import Typer
@@ -75,8 +74,6 @@ async def seed_roles():
             if role["name"] not in existing_roles:
                 new_role = Role(
                     **role,
-                    created_date=datetime.now(UTC),
-                    updated_date=datetime.now(UTC),
                 )
                 session.add(new_role)
                 await session.commit()
