@@ -1,6 +1,11 @@
 <script lang="ts">
+    import StyledButton from "#lib/components/buttons/StyledButton.svelte";
+    import SelectInput from "#lib/components/inputs/SelectInput.svelte";
     import TextInput from "#lib/components/inputs/TextInput.svelte";
     import { enhance } from "$app/forms";
+    import { getCountryDataList } from "countries-list";
+
+    let isSavingBranch: boolean = $state(false);
 </script>
 
 <div class="h-screen overflow-hidden flex items-center justify-center">
@@ -89,6 +94,63 @@
                                 name="address_line_2"
                             />
                         </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                            <TextInput
+                                type="text"
+                                id="City"
+                                label="City"
+                                placeholder="Blantyre"
+                                value=""
+                                valueError=""
+                                name="city"
+                            />
+
+                            <SelectInput
+                                id="Nationality"
+                                label="Nationality"
+                                placeholder=""
+                                fieldError=""
+                                name="nationality"
+                            >
+                                <option value="">Select option</option>
+                                {#each getCountryDataList() as countries}
+                                    <option value={countries.name}
+                                        >{countries.name}</option
+                                    >
+                                {/each}
+                            </SelectInput>
+                        </div>
+
+                        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                            <TextInput
+                                type="text"
+                                id="District"
+                                label="District"
+                                placeholder=""
+                                value=""
+                                valueError=""
+                                name="district"
+                            />
+
+                            <SelectInput
+                                id="Nationality"
+                                label="Nationality"
+                                placeholder=""
+                                fieldError=""
+                                name="nationality"
+                            >
+                                <option value="">Select option</option>
+                                <option value="Yes">Yes</option>
+                                <option value="No">No</option>
+                            </SelectInput>
+                        </div>
+
+                        <StyledButton
+                            isLoading={true}
+                            label="Save Branch"
+                            title="Save Branch"
+                        />
                     </div>
                 </form>
             </div>
