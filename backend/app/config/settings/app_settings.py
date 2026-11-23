@@ -17,7 +17,16 @@ class AppSettings(BaseSettings):
     issuer: str
 
     # for the database connection
-    database_url = URL.create()
+    @property
+    def database_url(self):
+        return URL.create(
+            drivername=self.drivername,
+            username=self.username,
+            host=self.host,
+            database=self.database,
+            password=self.password,
+            port=self.port,
+        )
 
     model_config = SettingsConfigDict(
         env_file=".env", validate_default=False, env_ignore_empty=True
