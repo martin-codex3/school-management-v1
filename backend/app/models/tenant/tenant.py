@@ -58,4 +58,4 @@ class Tenant(Base):
     )
 
     # for the branch relationship
-    branches: Mapped[list[Tenant]] = relationship(back_populates="tenant")
+    branches: Mapped[list[Branch]] = relationship(back_populates="tenant")

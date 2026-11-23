@@ -8,6 +8,7 @@ from sqlalchemy.ext.asyncio import async_engine_from_config
 
 from app.config.settings.app_settings import AppSettings
 from app.models.application_user.application_user import ApplicationUser  # noqa: F401
+from app.models.branches.branch import Branch  # noqa: F401
 from app.models.roles.role import Role  # noqa: F401
 from app.models.tenant.tenant import Tenant  # noqa: F401
 from app.models.tenant_user.tenant_user import TenantUser  # noqa: F401
