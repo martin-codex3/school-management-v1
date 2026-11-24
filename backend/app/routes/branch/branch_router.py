@@ -131,11 +131,11 @@ async def get_branch(
 
 # fetching branches based on the tenant
 @branch_router.get(
-    "/{user_id}/tenant-braches/{tenant_id}", status_code=status.HTTP_200_OK
+    "/{user_id}/tenant-braches",
+    status_code=status.HTTP_200_OK,
 )
 async def get_branches_by_tenant(
     user_id: uuid.UUID,
-    tenant_id: uuid.UUID,
     current_user: CurrentUser,
     session: Annotated[AsyncSession, Depends(app_session)],
 ):
