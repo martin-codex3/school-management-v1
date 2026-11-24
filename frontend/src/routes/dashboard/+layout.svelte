@@ -104,7 +104,7 @@
                                 title={link.label}
                                 class={[
                                     "flex items-center w-full gap-3 hover:bg-purple-200 hover:text-purple-950 rounded-full px-2 py-2 transition duration-300",
-                                    page.url.pathname === link.to
+                                    page.url.pathname.startsWith(`${link.to}/`)
                                         ? "bg-purple-300"
                                         : "",
                                 ]}

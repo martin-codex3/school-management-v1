@@ -23,8 +23,15 @@
         extraLinks?: ExtraLinks[];
     }
 
-    const branch_path: string = "/dashboard/school-management/branch";
-    let openLinks: boolean = $state(false);
+    const BRANCH_PATH = "/dashboard/school-management/branch";
+
+    let toggleLink = $state(
+        page.url.pathname === BRANCH_PATH ||
+            page.url.pathname.startsWith(`${BRANCH_PATH}/`),
+    );
+
+    let activeLink = (path: string) =>
+        page.url.pathname === path || page.url.pathname.startsWith(`${path}/`);
 
     let SchoolManagementLinks: Props[] = [
         {
@@ -39,13 +46,13 @@
             extraLinks: [
                 {
                     label: "Create branch",
-                    to: `${branch_path}`,
+                    to: `${BRANCH_PATH}`,
                     icon: BuildingIcon,
                 },
 
                 {
                     label: "Manage branches",
-                    to: `${branch_path}/manage-branches`,
+                    to: `${BRANCH_PATH}/manage-branches`,
                     icon: BuildingIcon,
                 },
             ],
@@ -71,11 +78,6 @@
             icon: SettingsIcon,
         },
     ];
-
-    const handleToggleLink = (path: string) => {
-        openLinks = true;
-        console.log(openLinks);
-    };
 </script>
 
 <nav
@@ -108,10 +110,10 @@
                             <a
                                 href={link.to}
                                 title={link.label}
-                                onclick={() => handleToggleLink(link.to)}
+                                onclick={() => (toggleLink = true)}
                                 class={[
                                     "flex items-center gap-3 w-full hover:bg-purple-200 hover:text-purple-950 transition duration-300 py-3 px-4 rounded-full",
-                                    page.url.pathname === link.to
+                                    page.url.pathname.startsWith(`${link.to}`)
                                         ? "bg-purple-300 text-purple-950"
                                         : "",
                                 ]}
@@ -120,8 +122,29 @@
                                 <span class="">{link.label}</span>
                             </a>
 
-                            {#if openLinks}
-                                <h1>hey</h1>
+                            {#if toggleLink}
+                                <div
+                                    class="bg-gray-100 mx-2 rounded-tr-xl rounded-tl-xl px-4 space-y-2 py-2 rounded-bl-4xl rounded-br-4xl"
+                                >
+                                    {#each link.extraLinks as child}
+                                        <a
+                                            href={child.to}
+                                            title={child.label}
+                                            onclick={() =>
+                                                toggleLink != toggleLink}
+                                            class={[
+                                                "flex items-center gap-3 w-full hover:bg-purple-200 hover:text-purple-950 transition duration-300 py-2 px-4 rounded-full",
+                                                activeLink(child.to) ? "" : "",
+                                            ]}
+                                        >
+                                            <link.icon
+                                                height="1.5em"
+                                                class="shrink-0"
+                                            />
+                                            <span class="">{child.label}</span>
+                                        </a>
+                                    {/each}
+                                </div>
                             {/if}
                         {:else}
                             <a

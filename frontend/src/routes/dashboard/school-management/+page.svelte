@@ -6,7 +6,6 @@
     import SchoolDetailsIcon from "@iconify-svelte/tabler/school";
     import LeaderShipIcon from "@iconify-svelte/tabler/users";
     import BrandingIcon from "@iconify-svelte/tabler/palette";
-    import DocumentIcon from "@iconify-svelte/tabler/files";
     let { data }: PageProps = $props();
 
     interface Props {
