@@ -1,11 +1,12 @@
 <script lang="ts">
-    import ClosePanelIcon from "@iconify-svelte/tabler/layout-navbar";
+    import ClosePanelIcon from "@iconify-svelte/tabler/layout-sidebar-left-collapse";
     import BuildingIcon from "@iconify-svelte/tabler/building";
     import SitemapIcon from "@iconify-svelte/tabler/sitemap";
     import HierarchyIcon from "@iconify-svelte/tabler/hierarchy";
     import UsersIcon from "@iconify-svelte/tabler/users";
     import ShieldCheckIcon from "@iconify-svelte/tabler/shield-check";
     import SettingsIcon from "@iconify-svelte/tabler/settings";
+    import ChevronRightIcon from "@iconify-svelte/tabler/chevron-right";
     import { page } from "$app/state";
 
     const { children } = $props();
@@ -32,6 +33,12 @@
 
     let activeLink = (path: string) =>
         page.url.pathname === path || page.url.pathname.startsWith(`${path}/`);
+
+    let toggleSidePanel: boolean = $state(false);
+
+    const handleToggleSidePanel = () => {
+        toggleSidePanel = !toggleSidePanel;
+    };
 
     let SchoolManagementLinks: Props[] = [
         {
@@ -81,8 +88,14 @@
 </script>
 
 <nav
-    class="fixed h-screen overflow-hidden w-90 space-y-10 border-x bg-white border-gray-300 py-2 px-3"
+    class={[
+        !toggleSidePanel
+            ? "fixed h-screen overflow-hidden w-90 space-y-10 border-x bg-white border-gray-300 py-2 px-3"
+            : "hidden",
+    ]}
 >
+    <!-- this is for the close navigation button -->
+
     <div class="flex items-center justify-between">
         <div>
             <h1 class="first-letter:capitalize text-lg font-semibold">
@@ -94,9 +107,10 @@
             <button
                 aria-label="close panel button"
                 title="Close Panel"
+                onclick={handleToggleSidePanel}
                 class="flex items-center justify-center p-2 rounded-full bg-mauve-100 cursor-pointer"
             >
-                <ClosePanelIcon height="1.3em" class="shrink-0" />
+                <ClosePanelIcon height="1.5em" class="shrink-0" />
             </button>
         </div>
     </div>
@@ -135,7 +149,7 @@
                                             class={[
                                                 "flex items-center gap-3 w-full hover:bg-purple-200 hover:text-purple-950 transition duration-300 py-2 px-4 rounded-full",
                                                 activeLink(child.to)
-                                                    ? "bg-purple-200"
+                                                    ? "bg-purple-200 text-purple-950"
                                                     : "",
                                             ]}
                                         >
@@ -170,8 +184,22 @@
     </div>
 </nav>
 
+{#if toggleSidePanel}
+    <div class="fixed top-2 h-screen z-100">
+        <button
+            aria-label="close panel"
+            title="Close Panel"
+            class="flex items-center bg-white justify-center p-4 rounded-tl-full rounded-bl-full"
+        >
+            <ChevronRightIcon height="1.5em" class="shrink-0" />
+        </button>
+    </div>
+{/if}
+
 <main>
-    <section class="ms-90 px-5">
+    <section
+        class={[!toggleSidePanel ? "ms-90 px-5" : "max-w-full px-5 ms-10"]}
+    >
         {@render children()}
     </section>
 </main>
