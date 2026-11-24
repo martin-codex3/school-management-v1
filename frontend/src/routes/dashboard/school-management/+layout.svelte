@@ -10,11 +10,21 @@
 
     const { children } = $props();
 
-    interface Props {
+    interface ExtraLinks {
         label: string;
         to: string;
         icon: any;
     }
+
+    interface Props {
+        label: string;
+        to: string;
+        icon: any;
+        extraLinks?: ExtraLinks[];
+    }
+
+    const branch_path: string = "/dashboard/school-management/branch";
+    let openLinks: boolean = $state(false);
 
     let SchoolManagementLinks: Props[] = [
         {
@@ -26,6 +36,19 @@
             label: "Branches",
             to: "/dashboard/school-management/branch",
             icon: SitemapIcon,
+            extraLinks: [
+                {
+                    label: "Create branch",
+                    to: `${branch_path}`,
+                    icon: BuildingIcon,
+                },
+
+                {
+                    label: "Manage branches",
+                    to: `${branch_path}/manage-branches`,
+                    icon: BuildingIcon,
+                },
+            ],
         },
         {
             label: "Departments",
@@ -48,6 +71,11 @@
             icon: SettingsIcon,
         },
     ];
+
+    const handleToggleLink = (path: string) => {
+        openLinks = true;
+        console.log(openLinks);
+    };
 </script>
 
 <nav
@@ -76,19 +104,40 @@
             <ul class="space-y-3">
                 {#each SchoolManagementLinks as link (link.label)}
                     <li>
-                        <a
-                            href={link.to}
-                            title={link.label}
-                            class={[
-                                "flex items-center gap-3 w-full hover:bg-purple-200 hover:text-purple-950 transition duration-300 py-3 px-4 rounded-full",
-                                page.url.pathname === link.to
-                                    ? "bg-purple-300 text-purple-950"
-                                    : "",
-                            ]}
-                        >
-                            <link.icon height="1.5em" class="shrink-0" />
-                            <span class="">{link.label}</span>
-                        </a>
+                        {#if link.extraLinks}
+                            <a
+                                href={link.to}
+                                title={link.label}
+                                onclick={() => handleToggleLink(link.to)}
+                                class={[
+                                    "flex items-center gap-3 w-full hover:bg-purple-200 hover:text-purple-950 transition duration-300 py-3 px-4 rounded-full",
+                                    page.url.pathname === link.to
+                                        ? "bg-purple-300 text-purple-950"
+                                        : "",
+                                ]}
+                            >
+                                <link.icon height="1.5em" class="shrink-0" />
+                                <span class="">{link.label}</span>
+                            </a>
+
+                            {#if openLinks}
+                                <h1>hey</h1>
+                            {/if}
+                        {:else}
+                            <a
+                                href={link.to}
+                                title={link.label}
+                                class={[
+                                    "flex items-center gap-3 w-full hover:bg-purple-200 hover:text-purple-950 transition duration-300 py-3 px-4 rounded-full",
+                                    page.url.pathname === link.to
+                                        ? "bg-purple-300 text-purple-950"
+                                        : "",
+                                ]}
+                            >
+                                <link.icon height="1.5em" class="shrink-0" />
+                                <span class="">{link.label}</span>
+                            </a>
+                        {/if}
                     </li>
                 {/each}
             </ul>

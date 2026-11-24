@@ -5,8 +5,27 @@
     import { enhance } from "$app/forms";
     import { getCountryDataList } from "countries-list";
     import { toast } from "svelte-sonner";
+    import type { PageProps } from "./$types";
 
     let isSavingBranch: boolean = $state(false);
+
+    let { form }: PageProps = $props();
+
+    let errorTitle: string = $state("");
+
+    $effect(() => {
+        if (form?.problem?.title) {
+            errorTitle = form?.problem?.title;
+        }
+
+        if (form?.problem?.detail) {
+            errorTitle = form?.problem?.detail;
+        }
+    });
+
+    const fieldErrors = $derived((field: string) => {
+        return form?.problem?.errors?.find((e) => field === e.pointer);
+    });
 </script>
 
 <div class="h-screen overflow-hidden flex items-center justify-center">
@@ -31,11 +50,11 @@
                             isSavingBranch = false;
 
                             if (result.type === "failure") {
-                                toast.error("Error");
+                                toast.error(errorTitle);
                             }
 
                             if (result.type === "error") {
-                                toast.error("Error");
+                                toast.error(errorTitle);
                             }
 
                             if (result.type === "success") {
@@ -52,7 +71,8 @@
                                 label="Branch name"
                                 placeholder=""
                                 value=""
-                                valueError=""
+                                valueError={fieldErrors("#/branch_name")
+                                    ?.detail}
                                 name="branch_name"
                             />
 
@@ -62,7 +82,8 @@
                                 label="Branch email"
                                 placeholder="branch@example.com"
                                 value=""
-                                valueError=""
+                                valueError={fieldErrors("#/branch_email")
+                                    ?.detail}
                                 name="branch_email"
                             />
                         </div>
@@ -75,7 +96,8 @@
                                 label="Branch phone"
                                 placeholder=""
                                 value=""
-                                valueError=""
+                                valueError={fieldErrors("#/branch_phone")
+                                    ?.detail}
                                 name="branch_phone"
                             />
 
@@ -85,7 +107,8 @@
                                 label="Alternative phone"
                                 placeholder=""
                                 value=""
-                                valueError=""
+                                valueError={fieldErrors("#/alternative_phone")
+                                    ?.detail}
                                 name="alternative_phone"
                             />
                         </div>
@@ -97,7 +120,8 @@
                                 label="Address line 1"
                                 placeholder=""
                                 value=""
-                                valueError=""
+                                valueError={fieldErrors("#/address_line_1")
+                                    ?.detail}
                                 name="address_line_1"
                             />
 
@@ -107,7 +131,8 @@
                                 label="Address line 2"
                                 placeholder=""
                                 value=""
-                                valueError=""
+                                valueError={fieldErrors("#/address_line_2")
+                                    ?.detail}
                                 name="address_line_2"
                             />
                         </div>
@@ -119,7 +144,7 @@
                                 label="City"
                                 placeholder="Blantyre"
                                 value=""
-                                valueError=""
+                                valueError={fieldErrors("#/city")?.detail}
                                 name="city"
                             />
 
@@ -127,7 +152,8 @@
                                 id="Nationality"
                                 label="Nationality"
                                 placeholder=""
-                                fieldError=""
+                                fieldError={fieldErrors("#/nationality")
+                                    ?.detail}
                                 name="nationality"
                             >
                                 <option value="">Select option</option>
@@ -146,16 +172,17 @@
                                 label="District"
                                 placeholder=""
                                 value=""
-                                valueError=""
+                                valueError={fieldErrors("#/district")?.detail}
                                 name="district"
                             />
 
                             <SelectInput
-                                id="Nationality"
-                                label="Nationality"
+                                id="MainBranch"
+                                label="Main branch"
                                 placeholder=""
-                                fieldError=""
-                                name="nationality"
+                                fieldError={fieldErrors("#/is_main_branch")
+                                    ?.detail}
+                                name="is_main_branch"
                             >
                                 <option value="">Select option</option>
                                 <option value="Yes">Yes</option>
