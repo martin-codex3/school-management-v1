@@ -34,6 +34,7 @@
 		"@iconify-svelte/material-symbols": "gitlab:iconify-icons/svelte#material-symbols",
 		"@iconify-svelte/svg-spinners": "gitlab:iconify-icons/svelte#svg-spinners",
 		"@iconify-svelte/tabler": "gitlab:iconify-icons/svelte#tabler",
+		"@tanstack/svelte-table": "^9.3.2",
 		"countries-list": "^3.4.1",
 		"svelte-sonner": "^1.2.3"
 	}

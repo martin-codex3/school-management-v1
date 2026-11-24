@@ -30,7 +30,7 @@
 
 <div class="h-screen overflow-hidden flex items-center justify-center">
     <div
-        class="h-[calc(100vh-1rem)] bg-white w-full px-5 border py-5 border-gray-300 rounded-4xl"
+        class="h-[calc(100vh-1rem)] bg-white w-full px-5 border py-5 border-gray-300 rounded-4xl motion-preset-slide-down-sm motion-duration-100"
     >
         <!-- for the main header -->
         <div class="h-full scrollbar-thin overflow-auto px-5 space-y-10">
@@ -39,7 +39,7 @@
             </div>
 
             <!-- for the main form here -->
-            <div>
+            <div class="motion-preset-slide-down-sm motion-duration-300">
                 <form
                     action="?/createBranch"
                     method="POST"
