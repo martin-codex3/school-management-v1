@@ -35,7 +35,7 @@
     let activeLink = (path: string) =>
         page.url.pathname === path || page.url.pathname.startsWith(`${path}/`);
 
-    let toggleSidePanel: boolean = $state(true);
+    let toggleSidePanel: boolean = $state(false);
 
     const handleToggleSidePanel = () => {
         toggleSidePanel = !toggleSidePanel;

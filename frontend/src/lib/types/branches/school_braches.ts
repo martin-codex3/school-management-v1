@@ -1,3 +1,5 @@
+import type { BranchResponse } from "./branch";
+
 export interface SchoolBranches {
     id: string,
     school_name: string,
@@ -21,5 +23,5 @@ export interface SchoolBranches {
     district: string | undefined,
     region: string | undefined,
     postal_code: string | undefined,
-    branches: []
+    branches: BranchResponse[]
 }
