@@ -79,7 +79,6 @@
                     <tbody>
                         {#each table.getRowModel().rows as row (row.id)}
                             <tr
-                                onclick={() => handleClickRow(row.id)}
                                 class="odd:bg-white even:bg-gray-100 cursor-pointer hover:bg-gray-50 transition duration-200"
                             >
                                 {#each row.getAllCells() as cell (cell.id)}
@@ -93,7 +92,17 @@
                                 <td
                                     class="text-sm border-b border-b-gray-200 text-start p-4"
                                 >
-                                    <h1>hey</h1>
+                                    <button
+                                        aria-label="Select Row"
+                                        title="See Options"
+                                        onclick={() => handleClickRow(row.id)}
+                                        class="flex items-center justify-center cursor-pointer hover:bg-purple-100 rounded-full text-purple-950 p-2"
+                                    >
+                                        <DotsIcon
+                                            height="1.5em"
+                                            class="shrink-0"
+                                        />
+                                    </button>
                                 </td>
                             </tr>
                         {/each}
