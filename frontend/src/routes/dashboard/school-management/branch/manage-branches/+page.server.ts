@@ -1,7 +1,8 @@
 import { error, redirect } from "@sveltejs/kit";
 import type { Actions, PageServerLoad } from "./$types";
 import { PUBLIC_BACKEND_API } from "$app/env/public";
-import type { SchoolBranches } from "#lib/types/branches/school_braches.ts";
+import type { BranchResponse } from "#lib/types/branches/branch.ts";
+
 
 export const load: PageServerLoad = async ({ locals, fetch }) => {
     const current_user = locals.user;
@@ -25,7 +26,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
         error(response.status, "Failed to fetch the branches");
     }
 
-    const branches: SchoolBranches[] = await response.json();
+    const branches: BranchResponse[] = await response.json();
 
     console.log(branches)
 

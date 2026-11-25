@@ -6,7 +6,6 @@
     } from "@tanstack/svelte-table";
     import type { ColumnDef } from "@tanstack/svelte-table";
     import type { PageProps } from "./$types";
-    import type { SchoolBranches } from "#lib/types/branches/school_braches.ts";
     import { FlexRender } from "@tanstack/svelte-table";
     import type { BranchResponse } from "#lib/types/branches/branch.ts";
 
@@ -15,10 +14,9 @@
     // for the tanstack table here
     const features = tableFeatures({ columnVisibilityFeature });
 
-    const columns: ColumnDef<typeof features, SchoolBranches>[] = [
+    const columns: ColumnDef<typeof features, BranchResponse>[] = [
         { accessorKey: "branch_name", header: "Branch Name" },
         { accessorKey: "branch_email", header: "Branch Email" },
-        { accessorKey: "branch_phone", header: "Branch Phone" },
         { accessorKey: "address_line_1", header: "Address Line 1" },
         { accessorKey: "city", header: "City" },
         { accessorKey: "nationality", header: "Nationality" },
@@ -66,7 +64,9 @@
                         {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
                             <tr>
                                 {#each headerGroup.headers as header}
-                                    <th class="text-sm text-start">
+                                    <th
+                                        class="text-sm text-start p-4 border-b border-b-gray-200"
+                                    >
                                         {#if !header.isPlaceholder}
                                             <FlexRender {header} />
                                         {/if}
@@ -80,7 +80,9 @@
                         {#each table.getRowModel().rows as row (row.id)}
                             <tr>
                                 {#each row.getAllCells() as cell (cell.id)}
-                                    <td>
+                                    <td
+                                        class="text-sm border-b border-b-gray-200"
+                                    >
                                         <FlexRender {cell} />
                                     </td>
                                 {/each}
