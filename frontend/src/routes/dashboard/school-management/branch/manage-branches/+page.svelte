@@ -3,17 +3,24 @@
         createTable,
         tableFeatures,
         columnVisibilityFeature,
+        cellSelectionFeature,
+        rowSelectionFeature,
     } from "@tanstack/svelte-table";
     import type { ColumnDef } from "@tanstack/svelte-table";
     import type { PageProps } from "./$types";
     import { FlexRender } from "@tanstack/svelte-table";
     import type { BranchResponse } from "#lib/types/branches/branch.ts";
     import DotsIcon from "@iconify-svelte/tabler/dots-vertical";
+    import type { RowSelectionState } from "@tanstack/svelte-table";
 
     const { data }: PageProps = $props();
 
     // for the tanstack table here
-    const features = tableFeatures({ columnVisibilityFeature });
+    const features = tableFeatures({
+        columnVisibilityFeature,
+        cellSelectionFeature,
+        rowSelectionFeature,
+    });
 
     const columns: ColumnDef<typeof features, BranchResponse>[] = [
         { accessorKey: "branch_name", header: "Branch Name" },
@@ -26,6 +33,10 @@
     const table = createTable({
         features,
         columns,
+        enableRowSelection: true,
+        enableCellSelection: true,
+        enableMultiRowSelection: false,
+        getRowId: (row) => row.id,
         get data() {
             return data.branches;
         },
@@ -34,8 +45,14 @@
     // for click events on the rows
     const handleClickRow = (rowId: string) => {
         const row = table.getRow(rowId);
-        console.log(row.original);
     };
+
+    // for selecting the table row here
+    const rowSelection = $derived(table.atoms.rowSelection.get());
+
+    $effect(() => {
+        console.log(rowSelection);
+    });
 </script>
 
 <div class="h-screen overflow-hidden flex items-center justify-center">
@@ -79,10 +96,17 @@
                     <tbody>
                         {#each table.getRowModel().rows as row (row.id)}
                             <tr
-                                class="odd:bg-white even:bg-gray-100 cursor-pointer hover:bg-gray-50 transition duration-200"
+                                onclick={() => row.toggleSelected()}
+                                class={[
+                                    " cursor-pointer transition duration-200",
+                                    row.getIsSelected()
+                                        ? "bg-green-50 text-green-950"
+                                        : "odd:bg-white even:bg-gray-100",
+                                ]}
                             >
                                 {#each row.getAllCells() as cell (cell.id)}
                                     <td
+                                        title={cell.row.original.branch_name}
                                         class="text-sm border-b border-b-gray-200 text-start p-4"
                                     >
                                         <FlexRender {cell} />
