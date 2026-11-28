@@ -1,9 +1,13 @@
 <script lang="ts">
     import type { BranchData } from "#lib/types/branches/branch_data.ts";
     import {
+        createSortedRowModel,
         createTable,
         FlexRender,
         rowSortingFeature,
+        sortFn_alphanumeric,
+        sortFn_datetime,
+        sortFn_text,
         tableFeatures,
         type ColumnDef,
     } from "@tanstack/svelte-table";
@@ -15,28 +19,34 @@
     const { data }: PageProps = $props();
 
     // tables features
-    const features = tableFeatures({ rowSortingFeature });
+    const features = tableFeatures({
+        rowSortingFeature,
+        sortedRowModel: createSortedRowModel(),
+        sortFns: {
+            alphaNumeric: sortFn_alphanumeric,
+            text: sortFn_text,
+            datetime: sortFn_datetime,
+        },
+    });
 
     // table columns
     const columns: ColumnDef<typeof features, BranchData>[] = [
         {
             accessorKey: "branch_name",
-            header: "Branch name",
+            header: "Name",
+            sortFn: "auto",
         },
 
         {
             accessorKey: "branch_phone",
-            header: "Branch phone",
+            header: "Phone",
+            sortFn: "auto",
         },
 
         {
             accessorKey: "created_date",
             header: "Created date",
-        },
-
-        {
-            accessorKey: "updated_date",
-            header: "Updated date",
+            sortFn: "datetime",
         },
     ];
 
@@ -44,6 +54,8 @@
     const table = createTable({
         features,
         columns,
+        enableSorting: true,
+        enableMultiSort: true,
         get data() {
             return data.branches;
         },
@@ -67,9 +79,24 @@
                     {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
                         <tr class="border-b border-b-gray-300 bg-purple-50">
                             {#each headerGroup.headers as header (header.id)}
-                                <th class="p-4 text-start font-normal">
+                                <th
+                                    onclick={header.column.getToggleSortingHandler()}
+                                    class="p-4 text-start font-normal"
+                                >
                                     {#if !header.isPlaceholder}
-                                        <FlexRender {header} />
+                                        <div class="flex items-center gap-2">
+                                            <FlexRender {header} />
+
+                                            {#if header.column.getIsSorted() === "asc"}
+                                                <h1>1</h1>
+                                            {:else if header.column.getIsSorted() === "desc"}
+                                                <h1>2</h1>
+                                            {:else if header.column.getCanSort()}
+                                                <IconArrowsUpDown
+                                                    height="1em"
+                                                />
+                                            {/if}
+                                        </div>
                                     {/if}
                                 </th>
                             {/each}
