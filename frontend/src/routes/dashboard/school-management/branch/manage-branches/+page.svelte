@@ -3,27 +3,25 @@
     import {
         createTable,
         FlexRender,
+        rowSortingFeature,
         tableFeatures,
         type ColumnDef,
     } from "@tanstack/svelte-table";
+
+    import IconArrowsUpDown from "@iconify-svelte/tabler/arrows-up-down";
 
     import type { PageProps } from "./$types";
 
     const { data }: PageProps = $props();
 
     // tables features
-    const features = tableFeatures({});
+    const features = tableFeatures({ rowSortingFeature });
 
     // table columns
     const columns: ColumnDef<typeof features, BranchData>[] = [
         {
             accessorKey: "branch_name",
             header: "Branch name",
-        },
-
-        {
-            accessorKey: "branch_email",
-            header: "Branch email",
         },
 
         {
@@ -34,6 +32,11 @@
         {
             accessorKey: "created_date",
             header: "Created date",
+        },
+
+        {
+            accessorKey: "updated_date",
+            header: "Updated date",
         },
     ];
 
@@ -49,10 +52,10 @@
 
 <div class="h-screen flex items-center justify-center">
     <div
-        class="h-[calc(100vh-1rem)] overflow-hidden flex flex-col justify-between px-5 bg-primary-white rounded-4xl w-full"
+        class="h-[calc(100vh-1rem)] overflow-hidden flex flex-col justify-between bg-primary-white rounded-4xl w-full"
     >
         <!-- for the table header -->
-        <div class="">
+        <div class="p-5">
             <h1 class="text-xl font-semibold capitalize">manage branches</h1>
         </div>
 
@@ -62,9 +65,9 @@
             <table class="w-full table-auto border-collapse">
                 <thead>
                     {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
-                        <tr>
+                        <tr class="border-b border-b-gray-300 bg-purple-50">
                             {#each headerGroup.headers as header (header.id)}
-                                <th class="p-4 text-start font-semibold">
+                                <th class="p-4 text-start font-normal">
                                     {#if !header.isPlaceholder}
                                         <FlexRender {header} />
                                     {/if}
@@ -76,9 +79,11 @@
 
                 <tbody>
                     {#each table.getRowModel().rows as rows (rows.id)}
-                        <tr>
+                        <tr
+                            class="border-b border-b-gray-300 odd:bg-gray-100 even:bg-white"
+                        >
                             {#each rows.getAllCells() as cell (cell.id)}
-                                <td>
+                                <td class="p-4 py-4 text-start">
                                     <FlexRender {cell} />
                                 </td>
                             {/each}
@@ -89,7 +94,7 @@
         </div>
 
         <!-- for the table footer -->
-        <div class="">
+        <div class="p-5">
             <h1>table footer</h1>
         </div>
     </div>
