@@ -1,21 +1,20 @@
 <script lang="ts">
-    import { tableFeatures, type ColumnDef } from "@tanstack/svelte-table";
+    import type { BranchData } from "#lib/types/branches/branch_data.ts";
+    import {
+        createTable,
+        tableFeatures,
+        type ColumnDef,
+    } from "@tanstack/svelte-table";
 
-    // we will get all the table functionalities here
-    interface Branch {
-        branch_name: string;
-        branch_email: string;
-        branch_phone: string;
-        city: string;
-        nationality: string;
-        district: string;
-    }
+    import type { PageProps } from "./$types";
+
+    const { data }: PageProps = $props();
 
     // tables features
     const features = tableFeatures({});
 
     // table columns
-    const columns: ColumnDef<typeof features, Branch>[] = [
+    const columns: ColumnDef<typeof features, BranchData>[] = [
         {
             accessorKey: "branch_name",
             header: "Branch name",
@@ -50,8 +49,35 @@
             header: "Updated date",
         },
     ];
+
+    // the table instance
+    const table = createTable({
+        features,
+        columns,
+        get data() {
+            return data.branches;
+        },
+    });
 </script>
 
-<div>
-    <h1>we will start here</h1>
+<div class="h-screen overflow-hidden flex items-center justify-center">
+    <div class="h-[calc(100vh-2rem)] overflow-hidden bg-white rounded-4xl">
+        <!-- for the main table controllers -->
+        <div class="h-full overflow-auto scrollbar-none">
+            <!-- for the table header -->
+            <div class="">
+                <h1>hey</h1>
+            </div>
+
+            <!-- for the table body -->
+            <div class="">
+                <h1>table body</h1>
+            </div>
+
+            <!-- for the table footer -->
+            <div class="">
+                <h1>table footer</h1>
+            </div>
+        </div>
+    </div>
 </div>
