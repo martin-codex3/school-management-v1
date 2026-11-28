@@ -2,6 +2,7 @@
     import type { BranchData } from "#lib/types/branches/branch_data.ts";
     import {
         createTable,
+        FlexRender,
         tableFeatures,
         type ColumnDef,
     } from "@tanstack/svelte-table";
@@ -29,24 +30,10 @@
             accessorKey: "branch_phone",
             header: "Branch phone",
         },
-        {
-            accessorKey: "city",
-            header: "City",
-        },
-
-        {
-            accessorKey: "nationality",
-            header: "Nationality",
-        },
 
         {
             accessorKey: "created_date",
             header: "Created date",
-        },
-
-        {
-            accessorKey: "updated_date",
-            header: "Updated date",
         },
     ];
 
@@ -60,24 +47,50 @@
     });
 </script>
 
-<div class="h-screen overflow-hidden flex items-center justify-center">
-    <div class="h-[calc(100vh-2rem)] overflow-hidden bg-white rounded-4xl">
+<div class="h-screen flex items-center justify-center">
+    <div
+        class="h-[calc(100vh-1rem)] overflow-hidden flex flex-col justify-between px-5 bg-primary-white rounded-4xl w-full"
+    >
+        <!-- for the table header -->
+        <div class="">
+            <h1 class="text-xl font-semibold capitalize">manage branches</h1>
+        </div>
+
         <!-- for the main table controllers -->
-        <div class="h-full overflow-auto scrollbar-none">
-            <!-- for the table header -->
-            <div class="">
-                <h1>hey</h1>
-            </div>
-
+        <div class="h-full overflow-auto scrollbar-none py-4">
             <!-- for the table body -->
-            <div class="">
-                <h1>table body</h1>
-            </div>
+            <table class="w-full table-auto border-collapse">
+                <thead>
+                    {#each table.getHeaderGroups() as headerGroup (headerGroup.id)}
+                        <tr>
+                            {#each headerGroup.headers as header (header.id)}
+                                <th class="p-4 text-start font-semibold">
+                                    {#if !header.isPlaceholder}
+                                        <FlexRender {header} />
+                                    {/if}
+                                </th>
+                            {/each}
+                        </tr>
+                    {/each}
+                </thead>
 
-            <!-- for the table footer -->
-            <div class="">
-                <h1>table footer</h1>
-            </div>
+                <tbody>
+                    {#each table.getRowModel().rows as rows (rows.id)}
+                        <tr>
+                            {#each rows.getAllCells() as cell (cell.id)}
+                                <td>
+                                    <FlexRender {cell} />
+                                </td>
+                            {/each}
+                        </tr>
+                    {/each}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- for the table footer -->
+        <div class="">
+            <h1>table footer</h1>
         </div>
     </div>
 </div>

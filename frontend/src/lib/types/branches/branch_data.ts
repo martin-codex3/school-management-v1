@@ -5,6 +5,6 @@ export interface BranchData {
     city: string;
     nationality: string;
     district: string;
-    create_date: string;
+    created_date: string;
     updated_date: string;
 }

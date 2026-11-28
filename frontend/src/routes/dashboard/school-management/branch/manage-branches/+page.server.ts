@@ -23,7 +23,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Blantyre',
             nationality: 'Malawian',
             district: 'Blantyre',
-            create_date: '2024-03-15',
+            created_date: '2024-03-15',
             updated_date: '2026-08-12',
         },
         {
@@ -33,7 +33,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Blantyre',
             nationality: 'Malawian',
             district: 'Blantyre',
-            create_date: '2024-06-01',
+            created_date: '2024-06-01',
             updated_date: '2026-05-20',
         },
         {
@@ -43,7 +43,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Blantyre',
             nationality: 'Malawian',
             district: 'Blantyre',
-            create_date: '2025-02-14',
+            created_date: '2025-02-14',
             updated_date: '2026-09-18',
         },
         {
@@ -53,7 +53,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Lilongwe',
             nationality: 'Malawian',
             district: 'Lilongwe',
-            create_date: '2024-02-10',
+            created_date: '2024-02-10',
             updated_date: '2026-10-04',
         },
         {
@@ -63,7 +63,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Lilongwe',
             nationality: 'Malawian',
             district: 'Lilongwe',
-            create_date: '2025-01-20',
+            created_date: '2025-01-20',
             updated_date: '2026-07-19',
         },
         {
@@ -73,7 +73,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Lilongwe',
             nationality: 'Malawian',
             district: 'Lilongwe',
-            create_date: '2024-09-03',
+            created_date: '2024-09-03',
             updated_date: '2026-11-10',
         },
         {
@@ -83,7 +83,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Lilongwe',
             nationality: 'Malawian',
             district: 'Lilongwe',
-            create_date: '2025-05-19',
+            created_date: '2025-05-19',
             updated_date: '2026-08-29',
         },
         {
@@ -93,7 +93,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Mzuzu',
             nationality: 'Malawian',
             district: 'Mzimba',
-            create_date: '2024-08-18',
+            created_date: '2024-08-18',
             updated_date: '2026-09-02',
         },
         {
@@ -103,7 +103,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Mzuzu',
             nationality: 'Malawian',
             district: 'Mzimba',
-            create_date: '2025-08-11',
+            created_date: '2025-08-11',
             updated_date: '2026-10-15',
         },
         {
@@ -113,7 +113,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Zomba',
             nationality: 'Malawian',
             district: 'Zomba',
-            create_date: '2024-11-05',
+            created_date: '2024-11-05',
             updated_date: '2026-03-14',
         },
         {
@@ -123,7 +123,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Mangochi',
             nationality: 'Malawian',
             district: 'Mangochi',
-            create_date: '2025-04-12',
+            created_date: '2025-04-12',
             updated_date: '2026-06-28',
         },
         {
@@ -133,7 +133,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Monkey Bay',
             nationality: 'Malawian',
             district: 'Mangochi',
-            create_date: '2025-09-22',
+            created_date: '2025-09-22',
             updated_date: '2026-07-07',
         },
         {
@@ -143,7 +143,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Kasungu',
             nationality: 'Malawian',
             district: 'Kasungu',
-            create_date: '2025-07-09',
+            created_date: '2025-07-09',
             updated_date: '2026-11-01',
         },
         {
@@ -153,7 +153,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Salima',
             nationality: 'Malawian',
             district: 'Salima',
-            create_date: '2024-10-14',
+            created_date: '2024-10-14',
             updated_date: '2026-04-25',
         },
         {
@@ -163,7 +163,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Salima',
             nationality: 'Malawian',
             district: 'Salima',
-            create_date: '2026-01-12',
+            created_date: '2026-01-12',
             updated_date: '2026-08-03',
         },
         {
@@ -173,7 +173,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Karonga',
             nationality: 'Malawian',
             district: 'Karonga',
-            create_date: '2024-07-29',
+            created_date: '2024-07-29',
             updated_date: '2026-06-11',
         },
         {
@@ -183,7 +183,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Chitipa',
             nationality: 'Malawian',
             district: 'Chitipa',
-            create_date: '2025-03-04',
+            created_date: '2025-03-04',
             updated_date: '2026-05-09',
         },
         {
@@ -193,7 +193,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Rumphi',
             nationality: 'Malawian',
             district: 'Rumphi',
-            create_date: '2025-06-17',
+            created_date: '2025-06-17',
             updated_date: '2026-09-27',
         },
         {
@@ -203,7 +203,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Nkhotakota',
             nationality: 'Malawian',
             district: 'Nkhotakota',
-            create_date: '2025-04-28',
+            created_date: '2025-04-28',
             updated_date: '2026-07-30',
         },
         {
@@ -213,7 +213,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Nkhata Bay',
             nationality: 'Malawian',
             district: 'Nkhata Bay',
-            create_date: '2025-10-08',
+            created_date: '2025-10-08',
             updated_date: '2026-10-21',
         },
         {
@@ -223,7 +223,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Dedza',
             nationality: 'Malawian',
             district: 'Dedza',
-            create_date: '2024-12-02',
+            created_date: '2024-12-02',
             updated_date: '2026-04-16',
         },
         {
@@ -233,7 +233,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Ntcheu',
             nationality: 'Malawian',
             district: 'Ntcheu',
-            create_date: '2025-02-25',
+            created_date: '2025-02-25',
             updated_date: '2026-06-05',
         },
         {
@@ -243,7 +243,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Mchinji',
             nationality: 'Malawian',
             district: 'Mchinji',
-            create_date: '2025-07-21',
+            created_date: '2025-07-21',
             updated_date: '2026-09-14',
         },
         {
@@ -253,7 +253,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Dowa',
             nationality: 'Malawian',
             district: 'Dowa',
-            create_date: '2025-11-12',
+            created_date: '2025-11-12',
             updated_date: '2026-08-22',
         },
         {
@@ -263,7 +263,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Mponela',
             nationality: 'Malawian',
             district: 'Dowa',
-            create_date: '2026-01-29',
+            created_date: '2026-01-29',
             updated_date: '2026-10-09',
         },
         {
@@ -273,7 +273,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Balaka',
             nationality: 'Malawian',
             district: 'Balaka',
-            create_date: '2025-05-06',
+            created_date: '2025-05-06',
             updated_date: '2026-07-14',
         },
         {
@@ -283,7 +283,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Liwonde',
             nationality: 'Malawian',
             district: 'Machinga',
-            create_date: '2025-09-05',
+            created_date: '2025-09-05',
             updated_date: '2026-11-04',
         },
         {
@@ -293,7 +293,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Mulanje',
             nationality: 'Malawian',
             district: 'Mulanje',
-            create_date: '2024-05-18',
+            created_date: '2024-05-18',
             updated_date: '2026-05-31',
         },
         {
@@ -303,7 +303,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Thyolo',
             nationality: 'Malawian',
             district: 'Thyolo',
-            create_date: '2025-06-30',
+            created_date: '2025-06-30',
             updated_date: '2026-08-19',
         },
         {
@@ -313,7 +313,7 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
             city: 'Nsanje',
             nationality: 'Malawian',
             district: 'Nsanje',
-            create_date: '2026-02-18',
+            created_date: '2026-02-18',
             updated_date: '2026-11-15',
         },
     ];
