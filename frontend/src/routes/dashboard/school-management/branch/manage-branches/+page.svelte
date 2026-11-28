@@ -1,11 +1,57 @@
 <script lang="ts">
-    import DataTable from "#lib/components/tables/DataTable.svelte";
-    import type { PageProps } from "./$types";
-    import type { BranchResponse } from "#lib/types/branches/branch.ts";
+    import { tableFeatures, type ColumnDef } from "@tanstack/svelte-table";
 
-    const { data }: PageProps = $props();
+    // we will get all the table functionalities here
+    interface Branch {
+        branch_name: string;
+        branch_email: string;
+        branch_phone: string;
+        city: string;
+        nationality: string;
+        district: string;
+    }
+
+    // tables features
+    const features = tableFeatures({});
+
+    // table columns
+    const columns: ColumnDef<typeof features, Branch>[] = [
+        {
+            accessorKey: "branch_name",
+            header: "Branch name",
+        },
+
+        {
+            accessorKey: "branch_email",
+            header: "Branch email",
+        },
+
+        {
+            accessorKey: "branch_phone",
+            header: "Branch phone",
+        },
+        {
+            accessorKey: "city",
+            header: "City",
+        },
+
+        {
+            accessorKey: "nationality",
+            header: "Nationality",
+        },
+
+        {
+            accessorKey: "created_date",
+            header: "Created date",
+        },
+
+        {
+            accessorKey: "updated_date",
+            header: "Updated date",
+        },
+    ];
 </script>
 
 <div>
-    <DataTable {data} />
+    <h1>we will start here</h1>
 </div>

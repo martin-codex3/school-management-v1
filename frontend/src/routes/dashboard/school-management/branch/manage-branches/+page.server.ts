@@ -28,7 +28,5 @@ export const load: PageServerLoad = async ({ locals, fetch }) => {
 
     const branches: BranchResponse[] = await response.json();
 
-    console.log(branches)
-
     return { branches }
 }
